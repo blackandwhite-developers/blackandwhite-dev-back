@@ -4,10 +4,11 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import errorHandler from '@/api/common/middlewares/errorHandler.middleware';
+import userRouter from './api/users/router/users.router';
 
 const app = express();
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -24,7 +25,6 @@ const corsOptions = {
     }
   },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   optionsSuccessStatus: 200,
 };
@@ -38,6 +38,11 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
   res.send('Hello World!');
   next();
 });
+
+/** ------- USER ------- */
+app.use('/api/users', userRouter);
+
+/** ------- PRODUCT ------- */
 
 app.use(errorHandler);
 
