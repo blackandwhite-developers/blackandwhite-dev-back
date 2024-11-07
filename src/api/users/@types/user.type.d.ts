@@ -1,18 +1,23 @@
 type RoleType = 'admin' | 'provider' | 'user';
+type GenderType = 'M' | 'F' | 'E';
 
 interface IProfile {
   /** ID */
-  id?: string;
+  id: string;
   /** 이름 */
   name: string;
-  /** 생년월일 */
-  birth: string;
-  /** 성별 (M- 남자, F - 여자, E - 기타) */
-  gender?: 'M' | 'F' | 'E';
-  /** 프로필 이미지 */
-  thumbnail?: string;
   /** 연락처 */
   phone: string;
+  /** 생년월일 */
+  birth: string;
+  /** 성별 */
+  gender?: GenderType;
+  /** 주소 */
+  address: string;
+  /** 관심사 */
+  intereste: string;
+  /** 닉네임 */
+  nickname: string;
 }
 
 interface IUser {

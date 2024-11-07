@@ -23,10 +23,7 @@ const userSchema = new mongoose.Schema<IUser>(
     },
   },
   {
-    timestamps: {
-      createdAt: 'createdAt',
-      updatedAt: 'updatedAt',
-    },
+    timestamps: true,
   },
 );
 export const MongooseUser = mongoose.model<IUser>('User', userSchema);
