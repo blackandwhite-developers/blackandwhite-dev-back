@@ -1,7 +1,7 @@
 export class GetUserResponseDTO {
   id: string;
   email: string;
-  role: string;
+  role?: string;
   profile: {
     /** ID */
     id: string;

@@ -14,6 +14,8 @@ interface IProfile {
   gender?: GenderType;
   /** 주소 */
   address: string;
+  /** 상세주소 */
+  addressDetail: string;
   /** 관심사 */
   intereste: string;
   /** 닉네임 */
@@ -26,9 +28,9 @@ interface IUser {
   /** 이메일  (unique) */
   email: string;
   /** 비밀번호 */
-  password?: string;
+  password: string;
   /** 역할 */
-  role: RoleType;
+  role?: RoleType;
   /** 프로필 */
   profile: IProfile;
 }
