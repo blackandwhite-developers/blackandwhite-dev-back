@@ -1,15 +1,23 @@
 interface IRoom {
   id: string;
-  /** 객실 타입 */
-  type: string; // TODO: 객실 타입을 enum으로 변경
+  /** 객실 이름 */
+  name: string;
+  /** 객실 설명 */
+  description: string;
+  /** 객실 이미지 */
+  image: string;
   /** 객실 인원 */
   capacity: IRoomCapacity;
   /** 객실 시설 */
   time: IRoomTime;
   /** 객실 가격 */
   price: IPrice;
-  /** 상태 */
-  status: 'cleaning' | 'reserved' | 'empty'; // 청소중, 예약중, 빈방
+  /** 평점 */
+  rating: number;
+  /** 리뷰 */
+  review: string[];
+  /** 이벤트 */
+  event: string;
 }
 
 interface IPrice {
@@ -29,8 +37,8 @@ interface IRoomTime {
 }
 
 interface IRoomCapacity {
-  /** 성인 */
-  adult: number;
-  /** 어린이 */
-  child: number;
+  /** 기준 인원 */
+  standard: number;
+  /** 최대 인원 */
+  maximum: number;
 }

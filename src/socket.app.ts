@@ -11,7 +11,7 @@ app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(errorHandler);
 
-const port = 4000;
+const port = process.env.SOCKET_PORT || 5000;
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
