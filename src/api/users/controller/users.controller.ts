@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response, NextFunction } from 'express';
 import { UserService } from '../service/user.service.type';
 
 export default class UsersController {
+
   constructor(private _userService: UserService) {
     this.signUp = this.signUp.bind(this);
     this.getMyInfo = this.getMyInfo.bind;
@@ -48,6 +48,22 @@ export default class UsersController {
       });
 
       res.send(user);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async updateMyInfo(req: Request, res: Response, next: NextFunction) {
+    try {
+      res.send(req.body);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async deactivateMyInfo(req: Request, res: Response, next: NextFunction) {
+    try {
+      res.send(req.body);
     } catch (error) {
       next(error);
     }

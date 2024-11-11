@@ -5,10 +5,12 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import errorHandler from '@/api/common/middlewares/errorHandler.middleware';
 import userRouter from './api/users/router/users.router';
+import lodgeRouter from './api/lodge/router/lodge.router';
+import adminLodgeRouter from './api/lodge/router/adminLodge.router';
 
 const app = express();
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -42,7 +44,9 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
 /** ------- USER ------- */
 app.use('/api/users', userRouter);
 
-/** ------- PRODUCT ------- */
+/** ------- LODGE ------- */
+app.use('/api/lodges', lodgeRouter);
+app.use('/admin-api/lodges', adminLodgeRouter);
 
 app.use(errorHandler);
 
