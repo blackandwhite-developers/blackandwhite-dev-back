@@ -2,7 +2,7 @@
 export class GetUsersResponseDTO {
   id: string;
   email: string;
-  role: string;
+  role?: string;
   profile: {
     /** ID */
     id: string;
@@ -16,6 +16,8 @@ export class GetUsersResponseDTO {
     gender?: string;
     /** 주소 */
     address: string;
+    /** 상세주소 */
+    addressDetail: string;
     /** 관심사 */
     intereste: string;
     /** 닉네임 */
@@ -33,6 +35,7 @@ export class GetUsersResponseDTO {
       phone: user.profile.phone,
       gender: user.profile.gender,
       address: user.profile.address,
+      addressDetail: user.profile.addressDetail,
       intereste: user.profile.intereste,
       nickname: user.profile.nickname,
     };

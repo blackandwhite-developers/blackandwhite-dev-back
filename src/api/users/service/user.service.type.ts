@@ -4,11 +4,8 @@ import { UserResponseDTO } from '../dto/userResponse.dto';
 
 export interface UserService {
   /** 유저 목록 조회 */
-  getUsers({ limit, offset }: { limit?: number; offset?: number }): Promise<{
-    totalCount: number;
-    prev: string | null;
+  getUsers(): Promise<{
     results: GetUsersResponseDTO[];
-    next: string | null;
   }>;
   /** 유저 조회 */
   getUserDetail(id: string): Promise<GetUserResponseDTO | null>;

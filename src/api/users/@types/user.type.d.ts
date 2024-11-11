@@ -27,10 +27,10 @@ interface IUser {
   name: string;
   /** 이메일  (unique) */
   email: string;
-  /** 비밀번호  */
-  password?: string;
+  /** 비밀번호 */
+  password: string;
   /** 역할 */
-  role: RoleType;
+  role?: RoleType;
   /** 프로필 */
   profile: IProfile;
   /** 이용약관 동의 */
