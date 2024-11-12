@@ -4,6 +4,9 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import errorHandler from '@/api/common/middlewares/errorHandler.middleware';
+import userRouter from './api/users/router/users.router';
+import lodgeRouter from './api/lodge/router/lodge.router';
+import adminLodgeRouter from './api/lodge/router/adminLodge.router';
 
 const app = express();
 
@@ -24,7 +27,6 @@ const corsOptions = {
     }
   },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   optionsSuccessStatus: 200,
 };
@@ -38,6 +40,13 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
   res.send('Hello World!');
   next();
 });
+
+/** ------- USER ------- */
+app.use('/api/users', userRouter);
+
+/** ------- LODGE ------- */
+app.use('/api/lodges', lodgeRouter);
+app.use('/admin-api/lodges', adminLodgeRouter);
 
 app.use(errorHandler);
 
