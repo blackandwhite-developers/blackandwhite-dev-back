@@ -11,6 +11,11 @@ const LODGE_ROUTES = {
   LODGES_API: '/api/lodges',
 };
 
+const ROOM_ROUTES = {
+  ADMIN_ROOMS_API: '/admin-api/rooms',
+  ROOMS_API: '/api/rooms',
+};
+
 /** 카테고리 라우터 */
 const CATEGORY_ROUTERS = {
   CATEGORY_API: 'api/category',
@@ -19,5 +24,6 @@ const CATEGORY_ROUTERS = {
 export const ROUTES_INDEX = {
   ...USER_ROUTES,
   ...LODGE_ROUTES,
+  ...ROOM_ROUTES,
   ...CATEGORY_ROUTERS,
 };

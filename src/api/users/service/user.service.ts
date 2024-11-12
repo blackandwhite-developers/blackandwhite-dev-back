@@ -17,8 +17,7 @@ export class UsersServiceImpl implements UserService {
 
   async getUsers(): Promise<{ results: GetUsersResponseDTO[] }> {
     const users = await this._mongooseUserRepository.findAll();
-    const usersDto = await Promise.all(users.map(user => new GetUsersResponseDTO(user)));
-    return { results: usersDto };
+    return { results: users.map(user => new GetUsersResponseDTO(user)) };
   }
 
   async getUserDetail(id: string): Promise<GetUserResponseDTO | null> {
@@ -26,7 +25,7 @@ export class UsersServiceImpl implements UserService {
 
     if (!user) throw new HttpException(404, '유저를 찾을 수 없습니다.');
 
-    const dtoUser = await new GetUserResponseDTO(user);
+    const dtoUser = new GetUserResponseDTO(user);
 
     return dtoUser;
   }
