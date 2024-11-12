@@ -13,6 +13,7 @@ export interface UserService {
   createUser(
     params: Omit<IUser, 'id' | 'role' | 'profile'> & {
       profile: Omit<IProfile, 'id'>;
+      terms: Omit<ITerms, 'id'>;
     },
   ): Promise<UserResponseDTO>;
   /** 유저 수정 */

@@ -2,12 +2,10 @@ import mongoose from 'mongoose';
 
 const profileSchema = new mongoose.Schema<IProfile>(
   {
-    /** 이름 */
-    name: { type: String, required: true },
     /** 연락처 */
     phone: { type: String, required: true },
     /** 생년월일 */
-    birth: { type: String, required: true },
+    birth: { type: Date, required: true },
     /** 성별 */
     gender: { type: String, enum: ['M', 'F', 'E'], default: 'E', required: true },
     /** 주소 */
