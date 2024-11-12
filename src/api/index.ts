@@ -11,7 +11,13 @@ const LODGE_ROUTES = {
   LODGES_API: '/api/lodges',
 };
 
+const ROOM_ROUTES = {
+  ADMIN_ROOMS_API: '/admin-api/rooms',
+  ROOMS_API: '/api/rooms',
+};
+
 export const ROUTES_INDEX = {
   ...USER_ROUTES,
   ...LODGE_ROUTES,
+  ...ROOM_ROUTES,
 };
