@@ -11,7 +11,13 @@ const LODGE_ROUTES = {
   LODGES_API: '/api/lodges',
 };
 
+/** 카테고리 라우터 */
+const CATEGORY_ROUTERS = {
+  CATEGORY_API: 'api/category',
+};
+
 export const ROUTES_INDEX = {
   ...USER_ROUTES,
   ...LODGE_ROUTES,
+  ...CATEGORY_ROUTERS,
 };

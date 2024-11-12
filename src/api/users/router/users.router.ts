@@ -2,6 +2,7 @@ import express from 'express';
 import UsersController from '../controller/users.controller';
 import { extractPath } from '@/utils/path.util';
 import { ROUTES_INDEX } from '@/api';
+
 import { UsersServiceImpl } from '../service/user.service';
 import { MongooseUserRepository } from '../respository/user/mongooseUser.reopsitory';
 import { MongooseProfileRepository } from '../respository/profile/mongooseProfile.repository';
