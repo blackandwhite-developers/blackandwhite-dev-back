@@ -1,8 +1,7 @@
 export class Profile implements IProfile {
   id: string;
-  name: string;
   phone: string;
-  birth: string;
+  birth: Date;
   gender?: GenderType | undefined;
   address: string;
   addressDetail: string;
@@ -11,9 +10,8 @@ export class Profile implements IProfile {
 
   constructor(params: IProfile) {
     this.id = params.id;
-    this.name = params.name;
     this.phone = params.phone;
-    this.birth = params.birth;
+    this.birth = new Date(params.birth);
     this.gender = params.gender;
     this.address = params.address;
     this.addressDetail = params.addressDetail;

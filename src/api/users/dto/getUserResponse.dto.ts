@@ -1,12 +1,11 @@
 export class GetUserResponseDTO {
   id: string;
+  name: string;
   email: string;
   role?: string;
   profile: {
     /** ID */
     id: string;
-    /** 이름 */
-    name: string;
     /** 연락처 */
     phone: string;
     /** 생년월일 */
@@ -25,10 +24,10 @@ export class GetUserResponseDTO {
     this.id = user.id;
     this.email = user.email;
     this.role = user.role;
+    this.name = user.name;
     this.profile = {
       id: user.profile.id,
-      birth: user.profile.birth,
-      name: user.profile.name,
+      birth: user.profile.birth.toISOString(),
       phone: user.profile.phone,
       gender: user.profile.gender,
       address: user.profile.address,

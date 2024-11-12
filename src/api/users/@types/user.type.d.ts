@@ -15,7 +15,7 @@ interface IProfile {
   /** 상세 주소 */
   addressDetail: string;
   /** 관심사 */
-  interest: string;
+  intereste: string;
   /** 닉네임 */
   nickname: string;
 }
@@ -30,7 +30,7 @@ interface IUser {
   /** 비밀번호 */
   password: string;
   /** 역할 */
-  role?: RoleType;
+  role: RoleType;
   /** 프로필 */
   profile: IProfile;
   /** 이용약관 동의 */

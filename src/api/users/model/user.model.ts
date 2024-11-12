@@ -2,7 +2,7 @@ export class User implements IUser {
   id: string;
   email: string;
   name: string;
-  password?: string | undefined;
+  password: string;
   role: RoleType;
   profile: IProfile;
   terms: ITerms;
