@@ -17,7 +17,8 @@ export class UsersServiceImpl implements UserService {
 
   async getUsers(): Promise<{ results: GetUsersResponseDTO[] }> {
     const users = await this._mongooseUserRepository.findAll();
-    return { results: users };
+    const usersDto = await Promise.all(users.map(user => new GetUsersResponseDTO(user)));
+    return { results: usersDto };
   }
 
   async getUserDetail(id: string): Promise<GetUserResponseDTO | null> {
@@ -30,10 +31,14 @@ export class UsersServiceImpl implements UserService {
     return dtoUser;
   }
   async createUser(
-    params: Omit<IUser, 'id' | 'role' | 'profile'> & { profile: Omit<IProfile, 'id'> },
+    params: Omit<IUser, 'id' | 'role' | 'profile'> & { profile: Omit<IProfile, 'id'> } & { terms: Omit<ITerms, 'id'> },
   ): Promise<UserResponseDTO> {
     const profile = await this._mongooseProfileRepository.save(params.profile);
-    const user = await this._mongooseUserRepository.save({ ...params, profile });
+    const user = await this._mongooseUserRepository.save({
+      ...params,
+      profile,
+      role: 'user',
+    });
 
     return new UserResponseDTO(user);
   }
