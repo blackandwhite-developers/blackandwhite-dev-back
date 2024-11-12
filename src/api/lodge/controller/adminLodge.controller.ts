@@ -13,7 +13,9 @@ export default class AdminLodgeController {
 
   async getLodge(req: Request, res: Response, next: NextFunction) {
     try {
-      res.send('숙소 조회');
+      const { id } = req.params;
+      const lodge = await this._lodgeService.getLodge(id);
+      res.send(lodge);
     } catch (error) {
       next(error);
     }
@@ -21,7 +23,8 @@ export default class AdminLodgeController {
 
   async createLodge(req: Request, res: Response, next: NextFunction) {
     try {
-      res.send('숙소 등록');
+      const lodge = await this._lodgeService.postLodge(req.body);
+      res.send(lodge);
     } catch (error) {
       next(error);
     }
@@ -29,7 +32,9 @@ export default class AdminLodgeController {
 
   async updateLodge(req: Request, res: Response, next: NextFunction) {
     try {
-      res.send('숙소 수정');
+      const { id } = req.params;
+      await this._lodgeService.putLodge(id, req.body);
+      res.status(204).send();
     } catch (error) {
       next(error);
     }
@@ -37,7 +42,9 @@ export default class AdminLodgeController {
 
   async deleteLodge(req: Request, res: Response, next: NextFunction) {
     try {
-      res.send('숙소 삭제');
+      const { id } = req.params;
+      await this._lodgeService.deleteLodge(id);
+      res.status(204).send();
     } catch (error) {
       next(error);
     }
