@@ -1,13 +1,12 @@
 /**  유저 목록 조회 응답 DTO */
 export class GetUsersResponseDTO {
   id: string;
+  name: string;
   email: string;
   role?: string;
   profile: {
     /** ID */
     id: string;
-    /** 이름 */
-    name: string;
     /** 연락처 */
     phone: string;
     /** 생년월일 */
@@ -26,12 +25,12 @@ export class GetUsersResponseDTO {
   /** 예약 목록 */
   constructor(user: IUser) {
     this.id = user.id;
+    this.name = user.name;
     this.email = user.email;
     this.role = user.role;
     this.profile = {
       id: user.profile.id,
-      birth: user.profile.birth,
-      name: user.profile.name,
+      birth: user.profile.birth.toISOString(),
       phone: user.profile.phone,
       gender: user.profile.gender,
       address: user.profile.address,
