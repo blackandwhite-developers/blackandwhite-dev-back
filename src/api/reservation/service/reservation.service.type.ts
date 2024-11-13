@@ -11,9 +11,13 @@ export interface ReservationService {
     ): Promise<ReservationResponseDTO>;
     /** 예약 수정 */
     updateReservation(
-        reservationId: string,
+        id: string,
         updateReservations :Omit<IReservation, "id" | "reserverName">
     ): Promise<void>;
     /** 예약 삭제 */
     deleteReservation(id: string): Promise<void>;
-}
+    /** 예약 취소 */
+    patchCancelReservation(
+        id: string
+    ) : Promise<void>;
+} 

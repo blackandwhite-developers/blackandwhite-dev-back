@@ -21,7 +21,7 @@ export class MongooseReservationRepository implements ReservationRepository {
         })
         .populate({
             path: "information",
-            select: "id name image adult child maxCapacity price checkin checkout",
+            select: "id name image adult child maximum price checkin checkout",
         });
 
         return values;
@@ -38,7 +38,7 @@ export class MongooseReservationRepository implements ReservationRepository {
         })
         .populate({
             path: "information",
-            select: "id name image adult child maxCapacity price checkin checkout",
+            select: "id name image adult child maximum price checkin checkout",
         });
 
         return values;
@@ -57,9 +57,23 @@ export class MongooseReservationRepository implements ReservationRepository {
         return results;
     }
 
-    async delete(reservationId: string): Promise<void> {
-        await MongooseReservation.deleteOne({ _id: reservationId });
+    async delete(id: string): Promise<void> {
+        await MongooseReservation.deleteOne({ _id: id });
 
         return;
+    }
+
+    async cancel(id: string): Promise<IReservation> {
+        const reservation = await MongooseReservation.findById(id);
+
+        if (!reservation) {
+            throw new HttpException(404, "예약을 찾을 수 없습니다.");
+        }
+    
+        reservation.status = "cancel";
+    
+        await reservation.save();
+    
+        return reservation;
     }
 }

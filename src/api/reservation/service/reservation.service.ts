@@ -51,5 +51,13 @@ export default class ReservationServiceImpl implements ReservationService{
         return;
     }
 
+    async patchCancelReservation(id: string): Promise<void> {
+        const findReservation = await this._reservationRepository.findById(id);
+        if (!findReservation) throw new HttpException(404, "예약내역을 찾을 수 없습니다.");
+        await this._reservationRepository.update(id, { status: 'cancel' });
+    
+        return;
+    }
+
 
 }

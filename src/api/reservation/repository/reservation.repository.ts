@@ -9,4 +9,6 @@ export interface ReservationRepository {
     update(reservationId: string, updateReservationInfo: Partial<IReservation>): Promise<IReservation>;
     /** 예약 삭제 */
     delete (reservationId: string): Promise<void>;
+    /** 예약 취소 */
+    cancel (reservationId: string): Promise<IReservation>;
 }

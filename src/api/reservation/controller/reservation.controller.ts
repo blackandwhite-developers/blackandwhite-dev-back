@@ -77,29 +77,39 @@ export default class ReservationController {
         next: NextFunction
     ) {
         const id = req.body.information.id as string;
-        const informationData = await this._reservationRepository.findById(id); //IRoom 레포지토리가 들어와야함 
+        const reservation = await this._reservationRepository.findById(id); //IRoom 레포지토리가 들어와야함 
 
-        if (!informationData) {
+        if (!reservation) {
             throw new Error("해당 정보가 존재하지 않습니다.");
         }
         try {
             const createReservation =
                 await this._reservationService.createReservation({
-                    reserverName: { //IPartialUser가 필요
+                    adult: req.body.adult,
+                    child: req.body.child,
+                    reserverName: {
                         id: req.body.reserverName.id,
                         name: req.body.reserverName.name,
                     },
+                    reserverNumber:{
+                        id: req.body.reserverNumber.id,
+                        phone: req.body.reserverNumber.phone,
+                    },
                     information: {
-                        id: informationData.id,
-                        name: informationData.name,
-                        image: informationData.image,
-                        adult: informationData.adult,
-                        child: informationData.child,
-                        standardCapacity: informationData.standardCapacity,
-                        maxCapacity: informationData.maxCapacity,
-                        price: informationData.price,
-                        checkin: informationData.checkIn,
-                        checkout: informationData.checkOut,
+                        id: reservation.id,
+                        name: reservation.information.name,
+                        image: reservation.information.image,
+                        capacity: {
+                            standard: reservation.information.capacity.standard,
+                            maximum: reservation.information.capacity.maximum,
+                        },
+                        time: {
+                            checkIn: reservation.information.time.checkIn,
+                            checkOut: reservation.information.time.checkOut,
+                        },
+                        price: {
+                            price: reservation.information.price.price,
+                        }
                     },
                 });
             res.send(createReservation);
@@ -148,6 +158,16 @@ export default class ReservationController {
             await this._reservationService.deleteReservation(id);
 
             res.status(204).json();
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    async cancelReservation(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { id } = req.params;
+            const reservation = await this._reservationService.patchCancelReservation(id);
+            res.send(reservation);
         } catch (error) {
             next(error);
         }
