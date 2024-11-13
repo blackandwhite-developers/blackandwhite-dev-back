@@ -7,6 +7,8 @@ import errorHandler from '@/api/common/middlewares/errorHandler.middleware';
 import userRouter from './api/users/router/users.router';
 import lodgeRouter from './api/lodge/router/lodge.router';
 import adminLodgeRouter from './api/lodge/router/adminLodge.router';
+import { ROUTES_INDEX } from './api';
+import categoryRouter from './api/category/router/category.router';
 
 const app = express();
 
@@ -47,6 +49,9 @@ app.use('/api/users', userRouter);
 /** ------- LODGE ------- */
 app.use('/api/lodges', lodgeRouter);
 app.use('/admin-api/lodges', adminLodgeRouter);
+
+/** ------- CATEGORY ------- */
+app.use(ROUTES_INDEX.CATEGORY_API, categoryRouter);
 
 app.use(errorHandler);
 
