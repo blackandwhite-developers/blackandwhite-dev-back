@@ -1,4 +1,6 @@
 export interface UserRepository {
+  /** 이름과 전화번호로 유저 조회 */
+  getEmailByNameAndPhone(email: string, phone: string): Promise<string>;
   /** 유저 생성 */
   save(user: Omit<IUser, 'id'>): Promise<IUser>;
   /** 유저 목록 조회 */
