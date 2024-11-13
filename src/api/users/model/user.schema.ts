@@ -21,6 +21,16 @@ const userSchema = new mongoose.Schema<IUser>(
       ref: 'Profile',
       required: true,
     },
+    terms: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Terms',
+      required: true,
+    },
+    accountType: {
+      type: String,
+      enum: ['local', 'kakao', 'naver', 'apple'],
+      required: true,
+    },
   },
   {
     timestamps: true,

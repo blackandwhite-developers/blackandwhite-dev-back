@@ -35,6 +35,13 @@ interface IUser {
   profile: IProfile;
   /** 이용약관 동의 */
   terms: ITerms;
+  /** 계정 종류 */
+  /** local - 일반 로그인
+   * kakao - 카카오 로그인
+   * naver - 네이버 로그인
+   * apple - 애플 로그인
+   */
+  accountType: 'local' | 'kakao' | 'naver' | 'apple';
 }
 
 interface ITerms {

@@ -6,7 +6,7 @@ export class User implements IUser {
   role: RoleType;
   profile: IProfile;
   terms: ITerms;
-
+  accountType: 'local' | 'kakao' | 'naver' | 'apple';
   constructor(params: IUser) {
     this.id = params.id;
     this.email = params.email;
@@ -15,5 +15,6 @@ export class User implements IUser {
     this.role = params.role;
     this.profile = params.profile;
     this.terms = params.terms;
+    this.accountType = params.accountType;
   }
 }
