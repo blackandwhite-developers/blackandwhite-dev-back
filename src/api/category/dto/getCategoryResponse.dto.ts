@@ -1,5 +1,5 @@
 export class GetsCategoryResponseDTO {
-  id: string;
+  id?: string;
   title: string;
   thumbnail: string;
   division: string;

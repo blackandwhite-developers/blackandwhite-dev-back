@@ -18,7 +18,7 @@ const ROOM_ROUTES = {
 
 /** 카테고리 라우터 */
 const CATEGORY_ROUTERS = {
-  CATEGORY_API: 'api/category',
+  CATEGORY_API: '/api/category',
 };
 
 /** 예약 라우터 */
@@ -27,10 +27,16 @@ const RESERVATION_ROUTES = {
   RESERVATION_API: "/api/reservation",
 }
 
+const EVENT_ROUTES = {
+  EVENT_API: '/api/event',
+};
+
+
 export const ROUTES_INDEX = {
   ...USER_ROUTES,
   ...LODGE_ROUTES,
   ...ROOM_ROUTES,
   ...CATEGORY_ROUTERS,
   ...RESERVATION_ROUTES,
+  ...EVENT_ROUTES,
 };

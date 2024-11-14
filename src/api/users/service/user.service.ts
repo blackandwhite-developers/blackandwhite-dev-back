@@ -6,7 +6,7 @@ import { UserService } from './user.service.type';
 import { GetUserResponseDTO } from '../dto/getUserResponse.dto';
 import { GetUsersResponseDTO } from '../dto/getUsersResponse.dto';
 import { UserResponseDTO } from '../dto/userResponse.dto';
-import HttpException from '@/api/exceptions/http.exception';
+import HttpException from '@/api/common/exceptions/http.exception';
 import nodemailer from 'nodemailer';
 import { CryptoService } from '@/api/common/services/crypto.service';
 

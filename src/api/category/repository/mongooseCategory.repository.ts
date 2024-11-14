@@ -1,10 +1,10 @@
-import { CategorRepository } from '../repository/category.repository';
+import { CategoryRepository } from '../repository/category.repository';
 import { mongooseCategory } from '../model/category.schema';
 
-export class MongooseCategoryRepository implements CategorRepository {
+export class MongooseCategoryRepository implements CategoryRepository {
   async createCategory(params: Omit<ICategory, 'id'>): Promise<void> {
-    const newCategroy = new mongooseCategory({ params });
-    await newCategroy.save();
+    const newCategory = new mongooseCategory({ params });
+    await newCategory.save();
   }
   async getsCategory(): Promise<ICategory[]> {
     const results = await mongooseCategory.find();

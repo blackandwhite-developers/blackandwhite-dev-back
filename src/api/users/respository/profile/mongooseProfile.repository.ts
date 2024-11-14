@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { ProfileRepository } from './profile.repository';
 import { MongooseProfile } from '../../model/profile.schema';
-import HttpException from '@/api/exceptions/http.exception';
+import HttpException from '@/api/common/exceptions/http.exception';
 
 export class MongooseProfileRepository implements ProfileRepository {
   async save(profile: Omit<IProfile, 'id'>): Promise<IProfile> {
