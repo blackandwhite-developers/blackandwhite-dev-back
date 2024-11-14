@@ -17,3 +17,5 @@ const ROOM_ROUTES = {
 const roomController = new RoomController(new RoomServiceImpl(new MongooseRoomRepository()));
 roomRouter.get(extractPath(ROOM_ROUTES.GET_ROOMS, ROUTES_INDEX.ROOMS_API), roomController.getRooms);
 roomRouter.get(extractPath(ROOM_ROUTES.GET_ROOM, ROUTES_INDEX.ROOMS_API), roomController.getRoom);
+
+export default roomRouter;

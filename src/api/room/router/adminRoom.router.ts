@@ -38,3 +38,5 @@ adminRoomRouter.delete(
   extractPath(ADMIN_ROOM_ROUTES.DELETE_ROOM, ROUTES_INDEX.ADMIN_ROOMS_API),
   adminRoomController.deleteRoom,
 );
+
+export default adminRoomRouter;

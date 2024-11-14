@@ -11,6 +11,8 @@ import categoryRouter from './api/category/router/category.router';
 import eventRouter from './api/event/router/event.router';
 import reservationRouter from './api/reservation/router/reservation.router';
 import { ROUTES_INDEX } from './api';
+import paymentRouter from './api/payment/router/payment.router';
+import roomRouter from './api/room/router/room.router';
 
 const app = express();
 
@@ -46,21 +48,28 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
 });
 
 /** ------- USER ------- */
-app.use('/api/users', userRouter);
+app.use(ROUTES_INDEX.USERS_API, userRouter);
+app.use(ROUTES_INDEX.ADMIN_USERS_API, userRouter);
 
 /** ------- LODGE ------- */
-app.use('/api/lodges', lodgeRouter);
-app.use('/admin-api/lodges', adminLodgeRouter);
+app.use(ROUTES_INDEX.LODGES_API, lodgeRouter);
+app.use(ROUTES_INDEX.ADMIN_LODGES_API, adminLodgeRouter);
+
+/** ------- ROOMS ------- */
+app.use(ROUTES_INDEX.ROOMS_API, roomRouter);
+app.use(ROUTES_INDEX.ADMIN_ROOMS_API, roomRouter);
 
 /** ------- CATEGORY ------- */
-
 app.use(ROUTES_INDEX.CATEGORY_API, categoryRouter);
 
 /** ------- RESERVATION ------- */
-app.use('/api/reservation', reservationRouter);
+app.use(ROUTES_INDEX.RESERVATION_API, reservationRouter);
+
+/** ------- PAYMENT ------- */
+app.use(ROUTES_INDEX.PAYMENT_API, paymentRouter);
 
 /** ------- 이벤트 알림용 SSE 라우터 ------- */
-app.use('/api/event', eventRouter);
+app.use(ROUTES_INDEX.EVENT_API, eventRouter);
 
 app.use(errorHandler);
 

@@ -24,13 +24,16 @@ const CATEGORY_ROUTERS = {
 /** 예약 라우터 */
 const RESERVATION_ROUTES = {
   /** 예약 API */
-  RESERVATION_API: "/api/reservations",
-}
+  RESERVATION_API: '/api/reservations',
+};
 
 const EVENT_ROUTES = {
   EVENT_API: '/api/event',
 };
 
+const PAYMENT_ROUTES = {
+  PAYMENT_API: '/api/payment',
+};
 
 export const ROUTES_INDEX = {
   ...USER_ROUTES,
@@ -39,4 +42,5 @@ export const ROUTES_INDEX = {
   ...CATEGORY_ROUTERS,
   ...RESERVATION_ROUTES,
   ...EVENT_ROUTES,
+  ...PAYMENT_ROUTES,
 };
