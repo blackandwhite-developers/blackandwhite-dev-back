@@ -9,7 +9,6 @@ import lodgeRouter from './api/lodge/router/lodge.router';
 import adminLodgeRouter from './api/lodge/router/adminLodge.router';
 import categoryRouter from './api/category/router/category.router';
 import eventRouter from './api/event/router/event.router';
-import reservationRouter from './api/reservation/router/reservation.router';
 import { ROUTES_INDEX } from './api';
 import reservationRouter from './api/reservation/router/reservation.router';
 import adminReservationRouter from './api/reservation/router/adminReservation.router';
