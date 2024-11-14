@@ -1,4 +1,4 @@
-import { CategorRepository } from '../repository/category.repository';
+import { CategoryRepository } from '../repository/category.repository';
 
 import { CategoryService } from './category.service.type';
 
@@ -6,15 +6,15 @@ import { GetsCategoryResponseDTO } from '../dto/getCategoryResponse.dto';
 import HttpException from '@/api/exceptions/http.exception';
 
 export class CategoryServiceImpl implements CategoryService {
-  constructor(private readonly _mongooseCategortRespository: CategorRepository) {}
+  constructor(private readonly _categoryRepository: CategoryRepository) {}
 
   async getsCategory(): Promise<{ results: GetsCategoryResponseDTO[] }> {
-    const categories = await this._mongooseCategortRespository.getsCategory();
+    const categories = await this._categoryRepository.getsCategory();
     return { results: categories.map(cate => new GetsCategoryResponseDTO(cate)) };
   }
 
   async getCategory(id: string): Promise<GetsCategoryResponseDTO | null> {
-    const category = await this._mongooseCategortRespository.getCategory(id);
+    const category = await this._categoryRepository.getCategory(id);
 
     if (!category) throw new HttpException(404, '해당 카테고리를 찾을 수 없습니다');
 
@@ -25,21 +25,21 @@ export class CategoryServiceImpl implements CategoryService {
 
   async createCategory(params: Omit<ICategory, 'id'>): Promise<void> {
     if (!params) throw new HttpException(400, '해당 요청을 처리 할 수 없습니다.');
-    await this._mongooseCategortRespository.createCategory(params);
+    await this._categoryRepository.createCategory(params);
     return;
   }
 
   async updateCategory(id: string, params: Omit<ICategory, 'id'>): Promise<void> {
-    const findCate = await this._mongooseCategortRespository.getCategory(id);
+    const findCate = await this._categoryRepository.getCategory(id);
     if (!findCate) throw new HttpException(404, '카테고리를 찾을 수 없습니다.');
 
-    await this._mongooseCategortRespository.updateCategory(id, params);
+    await this._categoryRepository.updateCategory(id, params);
     return;
   }
 
-  async deleteCategroy(id: string): Promise<void> {
-    const findCate = await this._mongooseCategortRespository.getCategory(id);
+  async deleteCategory(id: string): Promise<void> {
+    const findCate = await this._categoryRepository.getCategory(id);
     if (!findCate) throw new HttpException(404, '카테고리를 찾을 수 없습니다.');
-    await this._mongooseCategortRespository.deleteCategory(id);
+    await this._categoryRepository.deleteCategory(id);
   }
 }
