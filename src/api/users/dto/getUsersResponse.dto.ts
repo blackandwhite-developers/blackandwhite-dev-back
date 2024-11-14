@@ -35,7 +35,7 @@ export class GetUsersResponseDTO {
       gender: user.profile.gender,
       address: user.profile.address,
       addressDetail: user.profile.addressDetail,
-      intereste: user.profile.intereste,
+      intereste: user.profile.interest,
       nickname: user.profile.nickname,
     };
   }

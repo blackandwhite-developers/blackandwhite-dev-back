@@ -20,7 +20,7 @@ export default class UsersController {
           gender: req.body.profile.gender,
           address: req.body.profile.address,
           addressDetail: req.body.profile.addressDetail,
-          intereste: req.body.profile.interest,
+          interest: req.body.profile.interest,
           nickname: req.body.profile.nickname,
         },
         terms: {
@@ -30,6 +30,7 @@ export default class UsersController {
           locationBasedService: Boolean(req.body.terms.locationBasedService),
           marketingInfoAgree: Boolean(req.body.terms.marketingInfoAgree),
         },
+        accountType: 'local',
       });
       res.send(user);
     } catch (error) {
@@ -84,6 +85,36 @@ export default class UsersController {
       const { userId } = req.user;
       const deleteUser = await this._userService.deleteUser(userId);
       res.send(deleteUser);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async findId(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { name, phone } = req.body;
+      const userId = await this._userService.getEmailByNameAndPhone(name, phone);
+      res.send(userId);
+    } catch (error) {
+      next(error);
+    }
+  }
+  async authPassword(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { name, email } = req.body;
+      await this._userService.authNameAndEmail(name, email);
+      res.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async resetPassword(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { newPassword } = req.body;
+      const { name, email } = req.params;
+      await this._userService.resetPassword(name, email, newPassword);
+      res.status(204).send();
     } catch (error) {
       next(error);
     }

@@ -15,7 +15,7 @@ interface IProfile {
   /** 상세 주소 */
   addressDetail: string;
   /** 관심사 */
-  intereste: string;
+  interest: '호캉스' | '풀빌라' | '게스트하우스' | '전원주택' | '비지니스호텔' | '레저' | '해외숙소';
   /** 닉네임 */
   nickname: string;
 }
@@ -35,6 +35,13 @@ interface IUser {
   profile: IProfile;
   /** 이용약관 동의 */
   terms: ITerms;
+  /** 계정 종류 */
+  /** local - 일반 로그인
+   * kakao - 카카오 로그인
+   * naver - 네이버 로그인
+   * apple - 애플 로그인
+   */
+  accountType: 'local' | 'kakao' | 'naver' | 'apple';
 }
 
 interface ITerms {

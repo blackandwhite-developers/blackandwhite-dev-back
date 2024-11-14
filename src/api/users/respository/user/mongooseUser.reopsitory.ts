@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { UserRepository } from './user.repository';
 import { MongooseUser } from '@/api/users/model/user.schema';
+import HttpException from '@/api/common/exceptions/http.exception';
 
 export class MongooseUserRepository implements UserRepository {
   /** 유저 저장 */
@@ -47,5 +48,11 @@ export class MongooseUserRepository implements UserRepository {
   async delete(userId: string): Promise<void> {
     await MongooseUser.deleteOne({ _id: userId });
     return;
+  }
+  /** 이름과 전화번호로 유저 조회 */
+  async getEmailByNameAndPhone(email: string, phone: string): Promise<string> {
+    const user = await MongooseUser.findOne({ email, phone });
+    if (!user) throw new HttpException(404, '존재 하지 않는 회원입니다.');
+    return user.email;
   }
 }
