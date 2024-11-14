@@ -15,7 +15,7 @@ interface IProfile {
   /** 상세 주소 */
   addressDetail: string;
   /** 관심사 */
-  intereste: string;
+  interest: '호캉스' | '풀빌라' | '게스트하우스' | '전원주택' | '비지니스호텔' | '레저' | '해외숙소';
   /** 닉네임 */
   nickname: string;
 }

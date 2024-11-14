@@ -39,7 +39,7 @@ const lodgeSchema = new mongoose.Schema<ILodge>(
         roomType: [
           {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Room',
+            ref: 'rooms',
           },
         ],
         stock: {
@@ -57,4 +57,4 @@ const lodgeSchema = new mongoose.Schema<ILodge>(
   },
 );
 
-export const MongooseLodge = mongoose.model<ILodge>('Lodge', lodgeSchema);
+export const MongooseLodge = mongoose.model<ILodge>('lodge', lodgeSchema);

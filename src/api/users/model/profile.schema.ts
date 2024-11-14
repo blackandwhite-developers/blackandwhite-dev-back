@@ -13,7 +13,11 @@ const profileSchema = new mongoose.Schema<IProfile>(
     /** 상세주소 */
     addressDetail: { type: String, required: false },
     /** 관심사 */
-    intereste: { type: String, required: false },
+    interest: {
+      type: String,
+      enum: ['호캉스', '풀빌라', '게스트하우스', '전원주택', '비지니스호텔', '레저', '해외숙소'],
+      required: true,
+    },
     /** 닉네임 */
     nickname: { type: String, required: false },
   },

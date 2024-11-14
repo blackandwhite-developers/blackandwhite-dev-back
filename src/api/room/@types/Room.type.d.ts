@@ -20,6 +20,9 @@ interface IRoom {
   event: string;
 }
 
+type IPartialRoom = Pick<IRoom, 'id' | 'name' | 'image' | 'capacity' | 'time' 
+| 'price'>
+
 interface IPrice {
   /** 가격 */
   price: number;

@@ -3,6 +3,12 @@ import { GetUsersResponseDTO } from '../dto/getUsersResponse.dto';
 import { UserResponseDTO } from '../dto/userResponse.dto';
 
 export interface UserService {
+  /** 비밀번호 수정 전 이름과 전화번호로 유저 인증 및 이메일 송신 */
+  authNameAndEmail(name: string, email: string): Promise<void>;
+  /** 비밀번호 변경 */
+  resetPassword(name: string, email: string, newPassword: string): Promise<void>;
+  /** 이름과 전화번호로 유저 조회 */
+  getEmailByNameAndPhone(name: string, phone: string): Promise<string | null>;
   /** 유저 목록 조회 */
   getUsers(): Promise<{
     results: GetUsersResponseDTO[];
