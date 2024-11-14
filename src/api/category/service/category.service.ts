@@ -3,7 +3,7 @@ import { CategoryRepository } from '../repository/category.repository';
 import { CategoryService } from './category.service.type';
 
 import { GetsCategoryResponseDTO } from '../dto/getCategoryResponse.dto';
-import HttpException from '@/api/exceptions/http.exception';
+import HttpException from '@/api/common/exceptions/http.exception';
 
 export class CategoryServiceImpl implements CategoryService {
   constructor(private readonly _categoryRepository: CategoryRepository) {}
