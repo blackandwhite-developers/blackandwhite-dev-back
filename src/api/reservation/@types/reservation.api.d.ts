@@ -88,10 +88,14 @@ type getReservationDetailRequestBody = {
         price: {
             /** 객실 가격 */
             price: number;
+            /** 할인율 */
+            discount: number;
+            /** 인원 당 추가 가격 */
+            additionalPrice: number;
         };
     };
     /** 예약 상태 */
-    status: string;
+    status: "active" | "cancel";
 };
 
 /** 예약 상세 조회 (사용자 페이지) */
@@ -109,6 +113,10 @@ declare type createReservationRequestPath = {};
 declare type createReservationRequestParams = {};
 
 declare type createReservationRequestBody = {
+    /** 입실 날짜 */
+    startDate: Date;
+    /** 퇴실 날짜 */
+    endDate: Date;
     /** 어른 인원 */
     adult: number;
     /** 아이 인원 */
@@ -153,10 +161,14 @@ declare type createReservationRequestBody = {
         price: {
             /** 객실 가격 */
             price: number;
+            /** 할인율 */
+            discount: number;
+            /** 인원 당 추가 가격 */
+            additionalPrice: number;
         };
     };
     /** 예약 상태 */
-    status: string;
+    status: "active" | "cancel";
 };
 
 /** 예약 생성 (사용자 페이지) 요청 */

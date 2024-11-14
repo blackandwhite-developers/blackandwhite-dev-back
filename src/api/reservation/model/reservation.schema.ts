@@ -49,9 +49,13 @@ const reservationSchema = new mongoose.Schema<IReservation>({
         price: {
             /** 객실 가격 */
             price: { type: Number },
+            /** 할인율 */
+            discount: { type: Number },
+            /** 인원 당 추가 가격 */
+            additionalPrice: { type: Number },
         },
     },
-    status:{
+    status: {
         type: String,
         enum: ['active', 'cancel'],
         default: 'active',

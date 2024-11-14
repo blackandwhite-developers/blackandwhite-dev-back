@@ -2,9 +2,9 @@ export class ReservationResponseDTO {
     /** 예약 ID */
     id: string;
     /** 입실 날짜 */
-    startDate: string;
+    startDate: Date;
     /** 퇴실 날짜 */
-    endDate: string;
+    endDate: Date;
     /** 어른 인원 */
     adult: number;
     /** 아이 인원 */
@@ -49,15 +49,19 @@ export class ReservationResponseDTO {
         price: {
             /** 객실 가격 */
             price: number;
+            /** 할인율 */
+            discount: number;
+            /** 인원 당 추가 가격 */
+            additionalPrice: number;
         };
     }
     /** 예약 상태 */
-    status: string;
+    status: "active" | "cancel";
 
     constructor(params: IReservation) {
         this.id = params.id;
-        this.startDate = params.startDate;
-        this.endDate = params.endDate;
+        this.startDate = new Date(params.startDate);
+        this.endDate = new Date(params.endDate);
         this.adult = params.adult;
         this.child = params.child;
         this.reserverName = {
@@ -82,6 +86,8 @@ export class ReservationResponseDTO {
             },
             price: {
                 price: params.information.price.price,
+                discount: params.information.price.discount,
+                additionalPrice: params.information.price.additionalPrice,
             },
 
         };

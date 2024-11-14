@@ -21,7 +21,7 @@ export class MongooseReservationRepository implements ReservationRepository {
         })
         .populate({
             path: "information",
-            select: "id name image adult child maximum price checkin checkout",
+            select: "id name image adult child maximum price discount additionalPrice checkin checkout",
         });
 
         return values;
@@ -38,7 +38,7 @@ export class MongooseReservationRepository implements ReservationRepository {
         })
         .populate({
             path: "information",
-            select: "id name image adult child maximum price checkin checkout",
+            select: "id name image adult child maximum price discount additionalPrice checkin checkout",
         });
 
         return values;

@@ -6,9 +6,9 @@ export interface ReservationRepository {
     /** ID로 예약 조회 */
     findById(id: string): Promise<IReservation | null>;
     /** 예약 수정 */
-    update(reservationId: string, updateReservationInfo: Partial<IReservation>): Promise<IReservation>;
+    update(id: string, updateReservationInfo: Partial<IReservation>): Promise<IReservation>;
     /** 예약 삭제 */
-    delete (reservationId: string): Promise<void>;
+    delete (id: string): Promise<void>;
     /** 예약 취소 */
-    cancel (reservationId: string): Promise<IReservation>;
+    cancel (id: string): Promise<IReservation>;
 }

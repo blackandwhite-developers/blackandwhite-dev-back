@@ -85,6 +85,8 @@ export default class ReservationController {
         try {
             const createReservation =
                 await this._reservationService.createReservation({
+                    startDate: req.body.startDate,
+                    endDate: req.body.endDate,
                     adult: req.body.adult,
                     child: req.body.child,
                     reserverName: {
@@ -109,8 +111,11 @@ export default class ReservationController {
                         },
                         price: {
                             price: reservation.information.price.price,
-                        }
+                            discount: reservation.information.price.discount,
+                            additionalPrice: reservation.information.price.additionalPrice,
+                        } 
                     },
+                    status: req.body.status
                 });
             res.send(createReservation);
         } catch (error) {

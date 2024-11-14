@@ -2,9 +2,9 @@ interface IReservation {
     /** 예약 ID */
     id: string;
     /** 입실 날짜 */
-    startDate: string;
+    startDate: Date;
     /** 퇴실 날짜 */
-    endDate: string;
+    endDate: Date;
     /** 어른 인원 */
     adult: number;
     /** 아이 인원 */
@@ -57,15 +57,19 @@ interface IReservationResponseDTO {
         /** 객실 시설 */
         time: IRoomTime;
         /** 객실 가격 */
-        price: Pick<IPrice, 'price'>;
+        price:IPrice;
     }
     /** 예약 상태 */
-    status: "active" | "cancelled";
+    status: "active" | "cancel";
 }
 
 interface IPriceResponseDTO {
     /** 객실 가격 */
     price: number;
+    /** 할인율 */
+    discount: number;
+    /** 인원 당 추가 가격 */
+    additionalPrice: number;
 }
 
 interface IRoomTimeResponseDTO {
