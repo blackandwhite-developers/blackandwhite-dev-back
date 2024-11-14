@@ -51,7 +51,7 @@ app.use('/api/lodges', lodgeRouter);
 app.use('/admin-api/lodges', adminLodgeRouter);
 
 /** ------- CATEGORY ------- */
-app.use(ROUTES_INDEX.CATEGORY_API, categoryRouter);
+// app.use(ROUTES_INDEX.CATEGORY_API, categoryRouter);
 
 app.use(errorHandler);
 

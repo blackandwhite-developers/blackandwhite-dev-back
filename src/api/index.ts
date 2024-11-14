@@ -18,7 +18,7 @@ const ROOM_ROUTES = {
 
 /** 카테고리 라우터 */
 const CATEGORY_ROUTERS = {
-  CATEGORY_API: 'api/category',
+  CATEGORY_API: '/api/category',
 };
 
 export const ROUTES_INDEX = {
