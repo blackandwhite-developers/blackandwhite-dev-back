@@ -1,4 +1,4 @@
-export interface CategorRepository {
+export interface CategoryRepository {
   createCategory(params: Omit<ICategory, 'id'>): Promise<void>;
   getsCategory(): Promise<ICategory[]>;
   getCategory(id: string): Promise<ICategory | null>;

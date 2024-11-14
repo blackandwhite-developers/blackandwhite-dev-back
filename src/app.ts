@@ -10,6 +10,7 @@ import adminLodgeRouter from './api/lodge/router/adminLodge.router';
 import categoryRouter from './api/category/router/category.router';
 import eventRouter from './api/event/router/event.router';
 import reservationRouter from './api/reservation/router/reservation.router';
+import { ROUTES_INDEX } from './api';
 
 const app = express();
 
@@ -52,7 +53,8 @@ app.use('/api/lodges', lodgeRouter);
 app.use('/admin-api/lodges', adminLodgeRouter);
 
 /** ------- CATEGORY ------- */
-// app.use(ROUTES_INDEX.CATEGORY_API, categoryRouter);
+
+app.use(ROUTES_INDEX.CATEGORY_API, categoryRouter);
 
 /** ------- RESERVATION ------- */
 app.use('/api/reservation', reservationRouter);

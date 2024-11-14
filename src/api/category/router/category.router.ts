@@ -2,6 +2,8 @@ import express from 'express';
 import { extractPath } from '@/utils/path.util';
 import { ROUTES_INDEX } from '@/api';
 import CategoryController from '../controller/category.controller';
+import { MongooseCategoryRepository } from '../repository/mongooseCategory.repository';
+import { CategoryServiceImpl } from '../service/category.service';
 
 const categoryRouter = express.Router();
 
@@ -17,7 +19,7 @@ const CATEGORY_ROUTES = {
   /** 카테고리 삭제 */
   DELETE_CATEGORY: `/api/category`,
 };
-// const categoryController = new CategoryController();
+const categoryController = new CategoryController(new CategoryServiceImpl(new MongooseCategoryRepository()));
 
 categoryRouter.post(
   extractPath(CATEGORY_ROUTES.CREATE_CATEGORY, ROUTES_INDEX.CATEGORY_API),
