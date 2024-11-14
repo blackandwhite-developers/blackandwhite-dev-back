@@ -29,7 +29,6 @@ const USER_ROUTES = {
 const userController = new UsersController(
   new UsersServiceImpl(new MongooseUserRepository(), new MongooseProfileRepository()),
 );
-
 userRouter.post(extractPath(USER_ROUTES.SIGN_UP, ROUTES_INDEX.USERS_API), userController.signUp);
 
 userRouter.get(extractPath(USER_ROUTES.FIND_ID, ROUTES_INDEX.USERS_API), userController.findId);

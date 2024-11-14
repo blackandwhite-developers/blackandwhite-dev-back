@@ -7,18 +7,17 @@ const categoryRouter = express.Router();
 
 const CATEGORY_ROUTES = {
   /** 카테고리 생성 */
-  CREATE_CATEGORY: `api/category`,
+  CREATE_CATEGORY: `/api/category`,
   /** 카테고리 상세조회 */
-  GETS_CATEGORY: `api/category`,
+  GETS_CATEGORY: `/api/category`,
   /** 카테고리 상세조회 */
-  GET_CATEGORY: `api/category/:cid`,
+  GET_CATEGORY: `/api/category/:cid`,
   /** 카테고리 수정 */
-  UPDATE_CATEGORY: `api/category/:cid`,
+  UPDATE_CATEGORY: `/api/category/:cid`,
   /** 카테고리 삭제 */
-  DELETE_CATEGORY: `api/category`,
+  DELETE_CATEGORY: `/api/category`,
 };
-
-const categoryController = new CategoryController();
+// const categoryController = new CategoryController();
 
 categoryRouter.post(
   extractPath(CATEGORY_ROUTES.CREATE_CATEGORY, ROUTES_INDEX.CATEGORY_API),
@@ -29,7 +28,7 @@ categoryRouter.get(
   categoryController.getsCategory,
 );
 categoryRouter.get(
-  extractPath(CATEGORY_ROUTES.GETS_CATEGORY, ROUTES_INDEX.CATEGORY_API),
+  extractPath(CATEGORY_ROUTES.GET_CATEGORY, ROUTES_INDEX.CATEGORY_API),
   categoryController.getCategory,
 );
 categoryRouter.put(

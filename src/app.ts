@@ -52,7 +52,7 @@ app.use('/api/lodges', lodgeRouter);
 app.use('/admin-api/lodges', adminLodgeRouter);
 
 /** ------- CATEGORY ------- */
-app.use('/api/category', categoryRouter);
+// app.use(ROUTES_INDEX.CATEGORY_API, categoryRouter);
 
 /** ------- RESERVATION ------- */
 app.use('/api/reservation', reservationRouter);
