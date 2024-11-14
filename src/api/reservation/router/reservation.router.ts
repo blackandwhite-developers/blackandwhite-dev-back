@@ -71,3 +71,5 @@ reservationRouter.delete(
     validate(deleteReservationValidator),
     reservationsController.deleteReservation
 );
+
+export default reservationRouter;

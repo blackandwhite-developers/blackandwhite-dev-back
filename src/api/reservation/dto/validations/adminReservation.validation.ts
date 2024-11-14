@@ -2,31 +2,32 @@ import { REGEX } from "@/api/common/validations";
 import * as yup from "yup";
 
 /** 예약 목록 조회 Validator */
-const getReservationPathValidator = yup.object({
-    id: yup
+const adminGetReservationPathValidator = yup.object({
+    adminId: yup
         .string()
         .matches(REGEX.EMPTY_VARIABLE_PATH, "id는 필수 입력값입니다.")
         .required(),
+
 });
 
-export const getReservationValidator = {
-    path: getReservationPathValidator,
+export const adminGetReservationValidator = {
+    path: adminGetReservationPathValidator,
 };
 
 /** 예약 상세 조회 Validator */
-const getReservationDetailPathValidator = yup.object({
+const adminGetReservationDetailPathValidator = yup.object({
     id: yup
         .string()
         .matches(REGEX.EMPTY_VARIABLE_PATH, "id는 필수 입력값입니다.")
         .required(),
 });
 
-export const getReservationDetailValidator = {
-    path: getReservationDetailPathValidator,
+export const adminGetReservationDetailValidator = {
+    path: adminGetReservationDetailPathValidator,
 };
 
 /** 예약 생성 Validator */
-const createReservationBodyValidator = yup.object({
+const adminCreateReservationBodyValidator = yup.object({
     startDate: yup
     .string()
     .required("날짜가 입력되지 않았습니다. 날짜는 필수 입력값입니다."),
@@ -42,12 +43,12 @@ const createReservationBodyValidator = yup.object({
     .number()
 });
 
-export const createReservationValidator = {
-    body: createReservationBodyValidator,
+export const adminCreateReservationValidator = {
+    body: adminCreateReservationBodyValidator,
 };
 
 /** 예약 수정 Validator */
-const updateReservationBodyValidator = yup.object({
+const adminUpdateReservationBodyValidator = yup.object({
     startDate: yup
     .string()
     .required("날짜가 입력되지 않았습니다. 날짜는 필수 입력값입니다."),
@@ -63,24 +64,35 @@ const updateReservationBodyValidator = yup.object({
     .number()
 });
 
-const updateReservationPathValidator = yup.object({
+const adminUpdateReservationPathValidator = yup.object({
     id: yup
         .string()
         .matches(REGEX.EMPTY_VARIABLE_PATH, "id는 필수 입력값입니다."),
 });
 
-export const updateReservationValidator = {
-    body: updateReservationBodyValidator,
-    path: updateReservationPathValidator,
+export const adminUpdateReservationValidator = {
+    body: adminUpdateReservationBodyValidator,
+    path: adminUpdateReservationPathValidator,
 };
 
 /** 예약 삭제 Validator */
-const deleteReservationPathValidator = yup.object({
+const adminDeleteReservationPathValidator = yup.object({
     id: yup
         .string()
         .matches(REGEX.EMPTY_VARIABLE_PATH, "id는 필수 입력값입니다."),
 });
 
-export const deleteReservationValidator = {
-    path: deleteReservationPathValidator,
+export const adminDeleteReservationValidator = {
+    path: adminDeleteReservationPathValidator,
 };
+
+/** 예약 취소 Validator */
+const adminCancelReservationPathValidator = yup.object({
+    id: yup
+        .string()
+        .matches(REGEX.EMPTY_VARIABLE_PATH, "id는 필수 입력값입니다."),
+});
+
+export const adminCancelReservationValidator = {
+    path: adminCancelReservationPathValidator,
+}
