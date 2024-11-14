@@ -7,8 +7,9 @@ import errorHandler from '@/api/common/middlewares/errorHandler.middleware';
 import userRouter from './api/users/router/users.router';
 import lodgeRouter from './api/lodge/router/lodge.router';
 import adminLodgeRouter from './api/lodge/router/adminLodge.router';
-import { ROUTES_INDEX } from './api';
 import categoryRouter from './api/category/router/category.router';
+import eventRouter from './api/event/router/event.router';
+import reservationRouter from './api/reservation/router/reservation.router';
 
 const app = express();
 
@@ -52,6 +53,12 @@ app.use('/admin-api/lodges', adminLodgeRouter);
 
 /** ------- CATEGORY ------- */
 // app.use(ROUTES_INDEX.CATEGORY_API, categoryRouter);
+
+/** ------- RESERVATION ------- */
+app.use('/api/reservation', reservationRouter);
+
+/** ------- 이벤트 알림용 SSE 라우터 ------- */
+app.use('/api/event', eventRouter);
 
 app.use(errorHandler);
 

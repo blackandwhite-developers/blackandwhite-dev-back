@@ -15,10 +15,13 @@ interface IRoom {
   /** 평점 */
   rating: number;
   /** 리뷰 */
-  review: string[];
+  review: string[]; // TODO: 리뷰 모델 추가
   /** 이벤트 */
   event: string;
 }
+
+type IPartialRoom = Pick<IRoom, 'id' | 'name' | 'image' | 'capacity' | 'time' 
+| 'price'>
 
 interface IPrice {
   /** 가격 */
