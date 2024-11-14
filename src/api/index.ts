@@ -21,9 +21,14 @@ const CATEGORY_ROUTERS = {
   CATEGORY_API: 'api/category',
 };
 
+const EVENT_ROUTES = {
+  EVENT_API: '/api/event',
+};
+
 export const ROUTES_INDEX = {
   ...USER_ROUTES,
   ...LODGE_ROUTES,
   ...ROOM_ROUTES,
   ...CATEGORY_ROUTERS,
+  ...EVENT_ROUTES,
 };
