@@ -9,10 +9,12 @@ import lodgeRouter from './api/lodge/router/lodge.router';
 import adminLodgeRouter from './api/lodge/router/adminLodge.router';
 import categoryRouter from './api/category/router/category.router';
 import eventRouter from './api/event/router/event.router';
-import reservationRouter from './api/reservation/router/reservation.router';
 import { ROUTES_INDEX } from './api';
+import reservationRouter from './api/reservation/router/reservation.router';
+import adminReservationRouter from './api/reservation/router/adminReservation.router';
 import paymentRouter from './api/payment/router/payment.router';
 import roomRouter from './api/room/router/room.router';
+
 
 const app = express();
 
@@ -61,6 +63,10 @@ app.use(ROUTES_INDEX.ADMIN_ROOMS_API, roomRouter);
 
 /** ------- CATEGORY ------- */
 app.use(ROUTES_INDEX.CATEGORY_API, categoryRouter);
+
+/** ------- Reservation ------- */
+app.use(ROUTES_INDEX.RESERVATION_API, reservationRouter);
+app.use(ROUTES_INDEX.ADMIN_RESERVATION_API, adminReservationRouter);
 
 /** ------- RESERVATION ------- */
 app.use(ROUTES_INDEX.RESERVATION_API, reservationRouter);

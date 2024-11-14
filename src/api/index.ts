@@ -23,9 +23,10 @@ const CATEGORY_ROUTERS = {
 
 /** 예약 라우터 */
 const RESERVATION_ROUTES = {
-  /** 예약 API */
-  RESERVATION_API: '/api/reservations',
-};
+  ADMIN_RESERVATION_API: '/admin-api/reservation',
+  RESERVATION_API: "/api/reservation",
+}
+
 
 const EVENT_ROUTES = {
   EVENT_API: '/api/event',
