@@ -21,9 +21,16 @@ const CATEGORY_ROUTERS = {
   CATEGORY_API: 'api/category',
 };
 
+/** 예약 라우터 */
+const RESERVATION_ROUTES = {
+  /** 예약 API */
+  RESERVATION_API: "/api/reservations",
+}
+
 export const ROUTES_INDEX = {
   ...USER_ROUTES,
   ...LODGE_ROUTES,
   ...ROOM_ROUTES,
   ...CATEGORY_ROUTERS,
+  ...RESERVATION_ROUTES,
 };

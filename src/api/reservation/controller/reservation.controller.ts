@@ -7,18 +7,18 @@
 
 import { NextFunction, Request, Response } from "express";
 import { ReservationService } from "../service/reservation.service.type";
-import { ReservationRepository } from "../repository/reservation.repository";
+import RoomRepository from "../../room/repository/room.repository";
 
 export default class ReservationController {
     private readonly _reservationService: ReservationService;
-    private readonly _reservationRepository: ReservationRepository;
+    private readonly _roomRepository: RoomRepository;
 
     constructor(
         _reservationService: ReservationService,
-        _reservationRepository: ReservationRepository,
+        _roomRepository: RoomRepository,
     ) {
         this._reservationService = _reservationService;
-        this._reservationRepository = _reservationRepository;
+        this._roomRepository = _roomRepository;
 
         this.getReservation = this.getReservation.bind(this);
         this.getReservationDetail = this.getReservationDetail.bind(this);
@@ -77,7 +77,7 @@ export default class ReservationController {
         next: NextFunction
     ) {
         const id = req.body.information.id as string;
-        const reservation = await this._reservationRepository.findById(id); //IRoom 레포지토리가 들어와야함 
+        const reservation = await this._roomRepository.findById(id); 
 
         if (!reservation) {
             throw new Error("해당 정보가 존재하지 않습니다.");
@@ -99,20 +99,20 @@ export default class ReservationController {
                     },
                     information: {
                         id: reservation.id,
-                        name: reservation.information.name,
-                        image: reservation.information.image,
+                        name: reservation.name,
+                        image: reservation.image,
                         capacity: {
-                            standard: reservation.information.capacity.standard,
-                            maximum: reservation.information.capacity.maximum,
+                            standard: reservation.capacity.standard,
+                            maximum: reservation.capacity.maximum,
                         },
                         time: {
-                            checkIn: reservation.information.time.checkIn,
-                            checkOut: reservation.information.time.checkOut,
+                            checkIn: reservation.time.checkIn,
+                            checkOut: reservation.time.checkOut,
                         },
                         price: {
-                            price: reservation.information.price.price,
-                            discount: reservation.information.price.discount,
-                            additionalPrice: reservation.information.price.additionalPrice,
+                            price: reservation.price.price,
+                            discount: reservation.price.discount,
+                            additionalPrice: reservation.price.additionalPrice,
                         } 
                     },
                     status: req.body.status
