@@ -27,10 +27,14 @@ const RESERVATION_ROUTES = {
   RESERVATION_API: "/api/reservation",
 }
 
+
 const EVENT_ROUTES = {
   EVENT_API: '/api/event',
 };
 
+const PAYMENT_ROUTES = {
+  PAYMENT_API: '/api/payment',
+};
 
 export const ROUTES_INDEX = {
   ...USER_ROUTES,
@@ -39,4 +43,5 @@ export const ROUTES_INDEX = {
   ...CATEGORY_ROUTERS,
   ...RESERVATION_ROUTES,
   ...EVENT_ROUTES,
+  ...PAYMENT_ROUTES,
 };
