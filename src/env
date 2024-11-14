@@ -1,8 +1,0 @@
-MONGODB_USER="dbUser"
-MONGODB_PASSWORD="fYlquYPk4uXZOYco"
-MONGODB_CLUSTER="cluster0.qgkeiid.mongodb.net"
-PORT=4000
-SOCKET_PORT=5000
-EMAIL="blackandwhite.devs@gmail.com"
-EMAIL_PASSWORD="gmrqorroqkfwk"
-SALT="blackandwhitepasswordsaltisgood"
