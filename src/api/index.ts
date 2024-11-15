@@ -24,9 +24,8 @@ const CATEGORY_ROUTERS = {
 /** 예약 라우터 */
 const RESERVATION_ROUTES = {
   ADMIN_RESERVATION_API: '/admin-api/reservation',
-  RESERVATION_API: "/api/reservation",
-}
-
+  RESERVATION_API: '/api/reservation',
+};
 
 const EVENT_ROUTES = {
   EVENT_API: '/api/event',
@@ -34,6 +33,10 @@ const EVENT_ROUTES = {
 
 const PAYMENT_ROUTES = {
   PAYMENT_API: '/api/payment',
+};
+
+const AUTH_ROUTES = {
+  AUTH_API: '/api/auth',
 };
 
 export const ROUTES_INDEX = {
@@ -44,4 +47,5 @@ export const ROUTES_INDEX = {
   ...RESERVATION_ROUTES,
   ...EVENT_ROUTES,
   ...PAYMENT_ROUTES,
+  ...AUTH_ROUTES,
 };

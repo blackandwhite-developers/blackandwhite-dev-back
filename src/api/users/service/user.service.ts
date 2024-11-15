@@ -9,12 +9,14 @@ import { UserResponseDTO } from '../dto/userResponse.dto';
 import HttpException from '@/api/common/exceptions/http.exception';
 import nodemailer from 'nodemailer';
 import { CryptoService } from '@/api/common/services/crypto.service';
+import TermsRepository from '../respository/terms/terms.repository';
 
 export class UsersServiceImpl implements UserService {
   // profile 추가 해야함
   constructor(
     private readonly _mongooseUserRepository: UserRepository,
     private readonly _mongooseProfileRepository: ProfileRepository,
+    private readonly _mongooseTermsRepository: TermsRepository,
   ) {}
 
   async getEmailByNameAndPhone(email: string, phone: string): Promise<string | null> {
@@ -37,18 +39,22 @@ export class UsersServiceImpl implements UserService {
     return dtoUser;
   }
   async createUser(
-    params: Omit<IUser, 'id' | 'role' | 'profile'> & { profile: Omit<IProfile, 'id'> } & { terms: Omit<ITerms, 'id'> },
+    params: Omit<IUser, 'id' | 'role' | 'profile' | 'terms'> & { profile: Omit<IProfile, 'id'> } & {
+      terms: Omit<ITerms, 'id'>;
+    },
   ): Promise<UserResponseDTO> {
     const profile = await this._mongooseProfileRepository.save(params.profile);
     const saltedPassword = CryptoService.encryptPassword(params.password);
-    if (saltedPassword === null) throw new HttpException(500, '비밀번호 암호화에 실패했습니다.');
+    if (saltedPassword === null || saltedPassword.hashedPassword === undefined)
+      throw new HttpException(500, '비밀번호 암호화에 실패했습니다.');
+    const terms = await this._mongooseTermsRepository.createTerms(params.terms);
     const user = await this._mongooseUserRepository.save({
       ...params,
       profile,
-      password: saltedPassword.hashedPassword || '',
+      password: saltedPassword.hashedPassword,
       role: 'user',
+      terms,
     });
-
     return new UserResponseDTO(user);
   }
   async updateUser(userId: string, params: Partial<IUser>): Promise<void> {

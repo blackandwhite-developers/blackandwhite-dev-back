@@ -14,7 +14,7 @@ import reservationRouter from './api/reservation/router/reservation.router';
 import adminReservationRouter from './api/reservation/router/adminReservation.router';
 import paymentRouter from './api/payment/router/payment.router';
 import roomRouter from './api/room/router/room.router';
-
+import authRouter from './api/auth/router/auth.router';
 
 const app = express();
 
@@ -48,6 +48,9 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
   res.send('Hello World!');
   next();
 });
+
+/** ------- AUTH ------- */
+app.use(ROUTES_INDEX.AUTH_API, authRouter);
 
 /** ------- USER ------- */
 app.use(ROUTES_INDEX.USERS_API, userRouter);

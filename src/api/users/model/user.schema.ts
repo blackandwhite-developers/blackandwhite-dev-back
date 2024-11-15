@@ -18,12 +18,12 @@ const userSchema = new mongoose.Schema<IUser>(
     },
     profile: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Profile',
+      ref: 'profile',
       required: true,
     },
     terms: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Terms',
+      ref: 'terms',
       required: true,
     },
     accountType: {

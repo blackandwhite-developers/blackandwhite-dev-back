@@ -24,7 +24,6 @@ export default class UsersController {
           nickname: req.body.profile.nickname,
         },
         terms: {
-          id: '',
           termsOfService: Boolean(req.body.terms.termsOfService),
           privacyPolicy: Boolean(req.body.terms.privacyPolicy),
           locationBasedService: Boolean(req.body.terms.locationBasedService),
