@@ -24,8 +24,7 @@ export default class AuthServiceImpl implements AuthService {
   }
   async refresh(refreshToken: string): Promise<{ accessToken: string; refreshToken: string }> {
     if (!refreshToken) throw new HttpException(401, '로그인이 필요합니다.');
-    console.log(refreshToken);
-    const userId = JwtService.verifyRefreshToken(refreshToken.split('Bearer ')[1]).userId;
+    const userId = JwtService.verifyRefreshToken(refreshToken).userId;
     const user = await this._userRepository.findById(userId);
     if (!user) throw new HttpException(404, '존재하지 않는 사용자입니다.');
     if (refreshToken !== (await redisCli.getData(userId))) {

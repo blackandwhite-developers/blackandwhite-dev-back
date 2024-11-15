@@ -54,7 +54,7 @@ async function setData(key: string, value: string, expire: number) {
 
 async function deleteData(key: string) {
   try {
-    await redis.del(key);
+    await redis.unlink(key);
     return true;
   } catch (error) {
     console.error(error);
