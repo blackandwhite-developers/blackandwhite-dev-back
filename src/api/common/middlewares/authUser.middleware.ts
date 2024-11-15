@@ -5,19 +5,16 @@ import { JwtService } from '../services/jwt.service';
 /** 인증 미들웨어 */
 export const authUserMiddleware = (req: Request, res: Response, next: NextFunction) => {
   try {
-    const token = req.headers.authorization;
-
-    if (!token) {
-      throw new HttpException(401, '토큰이 없습니다.');
-    }
-
-    const tokenValue = token.split('Bearer ')[1];
-
-    const payload = JwtService.verifyAccessToken(tokenValue);
-
+    const accessToken = req.headers.authorization;
+    if (!accessToken) throw new HttpException(401, '토큰이 없습니다.');
+    const accessTokenValue = accessToken?.split('Bearer ')[1];
+    const payload = JwtService.verifyAccessToken(accessTokenValue);
+    const refreshTokenHeader = req.headers['x-refresh-token'];
+    const refreshToken = Array.isArray(refreshTokenHeader) ? refreshTokenHeader[0] : refreshTokenHeader || '';
     req.user = {
       userId: payload.userId,
       role: payload.role,
+      refreshToken: refreshToken,
     };
 
     next();

@@ -17,10 +17,12 @@ export interface UserService {
   getUserDetail(id: string): Promise<GetUserResponseDTO | null>;
   /** 유저 생성 */
   createUser(
-    params: Omit<IUser, 'id' | 'role' | 'profile'> & {
-      profile: Omit<IProfile, 'id'>;
-      terms: Omit<ITerms, 'id'>;
-    },
+    params:
+      | Omit<IUser, 'id' | 'role' | 'profile'>
+      | {
+          profile: Omit<IProfile, 'id'>;
+          terms: Omit<ITerms, 'id'>;
+        },
   ): Promise<UserResponseDTO>;
   /** 유저 수정 */
   updateUser(

@@ -6,6 +6,7 @@ import { ROUTES_INDEX } from '@/api';
 import { UsersServiceImpl } from '../service/user.service';
 import { MongooseUserRepository } from '../respository/user/mongooseUser.reopsitory';
 import { MongooseProfileRepository } from '../respository/profile/mongooseProfile.repository';
+import MongooseTermsRepository from '../respository/terms/mongooseTerms.repository';
 
 const userRouter = express.Router();
 
@@ -27,7 +28,7 @@ const USER_ROUTES = {
 } as const;
 
 const userController = new UsersController(
-  new UsersServiceImpl(new MongooseUserRepository(), new MongooseProfileRepository()),
+  new UsersServiceImpl(new MongooseUserRepository(), new MongooseProfileRepository(), new MongooseTermsRepository()),
 );
 userRouter.post(extractPath(USER_ROUTES.SIGN_UP, ROUTES_INDEX.USERS_API), userController.signUp);
 
