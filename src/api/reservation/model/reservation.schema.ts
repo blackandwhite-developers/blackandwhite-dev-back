@@ -41,9 +41,9 @@ const reservationSchema = new mongoose.Schema<IReservation>({
     /** 객실 시설 */
     time: {
       /** 입실 시간 */
-      checkIn: { type: Date },
+      checkIn: { type: String },
       /** 퇴실 시간 */
-      checkOut: { type: Date },
+      checkOut: { type: String },
     },
     /** 객실 가격 */
     price: {

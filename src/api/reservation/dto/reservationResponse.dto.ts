@@ -41,9 +41,9 @@ export class ReservationResponseDTO {
         /** 객실 시설 */
         time: {
             /** 입실 시간 */
-            checkIn: Date;
+            checkIn: string;
             /** 퇴실 시간 */
-            checkOut: Date;
+            checkOut: string;
         };
         /** 객실 가격 */
         price: {
@@ -81,8 +81,8 @@ export class ReservationResponseDTO {
                 maximum: params.information.capacity.maximum,
             },
             time: {
-                checkIn: new Date(params.information.time.checkIn),
-                checkOut: new Date(params.information.time.checkOut),
+                checkIn: params.information.time.checkIn,
+                checkOut: params.information.time.checkOut,
             },
             price: {
                 price: params.information.price.price,

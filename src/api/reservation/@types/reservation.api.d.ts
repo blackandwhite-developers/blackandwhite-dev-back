@@ -80,9 +80,9 @@ type getReservationDetailRequestBody = {
         /** 객실 시설 */
         time: {
             /** 입실 시간 */
-            checkIn: Date;
+            checkIn: string;
             /** 퇴실 시간 */
-            checkOut: Date;
+            checkOut: string;
         };
         /** 객실 가격 */
         price: {
@@ -153,9 +153,9 @@ declare type createReservationRequestBody = {
         /** 객실 시설 */
         time: {
             /** 입실 시간 */
-            checkIn: Date;
+            checkIn: string;
             /** 퇴실 시간 */
-            checkOut: Date;
+            checkOut: string;
         };
         /** 객실 가격 */
         price: {

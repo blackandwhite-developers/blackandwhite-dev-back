@@ -35,8 +35,8 @@ class RoomCapacityDto {
 }
 
 class RoomTimeDto {
-  checkIn: Date;
-  checkOut: Date;
+  checkIn: string;
+  checkOut: string;
 
   constructor(data: RoomTimeDto) {
     this.checkIn = data.checkIn;
