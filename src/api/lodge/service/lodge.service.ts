@@ -39,7 +39,7 @@ export default class LodgeServiceImpl implements LodgeService {
     const lodge = await this._lodgeRepository.save(newLodge);
     return new LodgeResponseDto(lodge);
   }
-  async putLodge(id: string, data: ILodge): Promise<void> {
+  async putLodge(id: string, data: Partial<ILodge>): Promise<void> {
     const lodge = await this._lodgeRepository.findById(id);
     const newLodge = { ...lodge, ...data };
     await this._lodgeRepository.edit(id, newLodge);
