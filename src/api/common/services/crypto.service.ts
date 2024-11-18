@@ -11,14 +11,20 @@ export class CryptoService {
   }
 
   public static encryptString = (str: string): string => {
-    const encrypt = crypto.createCipheriv('sha512', this.SALT_KEY, this.SALT_KEY);
-    const encrypted = encrypt.update(str, 'utf8', 'hex') + encrypt.final('base64');
-    return encrypted;
+    const iv = crypto.randomBytes(16);
+    const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(this.SALT_KEY), iv);
+    let encrypted = cipher.update(str);
+    encrypted = Buffer.concat([encrypted, cipher.final()]);
+    return iv.toString('hex') + ':' + encrypted.toString('hex');
   };
   public static decryptString = (str: string): string => {
-    const decode = crypto.createDecipheriv('sha512', this.SALT_KEY, this.SALT_KEY);
-    const decrypted = decode.update(str, 'hex', 'utf8') + decode.final('utf8');
-    return decrypted;
+    const [ivHex, encryptedHex] = str.split(':');
+    const iv = Buffer.from(ivHex, 'hex');
+    const encrypted = Buffer.from(encryptedHex, 'hex');
+    const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(this.SALT_KEY), iv);
+    let decrypted = decipher.update(encrypted);
+    decrypted = Buffer.concat([decrypted, decipher.final()]);
+    return decrypted.toString();
   };
   public static compareString = (str: string, hashedStr: string): boolean => {
     return this.encryptString(str) === hashedStr;
