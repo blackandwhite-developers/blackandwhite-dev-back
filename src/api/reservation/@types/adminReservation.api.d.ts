@@ -37,9 +37,9 @@ declare type adminGetReservationDetailResponse = {
     /** 예약 ID */
     id : string;
     /** 입실 날짜 */
-    startDate: Date;
+    startDate: string;
     /** 퇴실 날짜 */
-    endDate: Date;
+    endDate: string;
     /** 어른 인원 */
     adult: number;
     /** 아이 인원 */
@@ -100,9 +100,9 @@ declare type adminCreateReservationRequestParams = {};
 
 declare type adminCreateReservationRequestBody = {
     /** 입실 날짜 */
-    startDate: Date;
+    startDate: string;
     /** 퇴실 날짜 */
-    endDate: Date;
+    endDate: string;
     /** 어른 인원 */
     adult: number;
     /** 아이 인원 */

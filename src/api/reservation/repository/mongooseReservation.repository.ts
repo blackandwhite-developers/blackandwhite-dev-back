@@ -69,7 +69,12 @@ export class MongooseReservationRepository implements ReservationRepository {
 
     reservation.status = 'cancel';
 
-    await reservation.save();
+    try {
+      await reservation.save();
+    } catch (error) {
+      console.error('Error saving reservation:', error);
+      throw new HttpException(500, '예약 상태를 업데이트하는 도중 오류가 발생했습니다.');
+    }
 
     return reservation;
   }
