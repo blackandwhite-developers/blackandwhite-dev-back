@@ -15,14 +15,14 @@ export default class LodgeServiceImpl implements LodgeService {
     return new LodgeResponseDto(lodge);
   }
   async postLodge(data: Omit<ILodge, 'id' | 'lat' | 'lng' | 'room'>): Promise<LodgeResponseDto> {
-    const query = `query=${data.address}`;
-    const response = await fetch(`https://dapi.kakao.com/v2/local/search/address/${query}`, {
+    const query = `query=${decodeURI(data.address)}`;
+    const response = await fetch(`https://dapi.kakao.com/v2/local/search/address?${query}`, {
       method: 'GET',
       headers: {
         Authorization: `KakaoAK ${KAKAO_API_KEY}`,
       },
     });
-
+    console.log(await response);
     if (!response.ok) {
       throw new HttpException(404, '주소를 찾을 수 없습니다.');
     }
