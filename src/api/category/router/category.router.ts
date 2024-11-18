@@ -17,7 +17,7 @@ const CATEGORY_ROUTES = {
   /** 카테고리 수정 */
   UPDATE_CATEGORY: `/api/category/:cid`,
   /** 카테고리 삭제 */
-  DELETE_CATEGORY: `/api/category`,
+  DELETE_CATEGORY: `/api/category/:cid`,
 };
 const categoryController = new CategoryController(new CategoryServiceImpl(new MongooseCategoryRepository()));
 
