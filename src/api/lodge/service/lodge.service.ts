@@ -24,7 +24,7 @@ export default class LodgeServiceImpl implements LodgeService {
         Authorization: `KakaoAK ${KAKAO_API_KEY}`,
       },
     });
-
+    console.log(await response);
     if (!response.ok) {
       throw new HttpException(404, '주소를 찾을 수 없습니다.');
     }

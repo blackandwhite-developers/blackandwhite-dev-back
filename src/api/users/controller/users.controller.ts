@@ -21,8 +21,6 @@ export default class UsersController {
           phone: req.body.profile.phone,
           birth: req.body.profile.birth,
           gender: req.body.profile.gender,
-          address: req.body.profile.address,
-          addressDetail: req.body.profile.addressDetail,
           interest: req.body.profile.interest,
           nickname: req.body.profile.nickname,
         },

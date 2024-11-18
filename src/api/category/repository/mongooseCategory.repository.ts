@@ -2,9 +2,10 @@ import { CategoryRepository } from '../repository/category.repository';
 import { mongooseCategory } from '../model/category.schema';
 
 export class MongooseCategoryRepository implements CategoryRepository {
-  async createCategory(params: Omit<ICategory, 'id'>): Promise<void> {
-    const newCategory = new mongooseCategory({ params });
-    await newCategory.save();
+  async createCategory(params: Omit<ICategory, 'id'>): Promise<ICategory> {
+    const newCategory = new mongooseCategory(params);
+    const category = await newCategory.save();
+    return category;
   }
   async getsCategory(): Promise<ICategory[]> {
     const results = await mongooseCategory.find();

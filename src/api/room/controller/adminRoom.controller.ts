@@ -13,7 +13,7 @@ export default class AdminRoomController {
   }
   async getRooms(req: Request, res: Response, next: NextFunction) {
     try {
-      const rooms = this._roomService.getRooms();
+      const rooms = await this._roomService.getRooms();
       res.send(rooms);
     } catch (error) {
       next(error);
@@ -21,7 +21,7 @@ export default class AdminRoomController {
   }
   async getRoom(req: Request, res: Response, next: NextFunction) {
     try {
-      const room = this._roomService.getRoom(req.params.id);
+      const room = await this._roomService.getRoom(req.params.id);
       res.send(room);
     } catch (error) {
       next(error);
@@ -29,7 +29,7 @@ export default class AdminRoomController {
   }
   async createRoom(req: Request, res: Response, next: NextFunction) {
     try {
-      const room = this._roomService.createRoom(req.body);
+      const room = await this._roomService.createRoom(req.body);
       res.send(room);
     } catch (error) {
       next(error);
@@ -37,7 +37,7 @@ export default class AdminRoomController {
   }
   async updateRoom(req: Request, res: Response, next: NextFunction) {
     try {
-      this._roomService.editRoom(req.params.id, req.body);
+      await this._roomService.editRoom(req.params.id, req.body);
       res.status(204).send();
     } catch (error) {
       next(error);
@@ -45,7 +45,7 @@ export default class AdminRoomController {
   }
   async deleteRoom(req: Request, res: Response, next: NextFunction) {
     try {
-      this._roomService.deleteRoom(req.params.id);
+      await this._roomService.deleteRoom(req.params.id);
       res.status(204).send();
     } catch (error) {
       next(error);
