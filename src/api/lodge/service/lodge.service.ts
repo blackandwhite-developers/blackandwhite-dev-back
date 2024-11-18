@@ -15,8 +15,8 @@ export default class LodgeServiceImpl implements LodgeService {
     return new LodgeResponseDto(lodge);
   }
   async postLodge(data: Omit<ILodge, 'id' | 'lat' | 'lng' | 'room'>): Promise<LodgeResponseDto> {
-    const query = `query=${decodeURI(data.address)}`;
-    const response = await fetch(`https://dapi.kakao.com/v2/local/search/address?${query}`, {
+    const query = `query=${encodeURI(data.address)}`;
+    const response = await fetch(`https://dapi.kakao.com/v2/local/search/address/${query}`, {
       method: 'GET',
       headers: {
         Authorization: `KakaoAK ${KAKAO_API_KEY}`,
