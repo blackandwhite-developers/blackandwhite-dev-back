@@ -18,6 +18,11 @@ export class UsersServiceImpl implements UserService {
     private readonly _mongooseProfileRepository: ProfileRepository,
     private readonly _mongooseTermsRepository: TermsRepository,
   ) {}
+  async grantRole(id: string, role: RoleType): Promise<void> {
+    const user = await this._mongooseUserRepository.findById(id);
+    if (!user) throw new HttpException(404, '유저를 찾을 수 없습니다.');
+    await this._mongooseUserRepository.update(id, { role });
+  }
 
   async getEmailByNameAndPhone(name: string, phone: string): Promise<string | null> {
     const id = await this._mongooseUserRepository.getEmailByNameAndPhone(name, phone);

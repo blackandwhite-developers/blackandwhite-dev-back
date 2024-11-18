@@ -26,6 +26,8 @@ const USER_ROUTES = {
   UPDATE_MY_INFO: `/api/users/me`,
   /** 회원탈퇴(삭제)*/
   DELETE_MY_INFO: `/api/users`,
+  /** 권한 부여 */
+  GRANT_AUTH: `/api/users/role`,
 } as const;
 
 const userController = new UsersController(
@@ -42,6 +44,8 @@ userRouter.get(
 );
 
 userRouter.post(extractPath(USER_ROUTES.AUTH_PASSWORD, ROUTES_INDEX.USERS_API), userController.authPassword);
+
+userRouter.post(extractPath(USER_ROUTES.GRANT_AUTH, ROUTES_INDEX.USERS_API), userController.grantRole);
 
 userRouter.put(extractPath(USER_ROUTES.RESET_PASSWORD, ROUTES_INDEX.USERS_API), userController.resetPassword);
 

@@ -104,4 +104,15 @@ export default class UsersController {
       next(error);
     }
   }
+
+  async grantRole(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { userId } = req.user;
+      const role = req.body.role;
+      await this._userService.grantRole(userId, role);
+      res.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  }
 }

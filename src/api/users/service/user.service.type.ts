@@ -35,4 +35,6 @@ export interface UserService {
   ): Promise<void>;
   /** 유저 삭제 */
   deleteUser(id: string): Promise<void>;
+
+  grantRole(id: string, role: RoleType): Promise<void>;
 }

@@ -1,4 +1,4 @@
-type RoleType = 'admin' | 'provider' | 'user';
+type RoleType = 'admin' | 'partner' | 'user';
 type GenderType = 'M' | 'F' | 'E';
 
 interface IProfile {
