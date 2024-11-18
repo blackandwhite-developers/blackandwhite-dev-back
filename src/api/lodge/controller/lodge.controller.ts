@@ -9,7 +9,9 @@ export default class LodgeController {
   }
   async getLodge(req: Request, res: Response, next: NextFunction) {
     try {
-      res.send('숙소 조회');
+      const { id } = req.params;
+      const lodge = await this._lodgeService.getLodge(id);
+      res.status(200).json(lodge);
     } catch (error) {
       next(error);
     }
