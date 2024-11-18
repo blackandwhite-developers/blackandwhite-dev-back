@@ -11,14 +11,16 @@ export default class RoomController {
 
   async getRooms(req: Request, res: Response, next: NextFunction) {
     try {
-      this._roomService.getRooms();
+      const rooms = await this._roomService.getRooms();
+      res.send(rooms);
     } catch (error) {
       next(error);
     }
   }
   async getRoom(req: Request, res: Response, next: NextFunction) {
     try {
-      this._roomService.getRoom(req.params.id);
+      const room = await this._roomService.getRoom(req.params.id);
+      res.send(room);
     } catch (error) {
       next(error);
     }

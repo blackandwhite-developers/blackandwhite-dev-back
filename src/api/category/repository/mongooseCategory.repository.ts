@@ -13,7 +13,7 @@ export class MongooseCategoryRepository implements CategoryRepository {
   }
   async getCategory(id: string): Promise<ICategory | null> {
     const result = await mongooseCategory.findById(id);
-    if (result) {
+    if (!result) {
       throw new Error('해당 카테고리를 찾을 수 없습니다.');
     }
     return result;
