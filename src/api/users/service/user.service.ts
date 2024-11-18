@@ -19,8 +19,8 @@ export class UsersServiceImpl implements UserService {
     private readonly _mongooseTermsRepository: TermsRepository,
   ) {}
 
-  async getEmailByNameAndPhone(email: string, phone: string): Promise<string | null> {
-    const id = await this._mongooseUserRepository.getEmailByNameAndPhone(email, phone);
+  async getEmailByNameAndPhone(name: string, phone: string): Promise<string | null> {
+    const id = await this._mongooseUserRepository.getEmailByNameAndPhone(name, phone);
     return id;
   }
 
