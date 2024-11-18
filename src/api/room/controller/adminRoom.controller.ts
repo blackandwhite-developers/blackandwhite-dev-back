@@ -5,6 +5,7 @@ export default class AdminRoomController {
   private readonly _roomService: RoomService;
   constructor(roomService: RoomService) {
     this._roomService = roomService;
+    this.getRooms = this.getRooms.bind(this);
     this.getRoom = this.getRoom.bind(this);
     this.createRoom = this.createRoom.bind(this);
     this.updateRoom = this.updateRoom.bind(this);
