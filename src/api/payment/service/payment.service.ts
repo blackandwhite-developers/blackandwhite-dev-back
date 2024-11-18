@@ -5,7 +5,7 @@ import PaymentService from './payment.service.type';
 import KakaoPaymentCancelResponseDto from '../dto/kakaoPaymentCancelResponce.dto';
 import PaymentRepository from '../repository/payment.repository';
 
-const KAKAO_API_KEY = process.env.KAKAO_API_KEY;
+const KAKAO_PAY_API_KEY = process.env.KAKAO_PAY_API_KEY;
 
 export default class PaymentServiceImpl implements PaymentService {
   private readonly _paymentRepository: PaymentRepository;
@@ -29,7 +29,7 @@ export default class PaymentServiceImpl implements PaymentService {
     const response = await fetch('https://open-api.kakaopay.com/online/v1/payment/ready', {
       method: 'POST',
       headers: {
-        Authorization: `SECRET_KEY ${KAKAO_API_KEY}`,
+        Authorization: `SECRET_KEY ${KAKAO_PAY_API_KEY}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -95,7 +95,7 @@ export default class PaymentServiceImpl implements PaymentService {
     const response = await fetch('https://open-api.kakaopay.com/online/v1/payment/approve', {
       method: 'POST',
       headers: {
-        Authorization: `SECRET_KEY ${KAKAO_API_KEY}`,
+        Authorization: `SECRET_KEY ${KAKAO_PAY_API_KEY}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -140,7 +140,7 @@ export default class PaymentServiceImpl implements PaymentService {
     const response = await fetch('https://open-api.kakaopay.com/v1/payment/cancel', {
       method: 'POST',
       headers: {
-        Authorization: `SECRET_KEY ${KAKAO_API_KEY}`,
+        Authorization: `SECRET_KEY ${KAKAO_PAY_API_KEY}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
