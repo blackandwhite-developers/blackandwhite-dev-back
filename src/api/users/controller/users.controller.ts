@@ -7,6 +7,11 @@ export default class UsersController {
     this.getMyInfo = this.getMyInfo.bind(this);
     this.updateUser = this.updateUser.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
+    this.findId = this.findId.bind(this);
+    this.authPassword = this.authPassword.bind(this);
+    this.resetPassword = this.resetPassword.bind(this);
+    this.updateMyInfo = this.updateMyInfo.bind(this);
+    this.deactivateMyInfo = this.deactivateMyInfo.bind(this);
   }
   async signUp(req: Request, res: Response, next: NextFunction) {
     try {
