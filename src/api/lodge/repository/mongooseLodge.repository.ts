@@ -15,7 +15,7 @@ export default class MongooseLodgeRepository implements LodgeRepository {
     await lodge.save();
     return lodge;
   }
-  async edit(id: string, data: ILodge): Promise<void> {
+  async edit(id: string, data: Partial<ILodge>): Promise<void> {
     if (!MongooseLodge.findById(id).exists) {
       throw new HttpException(404, '숙소를 찾을 수 없습니다.');
     }
