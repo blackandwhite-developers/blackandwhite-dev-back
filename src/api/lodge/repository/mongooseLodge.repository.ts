@@ -10,7 +10,7 @@ export default class MongooseLodgeRepository implements LodgeRepository {
     }
     return lodge;
   }
-  async save(data: ILodge): Promise<ILodge> {
+  async save(data: Omit<ILodge, 'id'>): Promise<ILodge> {
     const lodge = new MongooseLodge(data);
     await lodge.save();
     return lodge;
