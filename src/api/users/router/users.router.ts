@@ -45,8 +45,16 @@ userRouter.post(extractPath(USER_ROUTES.AUTH_PASSWORD, ROUTES_INDEX.USERS_API), 
 
 userRouter.put(extractPath(USER_ROUTES.RESET_PASSWORD, ROUTES_INDEX.USERS_API), userController.resetPassword);
 
-userRouter.put(extractPath(USER_ROUTES.UPDATE_MY_INFO, ROUTES_INDEX.USERS_API), userController.updateUser);
+userRouter.put(
+  extractPath(USER_ROUTES.UPDATE_MY_INFO, ROUTES_INDEX.USERS_API),
+  authUserMiddleware,
+  userController.updateUser,
+);
 
-userRouter.delete(extractPath(USER_ROUTES.DELETE_MY_INFO, ROUTES_INDEX.USERS_API), userController.deleteUser);
+userRouter.delete(
+  extractPath(USER_ROUTES.DELETE_MY_INFO, ROUTES_INDEX.USERS_API),
+  authUserMiddleware,
+  userController.deleteUser,
+);
 
 export default userRouter;

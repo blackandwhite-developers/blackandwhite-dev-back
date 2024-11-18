@@ -10,8 +10,6 @@ export default class UsersController {
     this.findId = this.findId.bind(this);
     this.authPassword = this.authPassword.bind(this);
     this.resetPassword = this.resetPassword.bind(this);
-    this.updateMyInfo = this.updateMyInfo.bind(this);
-    this.deactivateMyInfo = this.deactivateMyInfo.bind(this);
   }
   async signUp(req: Request, res: Response, next: NextFunction) {
     try {
@@ -55,30 +53,13 @@ export default class UsersController {
   async updateUser(req: Request, res: Response, next: NextFunction) {
     try {
       const { userId } = req.user;
-
       const user = await this._userService.updateUser(userId, {
+        ...req.body,
         profile: {
           ...req.body.profile,
         },
       });
-
       res.send(user);
-    } catch (error) {
-      next(error);
-    }
-  }
-
-  async updateMyInfo(req: Request, res: Response, next: NextFunction) {
-    try {
-      res.send(req.body);
-    } catch (error) {
-      next(error);
-    }
-  }
-
-  async deactivateMyInfo(req: Request, res: Response, next: NextFunction) {
-    try {
-      res.send(req.body);
     } catch (error) {
       next(error);
     }

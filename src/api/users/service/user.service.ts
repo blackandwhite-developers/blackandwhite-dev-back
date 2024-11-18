@@ -87,7 +87,7 @@ export class UsersServiceImpl implements UserService {
     if (!user) throw new HttpException(404, '존재하지 않는 회원입니다.');
     if (user.name !== name) throw new HttpException(400, '이름 혹은 이메일이 일치하지 않습니다.');
     /** 이메일 송신 */
-    const transporter = await nodemailer.createTransport({
+    const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
         user: process.env.EMAIL,
