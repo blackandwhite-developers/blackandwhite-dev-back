@@ -15,6 +15,7 @@ import adminReservationRouter from './api/reservation/router/adminReservation.ro
 import paymentRouter from './api/payment/router/payment.router';
 import roomRouter from './api/room/router/room.router';
 import authRouter from './api/auth/router/auth.router';
+import adminRoomRouter from './api/room/router/adminRoom.router';
 
 const app = express();
 
@@ -62,7 +63,7 @@ app.use(ROUTES_INDEX.ADMIN_LODGES_API, adminLodgeRouter);
 
 /** ------- ROOMS ------- */
 app.use(ROUTES_INDEX.ROOMS_API, roomRouter);
-app.use(ROUTES_INDEX.ADMIN_ROOMS_API, roomRouter);
+app.use(ROUTES_INDEX.ADMIN_ROOMS_API, adminRoomRouter);
 
 /** ------- CATEGORY ------- */
 app.use(ROUTES_INDEX.CATEGORY_API, categoryRouter);

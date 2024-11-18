@@ -21,11 +21,13 @@ const ADMIN_ROOM_ROUTES = {
 } as const;
 
 const adminRoomController = new AdminRoomController(new RoomServiceImpl(new MongooseRoomRepository()));
+adminRoomRouter.get(extractPath(ADMIN_ROOM_ROUTES.GET_ROOM, ROUTES_INDEX.ADMIN_ROOMS_API), adminRoomController.getRoom);
+
 adminRoomRouter.get(
   extractPath(ADMIN_ROOM_ROUTES.GET_ROOMS, ROUTES_INDEX.ADMIN_ROOMS_API),
   adminRoomController.getRooms,
 );
-adminRoomRouter.get(extractPath(ADMIN_ROOM_ROUTES.GET_ROOM, ROUTES_INDEX.ADMIN_ROOMS_API), adminRoomController.getRoom);
+
 adminRoomRouter.post(
   extractPath(ADMIN_ROOM_ROUTES.POST_ROOM, ROUTES_INDEX.ADMIN_ROOMS_API),
   adminRoomController.createRoom,
