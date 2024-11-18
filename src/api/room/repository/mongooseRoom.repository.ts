@@ -19,13 +19,12 @@ export default class MongooseRoomRepository implements RoomRepository {
     }
     return room;
   }
-  async update(roomId: string, updateRoomInfo: Partial<IRoom>): Promise<void> {
-    const room = await MongooseRoom.findById(roomId);
+  async update(roomId: string, updateRoomInfo: Partial<IRoom>): Promise<IRoom> {
+    const room = await MongooseRoom.findByIdAndUpdate(roomId, updateRoomInfo, { new: true });
     if (!room) {
       throw new HttpException(404, '해당 객실을 찾을 수 없습니다.');
     }
-    const newRoom = { ...room, ...updateRoomInfo };
-    await MongooseRoom.findByIdAndUpdate(roomId, newRoom);
+    return room;
   }
   async delete(roomId: string): Promise<void> {
     await MongooseRoom.findOneAndDelete({ _id: roomId });

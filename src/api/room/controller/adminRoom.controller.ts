@@ -38,7 +38,7 @@ export default class AdminRoomController {
   async updateRoom(req: Request, res: Response, next: NextFunction) {
     try {
       await this._roomService.editRoom(req.params.id, req.body);
-      res.status(204).send();
+      res.send();
     } catch (error) {
       next(error);
     }
