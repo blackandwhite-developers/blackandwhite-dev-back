@@ -12,7 +12,7 @@ export class CryptoService {
 
   public static encryptString = (str: string): string => {
     const iv = crypto.randomBytes(16);
-    const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(this.SALT_KEY), iv);
+    const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(this.SALT_KEY, 'hex'), iv);
     let encrypted = cipher.update(str);
     encrypted = Buffer.concat([encrypted, cipher.final()]);
     return iv.toString('hex') + ':' + encrypted.toString('hex');
@@ -21,7 +21,7 @@ export class CryptoService {
     const [ivHex, encryptedHex] = str.split(':');
     const iv = Buffer.from(ivHex, 'hex');
     const encrypted = Buffer.from(encryptedHex, 'hex');
-    const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(this.SALT_KEY), iv);
+    const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(this.SALT_KEY, 'hex'), iv);
     let decrypted = decipher.update(encrypted);
     decrypted = Buffer.concat([decrypted, decipher.final()]);
     return decrypted.toString();
