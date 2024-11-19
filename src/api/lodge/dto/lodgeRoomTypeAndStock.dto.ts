@@ -9,8 +9,8 @@ export default class LodgeRoomTypeAndStockDto {
       maximum: number;
     };
     time: {
-      checkIn: Date;
-      checkOut: Date;
+      checkIn: string;
+      checkOut: string;
     };
     price: {
       price: number;

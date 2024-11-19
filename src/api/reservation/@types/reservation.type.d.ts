@@ -2,9 +2,9 @@ interface IReservation {
     /** 예약 ID */
     id: string;
     /** 입실 날짜 */
-    startDate: Date;
+    startDate: string;
     /** 퇴실 날짜 */
-    endDate: Date;
+    endDate: string;
     /** 어른 인원 */
     adult: number;
     /** 아이 인원 */
@@ -23,9 +23,9 @@ interface IReservationResponseDTO {
     /** 예약 ID */
     id: string;
     /** 입실 날짜 */
-    startDate: Date;
+    startDate: string;
     /** 퇴실 날짜 */
-    endDate: Date;
+    endDate: string;
     /** 어른 인원 */
     adult: number;
     /** 아이 인원 */
@@ -74,9 +74,9 @@ interface IPriceResponseDTO {
 
 interface IRoomTimeResponseDTO {
     /** 입실 시간 */
-    checkIn: Date;
+    checkIn: string;
     /** 퇴실 시간 */
-    checkOut: Date;
+    checkOut: string;
 }
 
 interface IRoomCapacityResponseDTO {

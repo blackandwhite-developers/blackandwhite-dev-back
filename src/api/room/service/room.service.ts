@@ -22,8 +22,9 @@ export default class RoomServiceImpl implements RoomService {
     const room = await this._roomRepository.create(data);
     return room;
   }
-  async editRoom(id: string, data: Partial<IRoom>): Promise<void> {
-    await this._roomRepository.update(id, data);
+  async editRoom(id: string, data: Partial<IRoom>): Promise<IRoom> {
+    const room = await this._roomRepository.update(id, data);
+    return room;
   }
   async deleteRoom(id: string): Promise<void> {
     await this._roomRepository.delete(id);

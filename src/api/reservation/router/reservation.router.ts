@@ -23,7 +23,7 @@ const reservationsController = new ReservationController(
 
 const RESERVATION_ROUTES = {
   /**예약 조회 (사용자) */
-  GET_RESERVATION: `/api/reservation/me`,
+  GET_RESERVATION: `/api/reservation/:userId`,
   /** 예약 상세 조회 (사용자) */
   GET_RESERVATION_DETAIL: `/api/reservation/:id`,
   /** 예약 생성 (사용자) */
@@ -33,7 +33,7 @@ const RESERVATION_ROUTES = {
   /** 예약 삭제 (사용자) */
   DELETE_RESERVATION: `/api/reservation/:id`,
   /** 예약 취소 (사용자) */
-  CANCEL_RESERVATION: `/api/reservation/:id/cancel`,
+  CANCEL_RESERVATION: `/api/reservation/cancel/:id`,
 } as const;
 
 reservationRouter.get(
@@ -60,15 +60,15 @@ reservationRouter.put(
   reservationsController.updateReservation,
 );
 
-reservationRouter.put(
-  extractPath(RESERVATION_ROUTES.CANCEL_RESERVATION, ROUTES_INDEX.RESERVATION_API),
-  reservationsController.cancelReservation,
-);
-
 reservationRouter.delete(
   extractPath(RESERVATION_ROUTES.DELETE_RESERVATION, ROUTES_INDEX.RESERVATION_API),
   validate(deleteReservationValidator),
   reservationsController.deleteReservation,
+);
+
+reservationRouter.patch(
+  extractPath(RESERVATION_ROUTES.CANCEL_RESERVATION, ROUTES_INDEX.RESERVATION_API),
+  reservationsController.cancelReservation,
 );
 
 export default reservationRouter;

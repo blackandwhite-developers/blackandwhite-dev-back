@@ -29,11 +29,11 @@ const roomSchema = new mongoose.Schema<IRoom>({
   time: {
     type: {
       checkIn: {
-        type: Date,
+        type: String,
         required: true,
       },
       checkOut: {
-        type: Date,
+        type: String,
         required: true,
       },
     },

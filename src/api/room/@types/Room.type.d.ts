@@ -34,9 +34,9 @@ interface IPrice {
 
 interface IRoomTime {
   /** 입실 시간 */
-  checkIn: Date;
+  checkIn: string;
   /** 퇴실 시간 */
-  checkOut: Date;
+  checkOut: string;
 }
 
 interface IRoomCapacity {

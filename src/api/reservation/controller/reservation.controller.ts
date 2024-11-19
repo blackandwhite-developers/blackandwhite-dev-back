@@ -25,6 +25,7 @@ export default class ReservationController {
         this.createReservation = this.createReservation.bind(this);
         this.updateReservation = this.updateReservation.bind(this);
         this.deleteReservation = this.deleteReservation.bind(this);
+        this.cancelReservation = this.cancelReservation.bind(this);
     }
 
     async getReservation(

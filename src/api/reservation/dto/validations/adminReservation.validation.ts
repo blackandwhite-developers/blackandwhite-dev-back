@@ -5,7 +5,7 @@ import * as yup from "yup";
 const adminGetReservationPathValidator = yup.object({
     adminId: yup
         .string()
-        .matches(REGEX.EMPTY_VARIABLE_PATH, "id는 필수 입력값입니다.")
+        .matches(REGEX.EMPTY_VARIABLE_PATH, "adminId는 필수 입력값입니다.")
         .required(),
 
 });

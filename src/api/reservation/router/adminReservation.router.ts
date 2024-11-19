@@ -25,7 +25,7 @@ const adminReservationController = new AdminReservationController(
 
 const ADMIN_RESERVATION_ROUTES = {
     /**예약 조회 (관리자) */
-    GET_RESERVATION: `/admin-api/reservation/me`,
+    GET_RESERVATION: `/admin-api/reservation`,
     /** 예약 상세 조회 (관리자) */
     GET_RESERVATION_DETAIL: `/admin-api/reservation/:id`,
     /** 예약 생성 (관리자) */

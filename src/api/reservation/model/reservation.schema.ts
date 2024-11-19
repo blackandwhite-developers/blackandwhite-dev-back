@@ -2,9 +2,9 @@ import mongoose from 'mongoose';
 
 const reservationSchema = new mongoose.Schema<IReservation>({
   /** 입실 날짜 */
-  startDate: { type: Date },
+  startDate: { type: String },
   /** 퇴실 날짜 */
-  endDate: { type: Date },
+  endDate: { type: String },
   /** 어른 인원 */
   adult: { type: Number },
   /** 아이 인원 */
@@ -41,9 +41,9 @@ const reservationSchema = new mongoose.Schema<IReservation>({
     /** 객실 시설 */
     time: {
       /** 입실 시간 */
-      checkIn: { type: Date },
+      checkIn: { type: String },
       /** 퇴실 시간 */
-      checkOut: { type: Date },
+      checkOut: { type: String },
     },
     /** 객실 가격 */
     price: {

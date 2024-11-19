@@ -17,7 +17,5 @@ export interface ReservationService {
     /** 예약 삭제 */
     deleteReservation(id: string): Promise<void>;
     /** 예약 취소 */
-    patchCancelReservation(
-        id: string
-    ) : Promise<void>;
+    patchCancelReservation(id: string) : Promise<void>;
 } 
