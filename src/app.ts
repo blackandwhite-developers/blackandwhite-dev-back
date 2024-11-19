@@ -25,7 +25,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-const whiteList = ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:4000'];
+const whiteList = [
+  'http://localhost:3000',
+  'http://localhost:3001',
+  'http://localhost:4000',
+  'https://3d87-1-243-69-22.ngrok-free.app',
+];
 
 const corsOptions = {
   origin: function (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
@@ -36,8 +41,9 @@ const corsOptions = {
     }
   },
   credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'ngrok-skip-browser-warning'],
   optionsSuccessStatus: 200,
+  method: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
 };
 
 app.use(cors(corsOptions));
