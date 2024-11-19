@@ -92,6 +92,8 @@ declare type adminGetReservationDetailResponse = {
     };
     /** 예약 상태 */
     status: "active" | "cancel";
+    /** 예약 타입 */
+    type: "shortStay" | "overnight";
 };
 
 declare type adminCreateReservationRequestPath = {};
@@ -155,6 +157,8 @@ declare type adminCreateReservationRequestBody = {
     };
     /** 예약 상태 */
     status: "active" | "cancel";
+    /** 예약 타입 */
+    reservationType: "shortStay" | "overnight";
 };
 
 /** 예약 생성 (관리자) 요청 */

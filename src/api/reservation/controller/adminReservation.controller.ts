@@ -108,7 +108,8 @@ export default class AdminReservationController {
                         additionalPrice: reservation.price.additionalPrice,
                     }
                 },
-                status: req.body.status
+                status: req.body.status,
+                reservationType: req.body.reservationType,
             });
             res.send(createReservation);
         } catch (error) {
