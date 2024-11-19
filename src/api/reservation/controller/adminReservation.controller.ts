@@ -82,13 +82,10 @@ export default class AdminReservationController {
                 endDate: req.body.endDate,
                 adult: req.body.adult,
                 child: req.body.child,
-                reserverName: {
-                    id: req.body.reserverName.id,
-                    name: req.body.reserverName.name,
-                },
-                reserverNumber: {
-                    id: req.body.reserverNumber.id,
-                    phone: req.body.reserverNumber.phone,
+                userId: req.body.userId,
+                reserver: {
+                    reserverName: req.body.reserver.reserverName,
+                    reserverPhone: req.body.reserver.reserverPhone,
                 },
                 information: {
                     id: reservation.id,

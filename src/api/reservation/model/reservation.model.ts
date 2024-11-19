@@ -9,10 +9,15 @@ export class Reservation implements IReservation {
     adult: number;
     /** 아이 인원 */
     child: number;
+    /** 예약 계정 ID */
+    userId: string;
     /** 예약자 성함 */
-    reserverName: Pick<IUser, 'id' | 'name'>;
-    /** 예약자 연락처 */
-    reserverNumber: Pick<IProfile, 'id' | 'phone'>;
+    reserver: {
+        /** 이름 */
+        reserverName: string;
+        /** 연락처 */
+        reserverPhone: string;
+    };
     /** 객실 정보 */
     information: IPartialRoom;
     /** 예약 상태 */
@@ -26,8 +31,8 @@ export class Reservation implements IReservation {
         this.endDate = params.endDate;
         this.adult = params.adult;
         this.child = params.child;
-        this.reserverName = params.reserverName;
-        this.reserverNumber = params.reserverNumber;
+        this.userId = params.userId;
+        this.reserver = params.reserver;
         this.information = params.information;
         this.status = params.status;
         this.reservationType = params.reservationType;
