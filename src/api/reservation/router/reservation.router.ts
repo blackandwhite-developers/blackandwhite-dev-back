@@ -4,7 +4,6 @@ import { ROUTES_INDEX } from '@/api';
 import ReservationController from '../controller/reservation.controller';
 import ReservationServiceImpl from '../service/reservation.service';
 import {
-  getReservationValidator,
   getReservationDetailValidator,
   createReservationValidator,
   updateReservationValidator,
@@ -39,7 +38,6 @@ const RESERVATION_ROUTES = {
 
 reservationRouter.get(
   extractPath(RESERVATION_ROUTES.GET_RESERVATION, ROUTES_INDEX.RESERVATION_API),
-  validate(getReservationValidator),
   authUserMiddleware,
   reservationsController.getReservation,
 );
@@ -47,30 +45,35 @@ reservationRouter.get(
 reservationRouter.get(
   extractPath(RESERVATION_ROUTES.GET_RESERVATION_DETAIL, ROUTES_INDEX.RESERVATION_API),
   validate(getReservationDetailValidator),
+  authUserMiddleware,
   reservationsController.getReservationDetail,
 );
 
 reservationRouter.post(
   extractPath(RESERVATION_ROUTES.CREATE_RESERVATION, ROUTES_INDEX.RESERVATION_API),
   validate(createReservationValidator),
+  authUserMiddleware,
   reservationsController.createReservation,
 );
 
 reservationRouter.put(
   extractPath(RESERVATION_ROUTES.UPDATE_RESERVATION, ROUTES_INDEX.RESERVATION_API),
   validate(updateReservationValidator),
+  authUserMiddleware,
   reservationsController.updateReservation,
+);
+
+reservationRouter.patch(
+  extractPath(RESERVATION_ROUTES.CANCEL_RESERVATION, ROUTES_INDEX.RESERVATION_API),
+  authUserMiddleware,
+  reservationsController.cancelReservation,
 );
 
 reservationRouter.delete(
   extractPath(RESERVATION_ROUTES.DELETE_RESERVATION, ROUTES_INDEX.RESERVATION_API),
   validate(deleteReservationValidator),
+  authUserMiddleware,
   reservationsController.deleteReservation,
-);
-
-reservationRouter.patch(
-  extractPath(RESERVATION_ROUTES.CANCEL_RESERVATION, ROUTES_INDEX.RESERVATION_API),
-  reservationsController.cancelReservation,
 );
 
 export default reservationRouter;
