@@ -48,7 +48,7 @@ userRouter.post(extractPath(USER_ROUTES.AUTH_PASSWORD, ROUTES_INDEX.USERS_API), 
 
 userRouter.post(
   extractPath(USER_ROUTES.GRANT_AUTH, ROUTES_INDEX.USERS_API),
-  authRoleMiddleware(['admin', 'user']),
+  authRoleMiddleware(['admin']),
   userController.grantRole,
 );
 
