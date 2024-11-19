@@ -20,6 +20,15 @@ export default class ReservationServiceImpl implements ReservationService{
         return newList;
     }
 
+    async getReservationByUserId(userId: string): Promise<ReservationResponseDTO[]> {
+        if (!userId) throw new HttpException(404, 'UserID값은 필수입니다.');
+
+        const reservations = await this._reservationRepository.findByUserId(userId);
+
+
+        return reservations;
+    }
+
     async getReservationDetail(reservationId: string): Promise<ReservationResponseDTO | null> {
         const reservations = await this._reservationRepository.findById(reservationId);
 

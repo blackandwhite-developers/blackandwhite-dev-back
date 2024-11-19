@@ -44,6 +44,13 @@ export class MongooseReservationRepository implements ReservationRepository {
     return values;
   }
 
+  async findByUserId(userId: string): Promise<IReservation[]> {
+    console.log(`userId: ${userId}`);
+    const values = await MongooseReservation.findById(userId); 
+    console.log('values :', values);
+    return values ? [values] : [];
+  }
+
   async update(reservationId: string, updateReservationInfo: Partial<IReservation>): Promise<IReservation> {
     const results = await MongooseReservation.findByIdAndUpdate(reservationId, updateReservationInfo);
 

@@ -13,6 +13,7 @@ import {
 import { validate } from '@/api/common/middlewares/validation.middleware';
 import { MongooseReservationRepository } from '@/api/reservation/repository/mongooseReservation.repository';
 import MongooseRoomRepository from '@/api/room/repository/mongooseRoom.repository';
+import { authUserMiddleware } from '@/api/common/middlewares/authUser.middleware';
 
 const reservationRouter = express.Router();
 
@@ -39,7 +40,8 @@ const RESERVATION_ROUTES = {
 reservationRouter.get(
   extractPath(RESERVATION_ROUTES.GET_RESERVATION, ROUTES_INDEX.RESERVATION_API),
   validate(getReservationValidator),
-  reservationsController.getReservation,
+  authUserMiddleware,
+  reservationsController.getReservationByUserId,
 );
 
 reservationRouter.get(

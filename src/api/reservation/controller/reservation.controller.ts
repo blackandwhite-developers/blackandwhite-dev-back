@@ -20,7 +20,7 @@ export default class ReservationController {
         this._reservationService = _reservationService;
         this._roomRepository = _roomRepository;
 
-        this.getReservation = this.getReservation.bind(this);
+        this.getReservationByUserId = this.getReservationByUserId.bind(this);
         this.getReservationDetail = this.getReservationDetail.bind(this);
         this.createReservation = this.createReservation.bind(this);
         this.updateReservation = this.updateReservation.bind(this);
@@ -28,7 +28,7 @@ export default class ReservationController {
         this.cancelReservation = this.cancelReservation.bind(this);
     }
 
-    async getReservation(
+    async getReservationByUserId(
         req: Request<
             getReservationRequest["path"],
             getReservationResponse,
@@ -39,7 +39,8 @@ export default class ReservationController {
         next: NextFunction
     ) {
         try {
-            const reservations = await this._reservationService.getReservation();
+            const { userId } = req.params; 
+            const reservations = await this._reservationService.getReservationByUserId(userId);
 
             res.send(reservations);
         } catch (error) {

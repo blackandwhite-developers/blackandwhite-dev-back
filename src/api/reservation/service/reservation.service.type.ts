@@ -3,6 +3,8 @@ import { ReservationResponseDTO } from "../dto/reservationResponse.dto";
 export interface ReservationService {
     /** 예약 목록 조회 */
     getReservation(): Promise<ReservationResponseDTO[]>;
+    /** 예약 목록 조회 */
+    getReservationByUserId(userId: string): Promise<ReservationResponseDTO[]>;
     /** 예약 상세 조회 */
     getReservationDetail(id: string): Promise<ReservationResponseDTO | null>;
     /** 예약 생성 */
