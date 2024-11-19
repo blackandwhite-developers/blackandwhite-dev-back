@@ -39,7 +39,8 @@ export default class ReservationController {
         next: NextFunction
     ) {
         try {
-            const reservations = await this._reservationService.getReservation();
+            const {userId} = req.user;
+            const reservations = await this._reservationService.getReservationByUserId(userId);
 
             res.send(reservations);
         } catch (error) {
@@ -57,8 +58,8 @@ export default class ReservationController {
         res: Response,
         next: NextFunction
     ) {
-        const { id } = req.params;
         try {
+            const { id } = req.params;
             const reservation = await this._reservationService.getReservationDetail(id);
 
             res.send(reservation);

@@ -5,6 +5,7 @@ export interface ReservationRepository {
     findAll(): Promise<IReservation[]>;
     /** ID로 예약 조회 */
     findById(id: string): Promise<IReservation | null>;
+    findByUserId(userId:string):Promise<IReservation[]>;
     /** 예약 수정 */
     update(id: string, updateReservationInfo: Partial<IReservation>): Promise<IReservation>;
     /** 예약 삭제 */
