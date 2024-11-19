@@ -29,7 +29,7 @@ const whiteList = [
   'http://localhost:3000',
   'http://localhost:3001',
   'http://localhost:4000',
-  'https://3d87-1-243-69-22.ngrok-free.app/',
+  'https://3d87-1-243-69-22.ngrok-free.app',
 ];
 
 const corsOptions = {
