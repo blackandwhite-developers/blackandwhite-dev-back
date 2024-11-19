@@ -10,6 +10,7 @@ export default class UsersController {
     this.findId = this.findId.bind(this);
     this.authPassword = this.authPassword.bind(this);
     this.resetPassword = this.resetPassword.bind(this);
+    this.grantRole = this.grantRole.bind(this);
   }
   async signUp(req: Request, res: Response, next: NextFunction) {
     try {

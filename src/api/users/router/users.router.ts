@@ -8,6 +8,7 @@ import { MongooseUserRepository } from '../respository/user/mongooseUser.reopsit
 import { MongooseProfileRepository } from '../respository/profile/mongooseProfile.repository';
 import MongooseTermsRepository from '../respository/terms/mongooseTerms.repository';
 import { authUserMiddleware } from '@/api/common/middlewares/authUser.middleware';
+import { authRoleMiddleware } from '@/api/common/middlewares/authRole.middleware';
 
 const userRouter = express.Router();
 
@@ -45,7 +46,11 @@ userRouter.get(
 
 userRouter.post(extractPath(USER_ROUTES.AUTH_PASSWORD, ROUTES_INDEX.USERS_API), userController.authPassword);
 
-userRouter.post(extractPath(USER_ROUTES.GRANT_AUTH, ROUTES_INDEX.USERS_API), userController.grantRole);
+userRouter.post(
+  extractPath(USER_ROUTES.GRANT_AUTH, ROUTES_INDEX.USERS_API),
+  authRoleMiddleware(['admin', 'user']),
+  userController.grantRole,
+);
 
 userRouter.put(extractPath(USER_ROUTES.RESET_PASSWORD, ROUTES_INDEX.USERS_API), userController.resetPassword);
 
