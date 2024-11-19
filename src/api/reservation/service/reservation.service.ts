@@ -12,7 +12,6 @@ export default class ReservationServiceImpl implements ReservationService {
 
   async getReservation(): Promise<ReservationResponseDTO[]> {
     const reservations = await this._reservationRepository.findAll();
-    console.log('reservations', reservations);
     const newList = await Promise.all(reservations.map(Reservations => new ReservationResponseDTO(Reservations)));
 
     return newList;
