@@ -3,7 +3,7 @@ import * as yup from "yup";
 
 /** 예약 목록 조회 Validator */
 const getReservationPathValidator = yup.object({
-    userId: yup
+    userId: yup 
         .string()
         .matches(REGEX.EMPTY_VARIABLE_PATH, "userId는 필수 입력값입니다.")
         .required(),
