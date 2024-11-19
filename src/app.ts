@@ -16,6 +16,7 @@ import paymentRouter from './api/payment/router/payment.router';
 import roomRouter from './api/room/router/room.router';
 import authRouter from './api/auth/router/auth.router';
 import adminRoomRouter from './api/room/router/adminRoom.router';
+import couponRouter from './api/coupon/router/coupon.router';
 
 const app = express();
 
@@ -80,6 +81,9 @@ app.use(ROUTES_INDEX.PAYMENT_API, paymentRouter);
 
 /** ------- 이벤트 알림용 SSE 라우터 ------- */
 app.use(ROUTES_INDEX.EVENT_API, eventRouter);
+
+/** ------- Coupon ------- */
+app.use(ROUTES_INDEX.COUPON_API, couponRouter);
 
 app.use(errorHandler);
 
