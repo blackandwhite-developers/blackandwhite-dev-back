@@ -9,19 +9,14 @@ export class ReservationResponseDTO {
     adult: number;
     /** 아이 인원 */
     child: number;
+    /** 예약 계정 ID */
+    userId: string;
     /** 예약자 성함 */
-    reserverName: {
-        /** 사용자 ID */
-        id: string,
+    reserver: {
         /** 이름 */
-        name: string;
-    };
-    /** 예약자 연락처 */
-    reserverNumber: {
-        /** 프로필 ID */
-        id: string;
+        reserverName: string;
         /** 연락처 */
-        phone: string;
+        reserverPhone: string;
     };
     /** 객실 정보 */
     information: {
@@ -66,13 +61,10 @@ export class ReservationResponseDTO {
         this.endDate = params.endDate;
         this.adult = params.adult;
         this.child = params.child;
-        this.reserverName = {
-            id: params.reserverName.id,
-            name: params.reserverName.name,
-        };
-        this.reserverNumber = {
-            id: params.reserverNumber.id,
-            phone: params.reserverNumber.phone,
+        this.userId = params.userId;
+        this.reserver = {
+            reserverName: params.reserver.reserverName,
+            reserverPhone: params.reserver.reserverPhone,
         };
         this.information = {
             id: params.information.id,

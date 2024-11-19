@@ -9,19 +9,14 @@ const reservationSchema = new mongoose.Schema<IReservation>({
   adult: { type: Number },
   /** 아이 인원 */
   child: { type: Number },
+  /** 예약 계정 ID */
+  userId:  { type: String },
   /** 예약자 성함 */
-  reserverName: {
-    /** 사용자 ID */
-    id: { type: String, required: true },
-    /** 이름 */
-    name: { type: String },
-  },
-  /** 예약자 연락처 */
-  reserverNumber: {
-    /** 프로필 ID */
-    id: { type: String, required: true },
-    /** 연락처 */
-    phone: { type: String },
+  reserver: {
+      /** 이름 */
+      reserverName:  { type: String, required: true  },
+      /** 연락처 */
+      reserverPhone: { type: String, required: true  },
   },
   /** 객실 정보 */
   information: {
