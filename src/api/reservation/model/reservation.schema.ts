@@ -61,6 +61,11 @@ const reservationSchema = new mongoose.Schema<IReservation>({
     default: 'active',
     required: true,
   },
+  reservationType: {
+    type: String,
+    enum: ["shortStay" , "overnight"],
+    required: true,
+  }
 });
 
 export const MongooseReservation = mongoose.model<IReservation>('reservations', reservationSchema);

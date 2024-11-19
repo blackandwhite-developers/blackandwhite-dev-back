@@ -17,6 +17,8 @@ export class Reservation implements IReservation {
     information: IPartialRoom;
     /** 예약 상태 */
     status: "active" | "cancel";
+    /** 예약 타입 */
+    reservationType: "shortStay" | "overnight";
 
     constructor(params: IReservation) {
         this.id = params.id;
@@ -28,5 +30,6 @@ export class Reservation implements IReservation {
         this.reserverNumber = params.reserverNumber;
         this.information = params.information;
         this.status = params.status;
+        this.reservationType = params.reservationType;
     }
 }
