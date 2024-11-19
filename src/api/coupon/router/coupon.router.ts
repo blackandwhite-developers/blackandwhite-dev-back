@@ -10,8 +10,8 @@ const couponRouter = express.Router();
 const ROUTES_COUPON = {
   CREATE_COUPON: '/api/coupon',
   GETS_COUPON: '/api/coupon',
-  GET_COUPON: '/api/coupon',
-  UPDATE_COUPON: '/api/coupon',
+  GET_COUPON: '/api/coupon/:cid',
+  UPDATE_COUPON: '/api/coupon/:cid',
 };
 
 const couponController = new CouponController(new CouponServiceImpl(new MongooseCouponRepository()));

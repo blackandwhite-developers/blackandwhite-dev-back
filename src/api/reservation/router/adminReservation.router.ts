@@ -14,6 +14,7 @@ import {
 import { validate } from "@/api/common/middlewares/validation.middleware";
 import { MongooseReservationRepository } from '../repository/mongooseReservation.repository';
 import MongooseRoomRepository from '@/api/room/repository/mongooseRoom.repository';
+import { authRoleMiddleware } from '@/api/common/middlewares/authRole.middleware';
 
 const adminReservationRouter = express.Router();
 

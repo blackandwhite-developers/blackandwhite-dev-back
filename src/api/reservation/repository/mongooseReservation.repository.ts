@@ -13,12 +13,7 @@ export class MongooseReservationRepository implements ReservationRepository {
   async findAll(): Promise<IReservation[]> {
     const values = await MongooseReservation.find()
 
-      .populate({
-        path: 'reserverName',
-        populate: {
-          path: 'user',
-        },
-      })
+      .populate('userId')
       .populate({
         path: 'information',
         select: 'id name image adult child maximum price discount additionalPrice checkin checkout',
@@ -30,12 +25,7 @@ export class MongooseReservationRepository implements ReservationRepository {
   async findById(id: string): Promise<IReservation | null> {
     const values = await MongooseReservation.findById(id)
 
-      .populate({
-        path: 'reserverName',
-        populate: {
-          path: 'user',
-        },
-      })
+      .populate('userId')
       .populate({
         path: 'information',
         select: 'id name image adult child maximum price discount additionalPrice checkin checkout',
@@ -45,7 +35,11 @@ export class MongooseReservationRepository implements ReservationRepository {
   }
 
   async findByUserId(userId: string): Promise<IReservation[]> {
-    return await MongooseReservation.find({ "reserverName.id": userId }).exec();
+    const values = await MongooseReservation.find({ userId })
+
+      .populate('userId');
+
+    return values || [];
   }
 
   async update(reservationId: string, updateReservationInfo: Partial<IReservation>): Promise<IReservation> {

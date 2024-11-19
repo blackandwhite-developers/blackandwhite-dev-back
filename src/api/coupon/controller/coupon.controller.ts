@@ -41,10 +41,12 @@ export default class CouponController {
     try {
       const { title, discount } = req.body;
       const { cid } = req.params;
-      await this._couponService.updateCoupon(cid, {
+      const coupon = await this._couponService.updateCoupon(cid, {
         title,
         discount,
       });
+
+      res.send(coupon);
     } catch (err) {
       next(err);
     }

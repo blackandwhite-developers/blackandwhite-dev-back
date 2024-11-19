@@ -52,7 +52,8 @@ export default class AdminReservationController {
         next: NextFunction
     ) {
         try {
-            const reservationDetail = await this._reservationService.getReservationDetail(req.params.id);
+            const { id } = req.params;
+            const reservationDetail = await this._reservationService.getReservationDetail(id);
 
             res.send(reservationDetail);
         } catch (error) {
