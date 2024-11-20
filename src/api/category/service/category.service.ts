@@ -8,8 +8,8 @@ import HttpException from '@/api/common/exceptions/http.exception';
 export class CategoryServiceImpl implements CategoryService {
   constructor(private readonly _categoryRepository: CategoryRepository) {}
 
-  async getsCategory(): Promise<{ results: GetsCategoryResponseDTO[] }> {
-    const categories = await this._categoryRepository.getsCategory();
+  async getsCategory(level: number, parent: string | null): Promise<{ results: GetsCategoryResponseDTO[] }> {
+    const categories = await this._categoryRepository.getsCategory(level, parent);
     return { results: categories.map(cate => new GetsCategoryResponseDTO(cate)) };
   }
 
@@ -23,13 +23,13 @@ export class CategoryServiceImpl implements CategoryService {
     return categoryDto;
   }
 
-  async createCategory(params: Omit<ICategory, 'id'>): Promise<ICategory> {
+  async createCategory(params: Omit<ICategory, 'id' | 'subCategories' | 'lodges'>): Promise<ICategory> {
     if (!params) throw new HttpException(400, '해당 요청을 처리 할 수 없습니다.');
     const category = await this._categoryRepository.createCategory(params);
     return category;
   }
 
-  async updateCategory(id: string, params: Omit<ICategory, 'id'>): Promise<void> {
+  async updateCategory(id: string, params: Omit<ICategory, 'id' | 'subCategories' | 'lodges'>): Promise<void> {
     const findCate = await this._categoryRepository.getCategory(id);
     if (!findCate) throw new HttpException(404, '카테고리를 찾을 수 없습니다.');
 
@@ -41,5 +41,14 @@ export class CategoryServiceImpl implements CategoryService {
     const findCate = await this._categoryRepository.getCategory(id);
     if (!findCate) throw new HttpException(404, '카테고리를 찾을 수 없습니다.');
     await this._categoryRepository.deleteCategory(id);
+  }
+
+  async addSubCategory(id: string, params: Omit<ICategory, 'id' | 'subCategories' | 'lodges'>): Promise<void> {
+    const findCategory = await this._categoryRepository.getCategory(id);
+    if (!findCategory) throw new HttpException(404, '카테고리를 찾을 수 없습니다.');
+    const subCategory = await this._categoryRepository.createCategory(params);
+    findCategory.subCategories.push(subCategory);
+    await this._categoryRepository.updateCategory(id, findCategory);
+    return;
   }
 }

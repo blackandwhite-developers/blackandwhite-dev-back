@@ -2,19 +2,16 @@ import HttpException from '@/api/common/exceptions/http.exception';
 import LodgeResponseDto from '../dto/lodgeResponse.dto';
 import LodgeRepository from '../repository/lodge.repository';
 import LodgeService from './lodge.service.type';
+import { CategoryRepository } from '@/api/category/repository/category.repository';
 
 const KAKAO_API_KEY = process.env.KAKAO_API_KEY;
 
 export default class LodgeServiceImpl implements LodgeService {
   private readonly _lodgeRepository: LodgeRepository;
-  constructor(_lodgeRepository: LodgeRepository) {
+  private readonly _categoryRepository: CategoryRepository;
+  constructor(_lodgeRepository: LodgeRepository, _categoryRepository: CategoryRepository) {
     this._lodgeRepository = _lodgeRepository;
   }
-
-  async getLodgesByCategory(categoryId: string): Promise<ILodge[]> {
-    return await this._lodgeRepository.findByCategory(categoryId);
-  }
-
   async getLodge(id: string): Promise<LodgeResponseDto> {
     const lodge = await this._lodgeRepository.findById(id);
     return new LodgeResponseDto(lodge);
@@ -35,10 +32,11 @@ export default class LodgeServiceImpl implements LodgeService {
         Authorization: `KakaoAK ${KAKAO_API_KEY}`,
       },
     });
-    console.log(await response);
+
     if (!response.ok) {
       throw new HttpException(404, '주소를 찾을 수 없습니다.');
     }
+
     const result = await response.json();
 
     if (!result.documents || result.documents.length === 0) {
