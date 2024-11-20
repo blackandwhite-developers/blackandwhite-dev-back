@@ -1,9 +1,20 @@
 import HttpException from '@/api/common/exceptions/http.exception';
 import { MongooseRoom } from '../model/room.schema';
 import RoomRepository from './room.repository';
+import { MongooseLodge } from '@/api/lodge/model/lodge.schema';
 
 export default class MongooseRoomRepository implements RoomRepository {
   async create(data: Omit<IRoom, 'id'>): Promise<IRoom> {
+    const { lodgeId } = data;
+    if (!lodgeId) {
+        throw new HttpException(400, 'lodgeId는 필수 입니다.'); 
+    }
+
+    const lodgeExists = await MongooseLodge.findById(lodgeId);
+    if (!lodgeExists) {
+        throw new HttpException(404, 'lodgeId에 해당하는 숙소를 찾을 수 없습니다.');
+    }
+
     const room = new MongooseRoom(data);
     await room.save();
     return room;

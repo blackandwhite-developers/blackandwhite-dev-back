@@ -9,6 +9,7 @@ export default class Room implements IRoom {
   rating: number;
   review: string[]; // TODO: 리뷰 모델 추가
   event: string;
+  lodgeId: string;
 
   constructor(data: IRoom) {
     this.id = data.id;
@@ -21,5 +22,6 @@ export default class Room implements IRoom {
     this.rating = data.rating;
     this.review = data.review;
     this.event = data.event;
+    this.lodgeId = data.lodgeId;
   }
 }

@@ -18,10 +18,11 @@ interface IRoom {
   review: string[]; // TODO: 리뷰 모델 추가
   /** 이벤트 */
   event: string;
+  /** 숙소 ID */
+  lodgeId: string;
 }
 
-type IPartialRoom = Pick<IRoom, 'id' | 'name' | 'image' | 'capacity' | 'time' 
-| 'price'>
+type IPartialRoom = Pick<IRoom, 'id' | 'name' | 'image' | 'capacity' | 'time' | 'price'>
 
 interface IPrice {
   /** 가격 */

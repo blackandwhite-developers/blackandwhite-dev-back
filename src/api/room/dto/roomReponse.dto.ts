@@ -9,6 +9,7 @@ export default class RoomResponseDto {
   rating: number;
   review: string[];
   event: string;
+  lodgeId: string;
 
   constructor(data: RoomResponseDto) {
     this.id = data.id;
@@ -21,6 +22,7 @@ export default class RoomResponseDto {
     this.rating = data.rating;
     this.review = data.review;
     this.event = data.event;
+    this.lodgeId = data.lodgeId;
   }
 }
 
@@ -42,24 +44,6 @@ class RoomTimeDto {
     this.checkIn = data.checkIn;
     this.checkOut = data.checkOut;
   }
-  
-    formatTimeToDate(time: string): Date {
-      const [hours, minutes] = time.split(':').map(Number);
-      const date = new Date(0);  
-      date.setHours(hours, minutes, 0, 0); 
-      return date;
-    }
-  
-    get formattedCheckIn(): string {
-      const date = this.formatTimeToDate(this.checkIn);
-      return `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
-    }
-  
-    get formattedCheckOut(): string {
-      const date = this.formatTimeToDate(this.checkOut);
-      return `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
-    }
-  
 }
 
 class RoomPriceDto {

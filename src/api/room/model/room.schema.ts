@@ -68,6 +68,10 @@ const roomSchema = new mongoose.Schema<IRoom>({
     type: String,
     required: true,
   },
+  lodgeId: {
+    type: String,
+    required: true,
+  }
 });
 
 export const MongooseRoom = mongoose.model<IRoom>('rooms', roomSchema);
