@@ -13,12 +13,19 @@ import { validate } from '@/api/common/middlewares/validation.middleware';
 import { MongooseReservationRepository } from '@/api/reservation/repository/mongooseReservation.repository';
 import MongooseRoomRepository from '@/api/room/repository/mongooseRoom.repository';
 import { authUserMiddleware } from '@/api/common/middlewares/authUser.middleware';
+import RoomServiceImpl from '@/api/room/service/room.service';
+import MongooseLodgeRepository from '@/api/lodge/repository/mongooseLodge.repository';
 
 const reservationRouter = express.Router();
 
 const reservationsController = new ReservationController(
-  new ReservationServiceImpl(new MongooseReservationRepository()),
-  new MongooseRoomRepository(),
+  new ReservationServiceImpl(
+    new MongooseReservationRepository(),
+    new RoomServiceImpl(
+      new MongooseRoomRepository(),
+      new MongooseLodgeRepository()
+    ) 
+  ), new MongooseRoomRepository()
 );
 
 const RESERVATION_ROUTES = {

@@ -40,4 +40,12 @@ export default class MongooseRoomRepository implements RoomRepository {
   async delete(roomId: string): Promise<void> {
     await MongooseRoom.findOneAndDelete({ _id: roomId });
   }
+
+  async getRoomTime(roomId: string): Promise<IRoomTime> {
+    const room = await MongooseRoom.findById(roomId);
+    if (!room) {
+      throw new HttpException(404, '해당 객실을 찾을 수 없습니다.');
+    }
+    return room.time; 
+  }
 }
