@@ -1,3 +1,4 @@
+import { GetUserResponseDTO } from '@/api/users/dto/getUserResponse.dto';
 import { UserResponseDTO } from '@/api/users/dto/userResponse.dto';
 
 export default class AuthResponseDto {
@@ -7,6 +8,6 @@ export default class AuthResponseDto {
   constructor(accessToken: string, refreshToken: string, user: IUser) {
     this.accessToken = accessToken;
     this.refreshToken = refreshToken;
-    this.user = new UserResponseDTO(user);
+    this.user = new GetUserResponseDTO(user);
   }
 }
