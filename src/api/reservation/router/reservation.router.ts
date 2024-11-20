@@ -14,13 +14,17 @@ import { MongooseReservationRepository } from '@/api/reservation/repository/mong
 import MongooseRoomRepository from '@/api/room/repository/mongooseRoom.repository';
 import { authUserMiddleware } from '@/api/common/middlewares/authUser.middleware';
 import RoomServiceImpl from '@/api/room/service/room.service';
+import MongooseLodgeRepository from '@/api/lodge/repository/mongooseLodge.repository';
 
 const reservationRouter = express.Router();
 
 const reservationsController = new ReservationController(
   new ReservationServiceImpl(
     new MongooseReservationRepository(),
-    new RoomServiceImpl(new MongooseRoomRepository()) 
+    new RoomServiceImpl(
+      new MongooseRoomRepository(),
+      new MongooseLodgeRepository()
+    ) 
   ), new MongooseRoomRepository()
 );
 
