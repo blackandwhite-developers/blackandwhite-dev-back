@@ -3,6 +3,11 @@ import { MongooseLodge } from '../model/lodge.schema';
 import LodgeRepository from './lodge.repository';
 
 export default class MongooseLodgeRepository implements LodgeRepository {
+  async findByCategory(categoryId: string): Promise<ILodge[]> {
+    const lodge = await MongooseLodge.find({categoryId});
+    return lodge;
+  }
+
   async findById(id: string): Promise<ILodge> {
     const lodge = await MongooseLodge.findById(id);
     if (!lodge) {
@@ -10,23 +15,27 @@ export default class MongooseLodgeRepository implements LodgeRepository {
     }
     return lodge;
   }
+
   async save(data: Omit<ILodge, 'id'>): Promise<ILodge> {
     const lodge = new MongooseLodge(data);
     await lodge.save();
     return lodge;
   }
+
   async edit(id: string, data: Partial<ILodge>): Promise<void> {
-    if (!MongooseLodge.findById(id).exists) {
+    if (!MongooseLodge.findById(id)) {
       throw new HttpException(404, '숙소를 찾을 수 없습니다.');
     }
     await MongooseLodge.findByIdAndUpdate(id, data);
   }
+
   async delete(id: string): Promise<void> {
-    if (!MongooseLodge.findById(id).exists) {
+    if (!MongooseLodge.findById(id)) {
       throw new HttpException(404, '숙소를 찾을 수 없습니다.');
     }
     await MongooseLodge.findByIdAndDelete(id);
   }
+
   async addRoomType(id: string, room: IRoom, count: number): Promise<void> {
     const lodge = await MongooseLodge.findById(id);
     if (!lodge) {

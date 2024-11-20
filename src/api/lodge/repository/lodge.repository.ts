@@ -1,4 +1,6 @@
 export default interface LodgeRepository {
+  /** 카테고리 ID로 조회 */
+  findByCategory(categoryId: string): Promise<ILodge[]> 
   /** 숙소 조회 */
   findById(id: string): Promise<ILodge>;
   /** 숙소 등록 */

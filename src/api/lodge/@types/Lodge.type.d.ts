@@ -18,6 +18,8 @@ interface ILodge {
   image: string;
   /** 숙소 객실 종류 및 재고 */
   room: Array<IRoomTypeAndStock>;
+  /** 카테고리 ID */
+  categoryId: string;
 }
 
 interface IRoomTypeAndStock {

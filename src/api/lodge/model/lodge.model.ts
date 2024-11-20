@@ -9,6 +9,7 @@ export default class Lodge implements ILodge {
   description: string;
   image: string;
   room: IRoomTypeAndStock[];
+  categoryId: string;
 
   constructor(data: ILodge) {
     this.id = data.id;
@@ -21,5 +22,6 @@ export default class Lodge implements ILodge {
     this.description = data.description;
     this.image = data.image;
     this.room = data.room;
+    this.categoryId = data.categoryId;
   }
 }
