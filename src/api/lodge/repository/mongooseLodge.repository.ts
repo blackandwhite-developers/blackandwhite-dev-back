@@ -27,4 +27,32 @@ export default class MongooseLodgeRepository implements LodgeRepository {
     }
     await MongooseLodge.findByIdAndDelete(id);
   }
+  async addRoomType(id: string, room: IRoom, count: number): Promise<void> {
+    const lodge = await MongooseLodge.findById(id);
+    if (!lodge) {
+      throw new HttpException(404, '숙소를 찾을 수 없습니다.');
+    }
+    if (lodge.room.some(r => r.roomType[0].name === room.name)) {
+      throw new HttpException(400, '이미 등록된 객실입니다.');
+    }
+    const newTypeAndStock: IRoomTypeAndStock = {
+      roomType: [room],
+      stock: count,
+    };
+    lodge.room.push(newTypeAndStock);
+    await lodge.save();
+  }
+
+  async editRoomStock(id: string, roomName: string, stock: number): Promise<void> {
+    const lodge = await MongooseLodge.findById(id);
+    if (!lodge) {
+      throw new HttpException(404, '숙소를 찾을 수 없습니다.');
+    }
+    const roomType = lodge.room.find(r => r.roomType[0].name === roomName);
+    if (!roomType) {
+      throw new HttpException(404, '객실을 찾을 수 없습니다.');
+    }
+    roomType.stock = stock;
+    await lodge.save();
+  }
 }

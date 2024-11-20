@@ -4,6 +4,7 @@ import { ROUTES_INDEX } from '@/api';
 import AdminRoomController from '../controller/adminRoom.controller';
 import RoomServiceImpl from '../service/room.service';
 import MongooseRoomRepository from '../repository/mongooseRoom.repository';
+import MongooseLodgeRepository from '@/api/lodge/repository/mongooseLodge.repository';
 
 const adminRoomRouter = express.Router();
 
@@ -20,18 +21,10 @@ const ADMIN_ROOM_ROUTES = {
   DELETE_ROOM: `/admin-api/rooms/:id`,
 } as const;
 
-const adminRoomController = new AdminRoomController
-(
-  new RoomServiceImpl(
-    new MongooseRoomRepository()
-  )
+const adminRoomController = new AdminRoomController(
+  new RoomServiceImpl(new MongooseRoomRepository(), new MongooseLodgeRepository()),
 );
-
-adminRoomRouter.get(
-  extractPath(ADMIN_ROOM_ROUTES.GET_ROOM, ROUTES_INDEX.ADMIN_ROOMS_API), 
-  adminRoomController.getRoom
-);
-
+adminRoomRouter.get(extractPath(ADMIN_ROOM_ROUTES.GET_ROOM, ROUTES_INDEX.ADMIN_ROOMS_API), adminRoomController.getRoom);
 adminRoomRouter.get(
   extractPath(ADMIN_ROOM_ROUTES.GET_ROOMS, ROUTES_INDEX.ADMIN_ROOMS_API),
   adminRoomController.getRooms,
