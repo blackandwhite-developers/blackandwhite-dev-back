@@ -4,4 +4,5 @@ export default interface RoomService {
   createRoom(data: IRoom): Promise<IRoom>;
   editRoom(id: string, data: IRoom): Promise<IRoom>;
   deleteRoom(id: string): Promise<void>;
+  getRoomTime(roomid:string):Promise<IRoomTime>
 }

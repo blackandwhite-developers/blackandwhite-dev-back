@@ -9,4 +9,6 @@ export default interface RoomRepository {
   update(roomId: string, updateRoomInfo: Partial<IRoom>): Promise<IRoom>;
   /** 객실 삭제 */
   delete(roomId: string): Promise<void>;
+  /** 객실 시간 조회 */
+  getRoomTime(roomId: string): Promise<IRoomTime>;
 }

@@ -1,5 +1,4 @@
 export default class RoomResponseDto {
-  id: string;
   name: string;
   description: string;
   image: string;
@@ -12,7 +11,6 @@ export default class RoomResponseDto {
   lodgeId: string;
 
   constructor(data: RoomResponseDto) {
-    this.id = data.id;
     this.name = data.name;
     this.description = data.description;
     this.image = data.image;

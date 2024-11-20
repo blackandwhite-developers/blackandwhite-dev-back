@@ -14,13 +14,15 @@ import { validate } from "@/api/common/middlewares/validation.middleware";
 import { MongooseReservationRepository } from '../repository/mongooseReservation.repository';
 import MongooseRoomRepository from '@/api/room/repository/mongooseRoom.repository';
 import { authRoleMiddleware } from '@/api/common/middlewares/authRole.middleware';
+import RoomServiceImpl from '@/api/room/service/room.service';
 
 const adminReservationRouter = express.Router();
 
 const adminReservationController = new AdminReservationController(
     new ReservationServiceImpl(
-        new MongooseReservationRepository()
-    ), new MongooseRoomRepository(),
+        new MongooseReservationRepository(),
+        new RoomServiceImpl(new MongooseRoomRepository())
+    ), new MongooseRoomRepository()
 );
 
 const ADMIN_RESERVATION_ROUTES = {
@@ -40,42 +42,42 @@ const ADMIN_RESERVATION_ROUTES = {
 
 adminReservationRouter.get(
     extractPath(ADMIN_RESERVATION_ROUTES.GET_RESERVATION, ROUTES_INDEX.ADMIN_RESERVATION_API),
-    authRoleMiddleware,
+    authRoleMiddleware(["admin"]),
     adminReservationController.getReservation
 );
 
 adminReservationRouter.get(
     extractPath(ADMIN_RESERVATION_ROUTES.GET_RESERVATION_DETAIL, ROUTES_INDEX.ADMIN_RESERVATION_API),
     validate(adminGetReservationDetailValidator),
-    authRoleMiddleware,
+    authRoleMiddleware(["admin"]),
     adminReservationController.getReservationDetail
 );
 
 adminReservationRouter.post(
     extractPath(ADMIN_RESERVATION_ROUTES.CREATE_RESERVATION, ROUTES_INDEX.ADMIN_RESERVATION_API),
     validate(adminCreateReservationValidator),
-    authRoleMiddleware,
+    authRoleMiddleware(["admin"]),
     adminReservationController.createReservation
 );
 
 adminReservationRouter.put(
-    extractPath(ADMIN_RESERVATION_ROUTES.UPDATE_RESERVATION,ROUTES_INDEX.ADMIN_RESERVATION_API),
+    extractPath(ADMIN_RESERVATION_ROUTES.UPDATE_RESERVATION, ROUTES_INDEX.ADMIN_RESERVATION_API),
     validate(adminUpdateReservationValidator),
-    authRoleMiddleware,
+    authRoleMiddleware(["admin"]),
     adminReservationController.updateReservation
 );
 
 adminReservationRouter.delete(
     extractPath(ADMIN_RESERVATION_ROUTES.DELETE_RESERVATION, ROUTES_INDEX.ADMIN_RESERVATION_API),
     validate(adminDeleteReservationValidator),
-    authRoleMiddleware,
+    authRoleMiddleware(["admin"]),
     adminReservationController.deleteReservation
 );
 
 adminReservationRouter.patch(
     extractPath(ADMIN_RESERVATION_ROUTES.CANCEL_RESERVATION, ROUTES_INDEX.ADMIN_RESERVATION_API),
     validate(adminCancelReservationValidator),
-    authRoleMiddleware,
+    authRoleMiddleware(["admin"]),
     adminReservationController.patchCancelReservation
 );
 
