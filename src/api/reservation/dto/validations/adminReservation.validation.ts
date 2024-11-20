@@ -1,19 +1,6 @@
 import { REGEX } from "@/api/common/validations";
 import * as yup from "yup";
 
-/** 예약 목록 조회 Validator */
-const adminGetReservationPathValidator = yup.object({
-    adminId: yup
-        .string()
-        .matches(REGEX.EMPTY_VARIABLE_PATH, "adminId는 필수 입력값입니다.")
-        .required(),
-
-});
-
-export const adminGetReservationValidator = {
-    path: adminGetReservationPathValidator,
-};
-
 /** 예약 상세 조회 Validator */
 const adminGetReservationDetailPathValidator = yup.object({
     id: yup

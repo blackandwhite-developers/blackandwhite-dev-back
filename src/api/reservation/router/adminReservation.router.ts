@@ -4,7 +4,6 @@ import { ROUTES_INDEX } from '@/api';
 import AdminReservationController from '../controller/adminReservation.controller';
 import ReservationServiceImpl from '../service/reservation.service';
 import {
-    adminGetReservationValidator,
     adminGetReservationDetailValidator,
     adminCreateReservationValidator,
     adminUpdateReservationValidator,
@@ -26,7 +25,7 @@ const adminReservationController = new AdminReservationController(
 
 const ADMIN_RESERVATION_ROUTES = {
     /**예약 조회 (관리자) */
-    GET_RESERVATION: `/admin-api/reservation/:adminId`,
+    GET_RESERVATION: `/admin-api/reservation`,
     /** 예약 상세 조회 (관리자) */
     GET_RESERVATION_DETAIL: `/admin-api/reservation/:id`,
     /** 예약 생성 (관리자) */
@@ -41,37 +40,42 @@ const ADMIN_RESERVATION_ROUTES = {
 
 adminReservationRouter.get(
     extractPath(ADMIN_RESERVATION_ROUTES.GET_RESERVATION, ROUTES_INDEX.ADMIN_RESERVATION_API),
-    validate(adminGetReservationValidator),
+    authRoleMiddleware,
     adminReservationController.getReservation
 );
 
 adminReservationRouter.get(
     extractPath(ADMIN_RESERVATION_ROUTES.GET_RESERVATION_DETAIL, ROUTES_INDEX.ADMIN_RESERVATION_API),
     validate(adminGetReservationDetailValidator),
+    authRoleMiddleware,
     adminReservationController.getReservationDetail
 );
 
 adminReservationRouter.post(
     extractPath(ADMIN_RESERVATION_ROUTES.CREATE_RESERVATION, ROUTES_INDEX.ADMIN_RESERVATION_API),
     validate(adminCreateReservationValidator),
+    authRoleMiddleware,
     adminReservationController.createReservation
 );
 
 adminReservationRouter.put(
     extractPath(ADMIN_RESERVATION_ROUTES.UPDATE_RESERVATION,ROUTES_INDEX.ADMIN_RESERVATION_API),
     validate(adminUpdateReservationValidator),
+    authRoleMiddleware,
     adminReservationController.updateReservation
 );
 
 adminReservationRouter.delete(
     extractPath(ADMIN_RESERVATION_ROUTES.DELETE_RESERVATION, ROUTES_INDEX.ADMIN_RESERVATION_API),
     validate(adminDeleteReservationValidator),
+    authRoleMiddleware,
     adminReservationController.deleteReservation
 );
 
 adminReservationRouter.patch(
     extractPath(ADMIN_RESERVATION_ROUTES.CANCEL_RESERVATION, ROUTES_INDEX.ADMIN_RESERVATION_API),
     validate(adminCancelReservationValidator),
+    authRoleMiddleware,
     adminReservationController.patchCancelReservation
 );
 
