@@ -20,6 +20,7 @@ export default class LodgeRoomTypeAndStockDto {
     rating: number;
     review: string[];
     event: string;
+    lodgeId: string;
   }>;
   stock: number;
   constructor(data: IRoomTypeAndStock) {
