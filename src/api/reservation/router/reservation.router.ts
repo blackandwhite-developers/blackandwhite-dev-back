@@ -4,7 +4,6 @@ import { ROUTES_INDEX } from '@/api';
 import ReservationController from '../controller/reservation.controller';
 import ReservationServiceImpl from '../service/reservation.service';
 import {
-  getReservationValidator,
   getReservationDetailValidator,
   createReservationValidator,
   updateReservationValidator,
@@ -13,6 +12,7 @@ import {
 import { validate } from '@/api/common/middlewares/validation.middleware';
 import { MongooseReservationRepository } from '@/api/reservation/repository/mongooseReservation.repository';
 import MongooseRoomRepository from '@/api/room/repository/mongooseRoom.repository';
+import { authUserMiddleware } from '@/api/common/middlewares/authUser.middleware';
 
 const reservationRouter = express.Router();
 
@@ -33,41 +33,46 @@ const RESERVATION_ROUTES = {
   /** 예약 삭제 (사용자) */
   DELETE_RESERVATION: `/api/reservation/:id`,
   /** 예약 취소 (사용자) */
-  CANCEL_RESERVATION: `/api/reservation/:id/cancel`,
+  CANCEL_RESERVATION: `/api/reservation/cancel/:id`,
 } as const;
 
 reservationRouter.get(
   extractPath(RESERVATION_ROUTES.GET_RESERVATION, ROUTES_INDEX.RESERVATION_API),
-  validate(getReservationValidator),
+  authUserMiddleware,
   reservationsController.getReservation,
 );
 
 reservationRouter.get(
   extractPath(RESERVATION_ROUTES.GET_RESERVATION_DETAIL, ROUTES_INDEX.RESERVATION_API),
   validate(getReservationDetailValidator),
+  authUserMiddleware,
   reservationsController.getReservationDetail,
 );
 
 reservationRouter.post(
   extractPath(RESERVATION_ROUTES.CREATE_RESERVATION, ROUTES_INDEX.RESERVATION_API),
   validate(createReservationValidator),
+  authUserMiddleware,
   reservationsController.createReservation,
 );
 
 reservationRouter.put(
   extractPath(RESERVATION_ROUTES.UPDATE_RESERVATION, ROUTES_INDEX.RESERVATION_API),
   validate(updateReservationValidator),
+  authUserMiddleware,
   reservationsController.updateReservation,
 );
 
-reservationRouter.put(
+reservationRouter.patch(
   extractPath(RESERVATION_ROUTES.CANCEL_RESERVATION, ROUTES_INDEX.RESERVATION_API),
+  authUserMiddleware,
   reservationsController.cancelReservation,
 );
 
 reservationRouter.delete(
   extractPath(RESERVATION_ROUTES.DELETE_RESERVATION, ROUTES_INDEX.RESERVATION_API),
   validate(deleteReservationValidator),
+  authUserMiddleware,
   reservationsController.deleteReservation,
 );
 

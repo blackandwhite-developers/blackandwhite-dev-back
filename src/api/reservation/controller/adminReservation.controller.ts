@@ -52,7 +52,8 @@ export default class AdminReservationController {
         next: NextFunction
     ) {
         try {
-            const reservationDetail = await this._reservationService.getReservationDetail(req.params.id);
+            const { id } = req.params;
+            const reservationDetail = await this._reservationService.getReservationDetail(id);
 
             res.send(reservationDetail);
         } catch (error) {
@@ -82,13 +83,10 @@ export default class AdminReservationController {
                 endDate: req.body.endDate,
                 adult: req.body.adult,
                 child: req.body.child,
-                reserverName: {
-                    id: req.body.reserverName.id,
-                    name: req.body.reserverName.name,
-                },
-                reserverNumber: {
-                    id: req.body.reserverNumber.id,
-                    phone: req.body.reserverNumber.phone,
+                userId: req.body.userId,
+                reserver: {
+                    reserverName: req.body.reserver.reserverName,
+                    reserverPhone: req.body.reserver.reserverPhone,
                 },
                 information: {
                     id: reservation.id,
@@ -108,7 +106,8 @@ export default class AdminReservationController {
                         additionalPrice: reservation.price.additionalPrice,
                     }
                 },
-                status: req.body.status
+                status: req.body.status,
+                reservationType: req.body.reservationType,
             });
             res.send(createReservation);
         } catch (error) {

@@ -13,12 +13,7 @@ export class MongooseReservationRepository implements ReservationRepository {
   async findAll(): Promise<IReservation[]> {
     const values = await MongooseReservation.find()
 
-      .populate({
-        path: 'reserverName',
-        populate: {
-          path: 'user',
-        },
-      })
+      .populate('userId')
       .populate({
         path: 'information',
         select: 'id name image adult child maximum price discount additionalPrice checkin checkout',
@@ -30,18 +25,21 @@ export class MongooseReservationRepository implements ReservationRepository {
   async findById(id: string): Promise<IReservation | null> {
     const values = await MongooseReservation.findById(id)
 
-      .populate({
-        path: 'reserverName',
-        populate: {
-          path: 'user',
-        },
-      })
+      .populate('userId')
       .populate({
         path: 'information',
         select: 'id name image adult child maximum price discount additionalPrice checkin checkout',
       });
 
     return values;
+  }
+
+  async findByUserId(userId: string): Promise<IReservation[]> {
+    const values = await MongooseReservation.find({ userId })
+
+      .populate('userId');
+
+    return values || [];
   }
 
   async update(reservationId: string, updateReservationInfo: Partial<IReservation>): Promise<IReservation> {
@@ -69,7 +67,12 @@ export class MongooseReservationRepository implements ReservationRepository {
 
     reservation.status = 'cancel';
 
-    await reservation.save();
+    try {
+      await reservation.save();
+    } catch (error) {
+      console.error('Error saving reservation:', error);
+      throw new HttpException(500, '예약 상태를 업데이트하는 도중 오류가 발생했습니다.');
+    }
 
     return reservation;
   }

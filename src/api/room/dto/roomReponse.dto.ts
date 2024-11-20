@@ -9,6 +9,7 @@ export default class RoomResponseDto {
   rating: number;
   review: string[];
   event: string;
+  lodgeId: string;
 
   constructor(data: RoomResponseDto) {
     this.id = data.id;
@@ -21,6 +22,7 @@ export default class RoomResponseDto {
     this.rating = data.rating;
     this.review = data.review;
     this.event = data.event;
+    this.lodgeId = data.lodgeId;
   }
 }
 
@@ -35,8 +37,8 @@ class RoomCapacityDto {
 }
 
 class RoomTimeDto {
-  checkIn: Date;
-  checkOut: Date;
+  checkIn: string;
+  checkOut: string;
 
   constructor(data: RoomTimeDto) {
     this.checkIn = data.checkIn;

@@ -23,10 +23,10 @@ export class CategoryServiceImpl implements CategoryService {
     return categoryDto;
   }
 
-  async createCategory(params: Omit<ICategory, 'id'>): Promise<void> {
+  async createCategory(params: Omit<ICategory, 'id'>): Promise<ICategory> {
     if (!params) throw new HttpException(400, '해당 요청을 처리 할 수 없습니다.');
-    await this._categoryRepository.createCategory(params);
-    return;
+    const category = await this._categoryRepository.createCategory(params);
+    return category;
   }
 
   async updateCategory(id: string, params: Omit<ICategory, 'id'>): Promise<void> {

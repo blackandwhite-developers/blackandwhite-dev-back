@@ -13,10 +13,6 @@ export class GetUsersResponseDTO {
     birth: string;
     /** 성별 */
     gender?: string;
-    /** 주소 */
-    address: string;
-    /** 상세주소 */
-    addressDetail: string;
     /** 관심사 */
     intereste: string;
     /** 닉네임 */
@@ -33,8 +29,6 @@ export class GetUsersResponseDTO {
       birth: user.profile.birth.toISOString(),
       phone: user.profile.phone,
       gender: user.profile.gender,
-      address: user.profile.address,
-      addressDetail: user.profile.addressDetail,
       intereste: user.profile.interest,
       nickname: user.profile.nickname,
     };

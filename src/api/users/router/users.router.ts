@@ -7,6 +7,8 @@ import { UsersServiceImpl } from '../service/user.service';
 import { MongooseUserRepository } from '../respository/user/mongooseUser.reopsitory';
 import { MongooseProfileRepository } from '../respository/profile/mongooseProfile.repository';
 import MongooseTermsRepository from '../respository/terms/mongooseTerms.repository';
+import { authUserMiddleware } from '@/api/common/middlewares/authUser.middleware';
+import { authRoleMiddleware } from '@/api/common/middlewares/authRole.middleware';
 
 const userRouter = express.Router();
 
@@ -25,6 +27,8 @@ const USER_ROUTES = {
   UPDATE_MY_INFO: `/api/users/me`,
   /** 회원탈퇴(삭제)*/
   DELETE_MY_INFO: `/api/users`,
+  /** 권한 부여 */
+  GRANT_AUTH: `/api/users/role`,
 } as const;
 
 const userController = new UsersController(
@@ -34,14 +38,32 @@ userRouter.post(extractPath(USER_ROUTES.SIGN_UP, ROUTES_INDEX.USERS_API), userCo
 
 userRouter.get(extractPath(USER_ROUTES.FIND_ID, ROUTES_INDEX.USERS_API), userController.findId);
 
-userRouter.get(extractPath(USER_ROUTES.GET_MY_INFO, ROUTES_INDEX.USERS_API), userController.getMyInfo);
+userRouter.get(
+  extractPath(USER_ROUTES.GET_MY_INFO, ROUTES_INDEX.USERS_API),
+  authUserMiddleware,
+  userController.getMyInfo,
+);
 
 userRouter.post(extractPath(USER_ROUTES.AUTH_PASSWORD, ROUTES_INDEX.USERS_API), userController.authPassword);
 
+userRouter.post(
+  extractPath(USER_ROUTES.GRANT_AUTH, ROUTES_INDEX.USERS_API),
+  authRoleMiddleware(['admin']),
+  userController.grantRole,
+);
+
 userRouter.put(extractPath(USER_ROUTES.RESET_PASSWORD, ROUTES_INDEX.USERS_API), userController.resetPassword);
 
-userRouter.put(extractPath(USER_ROUTES.UPDATE_MY_INFO, ROUTES_INDEX.USERS_API), userController.updateUser);
+userRouter.put(
+  extractPath(USER_ROUTES.UPDATE_MY_INFO, ROUTES_INDEX.USERS_API),
+  authUserMiddleware,
+  userController.updateUser,
+);
 
-userRouter.delete(extractPath(USER_ROUTES.DELETE_MY_INFO, ROUTES_INDEX.USERS_API), userController.deleteUser);
+userRouter.delete(
+  extractPath(USER_ROUTES.DELETE_MY_INFO, ROUTES_INDEX.USERS_API),
+  authUserMiddleware,
+  userController.deleteUser,
+);
 
 export default userRouter;

@@ -5,6 +5,7 @@ export default class AdminRoomController {
   private readonly _roomService: RoomService;
   constructor(roomService: RoomService) {
     this._roomService = roomService;
+    this.getRooms = this.getRooms.bind(this);
     this.getRoom = this.getRoom.bind(this);
     this.createRoom = this.createRoom.bind(this);
     this.updateRoom = this.updateRoom.bind(this);
@@ -12,7 +13,7 @@ export default class AdminRoomController {
   }
   async getRooms(req: Request, res: Response, next: NextFunction) {
     try {
-      const rooms = this._roomService.getRooms();
+      const rooms = await this._roomService.getRooms();
       res.send(rooms);
     } catch (error) {
       next(error);
@@ -20,7 +21,7 @@ export default class AdminRoomController {
   }
   async getRoom(req: Request, res: Response, next: NextFunction) {
     try {
-      const room = this._roomService.getRoom(req.params.id);
+      const room = await this._roomService.getRoom(req.params.id);
       res.send(room);
     } catch (error) {
       next(error);
@@ -28,7 +29,11 @@ export default class AdminRoomController {
   }
   async createRoom(req: Request, res: Response, next: NextFunction) {
     try {
-      const room = this._roomService.createRoom(req.body);
+      const { lodgeId, count, ...roomData } = req.body;
+      if (!lodgeId) {
+        return res.status(400).json({ message: 'lodgeId는 필수입니다.' });
+      }
+      const room = await this._roomService.createRoom({ lodgeId, ...roomData }, count);
       res.send(room);
     } catch (error) {
       next(error);
@@ -36,15 +41,15 @@ export default class AdminRoomController {
   }
   async updateRoom(req: Request, res: Response, next: NextFunction) {
     try {
-      this._roomService.editRoom(req.params.id, req.body);
-      res.status(204).send();
+      await this._roomService.editRoom(req.params.id, req.body);
+      res.send();
     } catch (error) {
       next(error);
     }
   }
   async deleteRoom(req: Request, res: Response, next: NextFunction) {
     try {
-      this._roomService.deleteRoom(req.params.id);
+      await this._roomService.deleteRoom(req.params.id);
       res.status(204).send();
     } catch (error) {
       next(error);

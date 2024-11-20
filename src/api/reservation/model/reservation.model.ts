@@ -2,31 +2,39 @@ export class Reservation implements IReservation {
     /** 예약 ID */
     id: string;
     /** 입실 날짜 */
-    startDate: Date;
+    startDate: string;
     /** 퇴실 날짜 */
-    endDate: Date;
+    endDate: string;
     /** 어른 인원 */
     adult: number;
     /** 아이 인원 */
     child: number;
+    /** 예약 계정 ID */
+    userId: string;
     /** 예약자 성함 */
-    reserverName: Pick<IUser, 'id' | 'name'>;
-    /** 예약자 연락처 */
-    reserverNumber: Pick<IProfile, 'id' | 'phone'>;
+    reserver: {
+        /** 이름 */
+        reserverName: string;
+        /** 연락처 */
+        reserverPhone: string;
+    };
     /** 객실 정보 */
     information: IPartialRoom;
     /** 예약 상태 */
     status: "active" | "cancel";
+    /** 예약 타입 */
+    reservationType: "shortStay" | "overnight";
 
     constructor(params: IReservation) {
         this.id = params.id;
-        this.startDate = new Date(params.startDate);
-        this.endDate = new Date(params.endDate);
+        this.startDate = params.startDate;
+        this.endDate = params.endDate;
         this.adult = params.adult;
         this.child = params.child;
-        this.reserverName = params.reserverName;
-        this.reserverNumber = params.reserverNumber;
+        this.userId = params.userId;
+        this.reserver = params.reserver;
         this.information = params.information;
         this.status = params.status;
+        this.reservationType = params.reservationType;
     }
 }

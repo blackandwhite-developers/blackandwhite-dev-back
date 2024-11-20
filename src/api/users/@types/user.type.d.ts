@@ -1,4 +1,4 @@
-type RoleType = 'admin' | 'provider' | 'user';
+type RoleType = 'admin' | 'partner' | 'user';
 type GenderType = 'M' | 'F' | 'E';
 
 interface IProfile {
@@ -10,14 +10,12 @@ interface IProfile {
   birth: Date;
   /** 성별 */
   gender?: GenderType;
-  /** 주소 */
-  address: string;
-  /** 상세 주소 */
-  addressDetail: string;
   /** 관심사 */
   interest: '호캉스' | '풀빌라' | '게스트하우스' | '전원주택' | '비지니스호텔' | '레저' | '해외숙소';
   /** 닉네임 */
   nickname: string;
+  /** 프로필 사진 */
+  profileImage: string;
 }
 
 interface IUser {

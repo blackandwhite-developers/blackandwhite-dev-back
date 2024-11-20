@@ -15,6 +15,8 @@ import adminReservationRouter from './api/reservation/router/adminReservation.ro
 import paymentRouter from './api/payment/router/payment.router';
 import roomRouter from './api/room/router/room.router';
 import authRouter from './api/auth/router/auth.router';
+import adminRoomRouter from './api/room/router/adminRoom.router';
+import couponRouter from './api/coupon/router/coupon.router';
 
 const app = express();
 
@@ -24,7 +26,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-const whiteList = ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:4000'];
+const whiteList = [
+  'http://localhost:3000',
+  'http://localhost:3001',
+  'http://localhost:4000',
+  'https://3d87-1-243-69-22.ngrok-free.app',
+];
 
 const corsOptions = {
   origin: function (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
@@ -35,8 +42,9 @@ const corsOptions = {
     }
   },
   credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'ngrok-skip-browser-warning'],
   optionsSuccessStatus: 200,
+  method: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
 };
 
 app.use(cors(corsOptions));
@@ -62,7 +70,7 @@ app.use(ROUTES_INDEX.ADMIN_LODGES_API, adminLodgeRouter);
 
 /** ------- ROOMS ------- */
 app.use(ROUTES_INDEX.ROOMS_API, roomRouter);
-app.use(ROUTES_INDEX.ADMIN_ROOMS_API, roomRouter);
+app.use(ROUTES_INDEX.ADMIN_ROOMS_API, adminRoomRouter);
 
 /** ------- CATEGORY ------- */
 app.use(ROUTES_INDEX.CATEGORY_API, categoryRouter);
@@ -79,6 +87,9 @@ app.use(ROUTES_INDEX.PAYMENT_API, paymentRouter);
 
 /** ------- 이벤트 알림용 SSE 라우터 ------- */
 app.use(ROUTES_INDEX.EVENT_API, eventRouter);
+
+/** ------- Coupon ------- */
+app.use(ROUTES_INDEX.COUPON_API, couponRouter);
 
 app.use(errorHandler);
 

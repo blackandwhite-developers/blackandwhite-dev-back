@@ -4,9 +4,13 @@ import { UserService } from '../service/user.service.type';
 export default class UsersController {
   constructor(private _userService: UserService) {
     this.signUp = this.signUp.bind(this);
-    this.getMyInfo = this.getMyInfo.bind;
+    this.getMyInfo = this.getMyInfo.bind(this);
     this.updateUser = this.updateUser.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
+    this.findId = this.findId.bind(this);
+    this.authPassword = this.authPassword.bind(this);
+    this.resetPassword = this.resetPassword.bind(this);
+    this.grantRole = this.grantRole.bind(this);
   }
   async signUp(req: Request, res: Response, next: NextFunction) {
     try {
@@ -18,10 +22,9 @@ export default class UsersController {
           phone: req.body.profile.phone,
           birth: req.body.profile.birth,
           gender: req.body.profile.gender,
-          address: req.body.profile.address,
-          addressDetail: req.body.profile.addressDetail,
           interest: req.body.profile.interest,
           nickname: req.body.profile.nickname,
+          profileImage: req.body.profile.profileImage,
         },
         terms: {
           termsOfService: Boolean(req.body.terms.termsOfService),
@@ -50,30 +53,13 @@ export default class UsersController {
   async updateUser(req: Request, res: Response, next: NextFunction) {
     try {
       const { userId } = req.user;
-
       const user = await this._userService.updateUser(userId, {
+        ...req.body,
         profile: {
           ...req.body.profile,
         },
       });
-
       res.send(user);
-    } catch (error) {
-      next(error);
-    }
-  }
-
-  async updateMyInfo(req: Request, res: Response, next: NextFunction) {
-    try {
-      res.send(req.body);
-    } catch (error) {
-      next(error);
-    }
-  }
-
-  async deactivateMyInfo(req: Request, res: Response, next: NextFunction) {
-    try {
-      res.send(req.body);
     } catch (error) {
       next(error);
     }
@@ -113,6 +99,16 @@ export default class UsersController {
       const { newPassword } = req.body;
       const { name, email } = req.params;
       await this._userService.resetPassword(name, email, newPassword);
+      res.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async grantRole(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { userId, role } = req.body;
+      await this._userService.grantRole(userId, role);
       res.status(204).send();
     } catch (error) {
       next(error);

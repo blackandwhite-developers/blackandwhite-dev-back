@@ -6,7 +6,7 @@ export default interface RoomRepository {
   /** ID로 객실 조회 */
   findById(id: string): Promise<IRoom | null>;
   /** 객실 수정 */
-  update(roomId: string, updateRoomInfo: Partial<IRoom>): Promise<void>;
+  update(roomId: string, updateRoomInfo: Partial<IRoom>): Promise<IRoom>;
   /** 객실 삭제 */
   delete(roomId: string): Promise<void>;
 }

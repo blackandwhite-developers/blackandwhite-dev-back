@@ -51,7 +51,7 @@ export class MongooseProfileRepository implements ProfileRepository {
     return updateProfile;
   }
   async delete(profileId: string): Promise<void> {
-    await MongooseProfile.deleteOne({ profileId });
+    await MongooseProfile.findByIdAndDelete(profileId);
     return;
   }
 }

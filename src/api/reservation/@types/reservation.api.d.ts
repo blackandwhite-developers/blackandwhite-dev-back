@@ -1,26 +1,11 @@
 type getReservationRequestPath = {
-    /** 예약 ID */
-    id: string;
+    /** 사용자 ID */
+    userId: string;
 };
 
 type getReservationRequestParams = {};
 
-type getReservationRequestBody = {
-    /** 예약자 성함 */
-    reserverName: {
-        /** 사용자 ID */
-        id: string;
-        /** 이름 */
-        name: string;
-    };
-    /** 예약자 연락처 */
-    reserverNumber: {
-        /** 프로필 ID */
-        id: string;
-        /** 연락처 */
-        phone: string;
-    };
-};
+type getReservationRequestBody = {};
 
 /** 예약 조회 (사용자 페이지) */
 type getReservationRequest = {
@@ -41,26 +26,21 @@ type getReservationDetailRequestParams = {};
 
 type getReservationDetailRequestBody = {
     /** 입실 날짜 */
-    startDate: Date;
+    startDate: string;
     /** 퇴실 날짜 */
-    endDate: Date;
+    endDate: string;
     /** 어른 인원 */
     adult: number;
     /** 아이 인원 */
     child: number;
+    /** 예약 계정 ID */
+    userId: string;
     /** 예약자 성함 */
-    reserverName: {
-        /** 사용자 ID */
-        id: string;
+    reserver: {
         /** 이름 */
-        name: string;
-    };
-    /** 예약자 연락처 */
-    reserverNumber: {
-        /** 프로필 ID */
-        id: string;
+        reserverName: string;
         /** 연락처 */
-        phone: string;
+        reserverPhone: string;
     };
     /** 객실 정보 */
     information: {
@@ -80,9 +60,9 @@ type getReservationDetailRequestBody = {
         /** 객실 시설 */
         time: {
             /** 입실 시간 */
-            checkIn: Date;
+            checkIn: string;
             /** 퇴실 시간 */
-            checkOut: Date;
+            checkOut: string;
         };
         /** 객실 가격 */
         price: {
@@ -95,7 +75,9 @@ type getReservationDetailRequestBody = {
         };
     };
     /** 예약 상태 */
-    status: "active" | "cancel";
+    status: 'active' | 'cancel';
+    /** 예약 타입 */
+    reservationType: 'shortStay' | 'overnight';
 };
 
 /** 예약 상세 조회 (사용자 페이지) */
@@ -114,26 +96,21 @@ declare type createReservationRequestParams = {};
 
 declare type createReservationRequestBody = {
     /** 입실 날짜 */
-    startDate: Date;
+    startDate: string;
     /** 퇴실 날짜 */
-    endDate: Date;
+    endDate: string;
     /** 어른 인원 */
     adult: number;
     /** 아이 인원 */
     child: number;
+    /** 예약 계정 ID */
+    userId: string;
     /** 예약자 성함 */
-    reserverName: {
-        /** 사용자 ID */
-        id: string;
+    reserver: {
         /** 이름 */
-        name: string;
-    };
-    /** 예약자 연락처 */
-    reserverNumber: {
-        /** 프로필 ID */
-        id: string;
+        reserverName: string;
         /** 연락처 */
-        phone: string;
+        reserverPhone: string;
     };
     /** 객실 정보 */
     information: {
@@ -153,9 +130,9 @@ declare type createReservationRequestBody = {
         /** 객실 시설 */
         time: {
             /** 입실 시간 */
-            checkIn: Date;
+            checkIn: string;
             /** 퇴실 시간 */
-            checkOut: Date;
+            checkOut: string;
         };
         /** 객실 가격 */
         price: {
@@ -168,7 +145,9 @@ declare type createReservationRequestBody = {
         };
     };
     /** 예약 상태 */
-    status: "active" | "cancel";
+    status: 'active' | 'cancel';
+    /** 예약 타입 */
+    reservationType: 'shortStay' | 'overnight';
 };
 
 /** 예약 생성 (사용자 페이지) 요청 */
@@ -188,7 +167,7 @@ declare type updateReservationRequestPath = {
 
 declare type updateReservationRequestParams = {};
 
-declare type updateReservationRequestBody = Omit<IReservation, "id">;
+declare type updateReservationRequestBody = Omit<IReservation, 'id'>;
 
 /** 예약 수정 (사용자 페이지) 요청 */
 declare type updateReservationRequest = {

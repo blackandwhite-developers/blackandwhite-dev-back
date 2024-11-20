@@ -9,8 +9,8 @@ export default class LodgeRoomTypeAndStockDto {
       maximum: number;
     };
     time: {
-      checkIn: Date;
-      checkOut: Date;
+      checkIn: string;
+      checkOut: string;
     };
     price: {
       price: number;
@@ -20,6 +20,7 @@ export default class LodgeRoomTypeAndStockDto {
     rating: number;
     review: string[];
     event: string;
+    lodgeId: string;
   }>;
   stock: number;
   constructor(data: IRoomTypeAndStock) {

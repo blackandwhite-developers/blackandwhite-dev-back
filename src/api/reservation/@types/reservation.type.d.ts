@@ -2,47 +2,49 @@ interface IReservation {
     /** 예약 ID */
     id: string;
     /** 입실 날짜 */
-    startDate: Date;
+    startDate: string;
     /** 퇴실 날짜 */
-    endDate: Date;
+    endDate: string;
     /** 어른 인원 */
     adult: number;
     /** 아이 인원 */
     child: number;
-    /** 예약자 성함 */
-    reserverName: Pick<IUser, 'id' | 'name'>;
-    /** 예약자 연락처 */
-    reserverNumber: Pick<IProfile, 'id' | 'phone'>;
+    /** 예약 계정 ID */
+    userId: string;
+    /** 이용자(로그인한 유저와 다름) */
+    reserver: {
+        /** 이용자 이름 */
+        reserverName: string;
+        /** 이용자 휴대폰 번호 */
+        reserverPhone: string;
+    };
     /** 객실 정보 */
     information: IPartialRoom;
     /** 예약 상태 */
-    status: "active" | "cancel";
+    status: 'active' | 'cancel';
+    /** 예약 타입 */
+    reservationType: 'shortStay' | 'overnight';
 }
 
 interface IReservationResponseDTO {
     /** 예약 ID */
     id: string;
     /** 입실 날짜 */
-    startDate: Date;
+    startDate: string;
     /** 퇴실 날짜 */
-    endDate: Date;
+    endDate: string;
     /** 어른 인원 */
     adult: number;
     /** 아이 인원 */
     child: number;
+    /** 예약 계정 ID */
+    userId: string;
     /** 예약자 성함 */
-    reserverName: {
-        /** 사용자 ID */
-        id: string;
+    reserver: {
         /** 이름 */
-        name: string;
-    };
-    /** 예약자 연락처 */
-    reserverNumber: {
-        /** 프로필 ID */
-        id: string;
+        reserverName: string;
         /** 연락처 */
-        phone: string;
+        reserverPhone: string;
     };
     /** 객실 정보 */
     information: {
@@ -57,10 +59,12 @@ interface IReservationResponseDTO {
         /** 객실 시설 */
         time: IRoomTime;
         /** 객실 가격 */
-        price:IPrice;
-    }
+        price: IPrice;
+    };
     /** 예약 상태 */
-    status: "active" | "cancel";
+    status: 'active' | 'cancel';
+    /** 예약 타입 */
+    reservationType: 'shortStay' | 'overnight';
 }
 
 interface IPriceResponseDTO {
@@ -74,9 +78,9 @@ interface IPriceResponseDTO {
 
 interface IRoomTimeResponseDTO {
     /** 입실 시간 */
-    checkIn: Date;
+    checkIn: string;
     /** 퇴실 시간 */
-    checkOut: Date;
+    checkOut: string;
 }
 
 interface IRoomCapacityResponseDTO {
