@@ -23,7 +23,7 @@ export default class AdminLodgeController {
 
   async createLodge(req: Request, res: Response, next: NextFunction) {
     try {
-      const lodge = await this._lodgeService.postLodge(req.body);
+      const lodge = await this._lodgeService.postLodge(req.body, req.body.cid);
       res.send(lodge);
     } catch (error) {
       next(error);

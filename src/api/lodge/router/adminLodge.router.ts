@@ -4,6 +4,7 @@ import express from 'express';
 import AdminLodgeController from '../controller/adminLodge.controller';
 import LodgeServiceImpl from '../service/lodge.service';
 import MongooseLodgeRepository from '../repository/mongooseLodge.repository';
+import { MongooseCategoryRepository } from '@/api/category/repository/mongooseCategory.repository';
 
 const adminLodgeRouter = express.Router();
 
@@ -18,7 +19,9 @@ const ADMIN_LODGE_ROUTES = {
   DELETE_LODGE: `/admin-api/lodges/:id`,
 } as const;
 
-const adminLodgeController = new AdminLodgeController(new LodgeServiceImpl(new MongooseLodgeRepository()));
+const adminLodgeController = new AdminLodgeController(
+  new LodgeServiceImpl(new MongooseLodgeRepository(), new MongooseCategoryRepository()),
+);
 
 adminLodgeRouter.get(
   extractPath(ADMIN_LODGE_ROUTES.GET_LODGE, ROUTES_INDEX.ADMIN_LODGES_API),

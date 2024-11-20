@@ -1,5 +1,8 @@
 // 카테고리 조회
-type getsCategoryRequestParams = {};
+type getsCategoryRequestParams = {
+  level: number;
+  parent: string | null;
+};
 type getsCategoryRequestPath = {};
 type getsCategoryRequestBody = {};
 
@@ -29,7 +32,7 @@ type getCategoryResponse = ICategory | null;
 // 카테고리 생성
 type createCategoryRequestParams = {};
 type createCategoryRequestPath = {};
-type createCategoryRequestBody = Omit<ICategory, 'id'>;
+type createCategoryRequestBody = Omit<ICategory, 'id' | 'subCategories' | 'lodges' | 'level'>;
 
 type createCategoryRequest = {
   params: createCategoryRequestParams;
@@ -43,11 +46,7 @@ type updateCategoryRequestParams = {};
 type updateCategoryRequestPath = {
   cid: string;
 };
-type updateCategoryRequestBody = {
-  title: string;
-  thumbnail: string;
-  division: string;
-};
+type updateCategoryRequestBody = Partial<Omit<ICategory, 'id' | 'subCategories' | 'lodges' | 'level'>>;
 type updateCategoryRequest = {
   params: updateCategoryRequestParams;
   path: updateCategoryRequestPath;
