@@ -19,8 +19,8 @@ export default class AuthController {
   async login(req: Request, res: Response, next: NextFunction) {
     try {
       const { email, password } = req.body;
-      const { accessToken, refreshToken } = await this._authService.login(email, password);
-      res.status(201).json({ accessToken, refreshToken });
+      const authUser = await this._authService.login(email, password);
+      res.status(201).json(authUser);
     } catch (error) {
       next(error);
     }
