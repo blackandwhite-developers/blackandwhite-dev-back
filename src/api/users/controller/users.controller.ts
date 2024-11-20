@@ -24,6 +24,7 @@ export default class UsersController {
           gender: req.body.profile.gender,
           interest: req.body.profile.interest,
           nickname: req.body.profile.nickname,
+          profileImage: req.body.profile.profileImage,
         },
         terms: {
           termsOfService: Boolean(req.body.terms.termsOfService),

@@ -16,6 +16,8 @@ const profileSchema = new mongoose.Schema<IProfile>(
     },
     /** 닉네임 */
     nickname: { type: String, required: false },
+    /** 프로필 사진 */
+    profileImage: { type: String, required: false },
   },
   { timestamps: true },
 );
