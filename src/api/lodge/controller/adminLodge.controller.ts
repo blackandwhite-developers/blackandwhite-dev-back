@@ -29,9 +29,8 @@ export default class AdminLodgeController {
   async getLodge(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
-
       const lodge = await this._lodgeService.getLodge(id);
-      res.status(200).json(lodge);
+      res.send(lodge);
     } catch (error) {
       next(error);
     }

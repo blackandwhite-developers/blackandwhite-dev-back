@@ -4,7 +4,6 @@ import express from 'express';
 import AdminLodgeController from '../controller/adminLodge.controller';
 import LodgeServiceImpl from '../service/lodge.service';
 import MongooseLodgeRepository from '../repository/mongooseLodge.repository';
-import { MongooseCategoryRepository } from '@/api/category/repository/mongooseCategory.repository';
 
 const adminLodgeRouter = express.Router();
 
