@@ -13,16 +13,11 @@ export default class eventController {
       const eventTypes = ['message', 'newEvent', 'alarm'];
 
       const eventHandler = (...args: unknown[]) => {
-        const [eventType, data] = args;
+        const [data] = args;
         res.write(
-          `data: ${JSON.stringify(
-            {
-              eventType,
-              data,
-            },
-            null,
-            2,
-          )}\n\n`,
+          `data: ${JSON.stringify({
+            data,
+          })}\n\n`,
         );
       };
 
