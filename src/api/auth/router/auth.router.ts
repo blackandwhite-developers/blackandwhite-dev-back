@@ -26,11 +26,7 @@ authRouter.post(extractPath(AUTH_ROUTES.LOGIN, ROUTES_INDEX.AUTH_API), authContr
 
 authRouter.post(extractPath(AUTH_ROUTES.LOGOUT, ROUTES_INDEX.AUTH_API), authUserMiddleware, authController.logout);
 
-authRouter.post(
-  extractPath(AUTH_ROUTES.REFRESH, ROUTES_INDEX.AUTH_API),
-  authUserMiddleware,
-  authController.refreshToken,
-);
+authRouter.post(extractPath(AUTH_ROUTES.REFRESH, ROUTES_INDEX.AUTH_API), authController.refreshToken);
 
 authRouter.post(extractPath(AUTH_ROUTES.KAKAO_SOCIAL_LOGIN, ROUTES_INDEX.AUTH_API), authController.kakaoSocialLogin);
 
