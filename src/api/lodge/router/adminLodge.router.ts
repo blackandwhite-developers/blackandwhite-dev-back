@@ -4,12 +4,13 @@ import express from 'express';
 import AdminLodgeController from '../controller/adminLodge.controller';
 import LodgeServiceImpl from '../service/lodge.service';
 import MongooseLodgeRepository from '../repository/mongooseLodge.repository';
-import { MongooseCategoryRepository } from '@/api/category/repository/mongooseCategory.repository';
 
 const adminLodgeRouter = express.Router();
 
 const ADMIN_LODGE_ROUTES = {
-  /** 숙소 조회 */
+  /** 카테고리별 숙소 조회 */
+  GET_LODGES: `/admin-api/lodges`,
+  /** 숙소 상세 조회 */
   GET_LODGE: `/admin-api/lodges/:id`,
   /** 숙소 등록 */
   POST_LODGE: `/admin-api/lodges`,
@@ -20,7 +21,14 @@ const ADMIN_LODGE_ROUTES = {
 } as const;
 
 const adminLodgeController = new AdminLodgeController(
-  new LodgeServiceImpl(new MongooseLodgeRepository(), new MongooseCategoryRepository()),
+  new LodgeServiceImpl(
+    new MongooseLodgeRepository()
+  )
+);
+
+adminLodgeRouter.get(
+  extractPath(ADMIN_LODGE_ROUTES.GET_LODGES, ROUTES_INDEX.ADMIN_LODGES_API),
+  adminLodgeController.getLodges,
 );
 
 adminLodgeRouter.get(

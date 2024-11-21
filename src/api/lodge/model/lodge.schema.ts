@@ -48,6 +48,10 @@ const lodgeSchema = new mongoose.Schema<ILodge>(
         },
       },
     ],
+    categoryId: {
+      type: String,
+      required: true,
+    }
   },
   {
     timestamps: {
@@ -55,6 +59,7 @@ const lodgeSchema = new mongoose.Schema<ILodge>(
       updatedAt: 'updated_at',
     },
   },
+  
 );
 
 export const MongooseLodge = mongoose.model<ILodge>('lodge', lodgeSchema);
