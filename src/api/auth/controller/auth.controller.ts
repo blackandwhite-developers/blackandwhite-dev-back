@@ -37,10 +37,9 @@ export default class AuthController {
 
   async refreshToken(req: Request, res: Response, next: NextFunction) {
     try {
-      const { refreshToken } = req.user;
-      if (refreshToken === '' || !refreshToken) throw new HttpException(401, '로그인이 필요합니다.');
-      const newAccessToken = await this._authService.refresh(refreshToken);
-      res.status(201).json({ newAccessToken });
+      const { refreshToken } = req.body;
+      const newToken = await this._authService.refresh(refreshToken);
+      res.status(201).json(newToken);
     } catch (error) {
       next(error);
     }
