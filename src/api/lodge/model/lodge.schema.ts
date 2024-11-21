@@ -48,12 +48,9 @@ const lodgeSchema = new mongoose.Schema<ILodge>(
         },
       },
     ],
-    categoryId: {
-      type: String,
-      required: true,
-    },
-    subCategoryId: {
-      type: String,
+    category: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'category',
       required: true,
     },
     rating: {
@@ -65,17 +62,14 @@ const lodgeSchema = new mongoose.Schema<ILodge>(
       required: true, // TODO: 리뷰 모델 추가
     },
     price: {
-      type: Number
+      type: Number,
     },
-    distance:{
-      type: String
+    distance: {
+      type: String,
     },
     count: {
-      type:Number
+      type: Number,
     },
-    categoryName: {
-      type: String
-    }
   },
   {
     timestamps: {

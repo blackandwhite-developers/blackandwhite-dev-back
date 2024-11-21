@@ -2,13 +2,16 @@ import HttpException from '@/api/common/exceptions/http.exception';
 import LodgeResponseDto from '../dto/lodgeResponse.dto';
 import LodgeRepository from '../repository/lodge.repository';
 import LodgeService from './lodge.service.type';
+import { CategoryRepository } from '@/api/category/repository/category.repository';
 
 const KAKAO_API_KEY = process.env.KAKAO_API_KEY;
 
 export default class LodgeServiceImpl implements LodgeService {
   private readonly _lodgeRepository: LodgeRepository;
-  constructor(_lodgeRepository: LodgeRepository) {
+  private readonly _categoryRepository: CategoryRepository;
+  constructor(_lodgeRepository: LodgeRepository, _categoryRepository: CategoryRepository) {
     this._lodgeRepository = _lodgeRepository;
+    this._categoryRepository = _categoryRepository;
   }
   async getLodgesByCategory(categoryId: string): Promise<ILodge[]> {
     return await this._lodgeRepository.findByCategory(categoryId);
@@ -43,10 +46,16 @@ export default class LodgeServiceImpl implements LodgeService {
       throw new HttpException(404, '유효한 주소가 아닙니다.');
     }
 
+    const category = await this._categoryRepository.getCategory(categoryId);
+
+    if (!category) {
+      throw new HttpException(404, '카테고리를 찾을 수 없습니다.');
+    }
+
     const { x, y } = result.documents[0];
     const newLodge = {
       ...data,
-      categoryId,
+      category,
       lat: y,
       lng: x,
       room: [],

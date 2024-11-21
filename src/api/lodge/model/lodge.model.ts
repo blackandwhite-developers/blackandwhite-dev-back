@@ -9,14 +9,12 @@ export default class Lodge implements ILodge {
   description: string;
   image: string;
   room: IRoomTypeAndStock[];
-  categoryId: string;
-  subCategoryId: string;
+  category: ICategory;
   rating: number;
   review: string[]; // TODO: 리뷰 모델 추가
   price: number;
   distance: string;
   count: number;
-  categoryName: string;
 
   constructor(data: ILodge) {
     this.id = data.id;
@@ -29,13 +27,11 @@ export default class Lodge implements ILodge {
     this.description = data.description;
     this.image = data.image;
     this.room = data.room;
-    this.categoryId = data.categoryId;
-    this.subCategoryId = data.subCategoryId;
+    this.category = data.category;
     this.rating = data.rating;
     this.review = data.review;
     this.price = data.price;
     this.distance = data.distance;
     this.count = data.count;
-    this.categoryName = data.categoryName;
   }
 }

@@ -1,7 +1,9 @@
 import LodgeRoomTypeAndStockDto from './lodgeRoomTypeAndStock.dto';
+import { GetsCategoryResponseDTO } from '@/api/category/dto/getCategoryResponse.dto';
 
 export default class LodgeResponseDto {
   id: string;
+  category: GetsCategoryResponseDTO;
   name: string;
   address: string;
   addressDetail: string;
@@ -16,11 +18,11 @@ export default class LodgeResponseDto {
   price: number;
   distance: string;
   count: number;
-  categoryName: string;
 
   constructor(data: ILodge) {
     this.id = data.id;
     this.name = data.name;
+    this.category = new GetsCategoryResponseDTO(data.category);
     this.address = data.address;
     this.addressDetail = data.addressDetail;
     this.lat = data.lat;
@@ -34,6 +36,5 @@ export default class LodgeResponseDto {
     this.price = data.price;
     this.distance = data.distance;
     this.count = data.count;
-    this.categoryName = data.categoryName;
   }
 }
