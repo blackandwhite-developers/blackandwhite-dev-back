@@ -8,6 +8,7 @@ export default class CategoryController {
     this.createCategory = this.createCategory.bind(this);
     this.updateCategory = this.updateCategory.bind(this);
     this.deleteCategory = this.deleteCategory.bind(this);
+    this.addSubCategory = this.addSubCategory.bind(this);
   }
 
   async createCategory(req: Request, res: Response, next: NextFunction) {
@@ -27,7 +28,7 @@ export default class CategoryController {
     try {
       const { level, parent } = req.query;
       const parentParam = typeof parent === 'string' ? parent : null;
-      const cates = await this._categoryService.getsCategory(Number(level), parentParam);
+      const cates = await this._categoryService.getsCategory(Number(level ?? 0), parentParam);
       console.log(cates);
       res.send(cates);
     } catch (err) {

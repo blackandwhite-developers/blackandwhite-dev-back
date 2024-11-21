@@ -9,14 +9,17 @@ export class MongooseCategoryRepository implements CategoryRepository {
     return category;
   }
   async getsCategory(level: number, parent: string | null): Promise<ICategory[]> {
-    const results = await mongooseCategory.find({
-      level,
-      parent,
-    });
+    const results = await mongooseCategory
+      .find({
+        level,
+        parent,
+      })
+      .populate('subCategories')
+      .populate('lodges');
     return results;
   }
   async getCategory(id: string): Promise<ICategory | null> {
-    const result = await mongooseCategory.findById(id);
+    const result = await mongooseCategory.findById(id).populate('subCategories').populate('lodges');
     if (!result) {
       throw new Error('해당 카테고리를 찾을 수 없습니다.');
     }

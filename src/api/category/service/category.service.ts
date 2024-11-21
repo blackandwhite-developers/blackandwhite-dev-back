@@ -46,7 +46,12 @@ export class CategoryServiceImpl implements CategoryService {
   async addSubCategory(id: string, params: Omit<ICategory, 'id' | 'subCategories' | 'lodges'>): Promise<void> {
     const findCategory = await this._categoryRepository.getCategory(id);
     if (!findCategory) throw new HttpException(404, '카테고리를 찾을 수 없습니다.');
-    const subCategory = await this._categoryRepository.createCategory(params);
+    console.log(findCategory);
+    const subCategory = await this._categoryRepository.createCategory({
+      ...params,
+      level: findCategory.level + 1,
+      parent: id,
+    });
     findCategory.subCategories.push(subCategory);
     await this._categoryRepository.updateCategory(id, findCategory);
     return;
