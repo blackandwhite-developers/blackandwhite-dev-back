@@ -35,7 +35,18 @@ const userSchema = new mongoose.Schema<IUser>(
       enum: ['local', 'kakao', 'naver', 'apple'],
       required: true,
     },
+    point: {
+      type: Number,
+      default: 0,
+    },
+    coupon: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'coupon',
+      },
+    ],
   },
+
   {
     timestamps: true,
   },

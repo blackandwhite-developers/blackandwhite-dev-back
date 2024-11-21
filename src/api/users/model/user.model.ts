@@ -6,6 +6,8 @@ export class User implements IUser {
   role: RoleType;
   profile: IProfile;
   terms: ITerms;
+  point: number;
+  coupon: Array<ICoupon>;
   accountType: 'local' | 'kakao' | 'naver' | 'apple';
   constructor(params: IUser) {
     this.id = params.id;
@@ -16,5 +18,7 @@ export class User implements IUser {
     this.profile = params.profile;
     this.terms = params.terms;
     this.accountType = params.accountType;
+    this.point = params.point;
+    this.coupon = params.coupon;
   }
 }

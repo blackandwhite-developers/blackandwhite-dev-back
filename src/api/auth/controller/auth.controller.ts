@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 import AuthService from '../service/auth.service.type';
-import HttpException from '@/api/common/exceptions/http.exception';
 
 export default class AuthController {
   private readonly _authService: AuthService;

@@ -40,6 +40,8 @@ interface IUser {
    * apple - 애플 로그인
    */
   accountType: 'local' | 'kakao' | 'naver' | 'apple';
+  point: number;
+  coupon: Array<ICoupon>;
 }
 
 interface ITerms {

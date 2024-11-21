@@ -52,6 +52,10 @@ const lodgeSchema = new mongoose.Schema<ILodge>(
       type: String,
       required: true,
     },
+    subCategoryId: {
+      type: String,
+      required: true,
+    },
     rating: {
       type: Number,
       required: true,
@@ -67,7 +71,6 @@ const lodgeSchema = new mongoose.Schema<ILodge>(
       updatedAt: 'updated_at',
     },
   },
-  
 );
 
 export const MongooseLodge = mongoose.model<ILodge>('lodge', lodgeSchema);
