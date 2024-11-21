@@ -60,6 +60,18 @@ const lodgeSchema = new mongoose.Schema<ILodge>(
       type: [String],
       required: true, // TODO: 리뷰 모델 추가
     },
+    price: {
+      type: Number
+    },
+    distance:{
+      type: String
+    },
+    count: {
+      type:Number
+    },
+    categoryName: {
+      type: String
+    }
   },
   {
     timestamps: {

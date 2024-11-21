@@ -13,7 +13,10 @@ export default class LodgeResponseDto {
   room: Array<LodgeRoomTypeAndStockDto>;
   rating: number;
   review: string[];
-  price: string;
+  price: number;
+  distance: string;
+  count: number;
+  categoryName: string;
 
   constructor(data: ILodge) {
     this.id = data.id;
@@ -29,5 +32,8 @@ export default class LodgeResponseDto {
     this.rating = data.rating;
     this.review = data.review;
     this.price = data.price;
+    this.distance = data.distance;
+    this.count = data.count;
+    this.categoryName = data.categoryName;
   }
 }
