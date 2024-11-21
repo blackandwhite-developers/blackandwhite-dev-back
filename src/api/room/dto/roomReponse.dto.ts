@@ -5,8 +5,6 @@ export default class RoomResponseDto {
   capacity: RoomCapacityDto;
   time: RoomTimeDto;
   price: RoomPriceDto;
-  rating: number;
-  review: string[];
   event: string;
   lodgeId: string;
 
@@ -17,8 +15,6 @@ export default class RoomResponseDto {
     this.capacity = new RoomCapacityDto(data.capacity);
     this.time = new RoomTimeDto(data.time);
     this.price = new RoomPriceDto(data.price);
-    this.rating = data.rating;
-    this.review = data.review;
     this.event = data.event;
     this.lodgeId = data.lodgeId;
   }

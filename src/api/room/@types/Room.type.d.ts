@@ -12,10 +12,6 @@ interface IRoom {
   time: IRoomTime;
   /** 객실 가격 */
   price: IPrice;
-  /** 평점 */
-  rating: number;
-  /** 리뷰 */
-  review: string[]; // TODO: 리뷰 모델 추가
   /** 이벤트 */
   event: string;
   /** 숙소 ID */

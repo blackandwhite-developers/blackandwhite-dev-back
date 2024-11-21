@@ -11,6 +11,10 @@ export default class LodgeResponseDto {
   description: string;
   image: string;
   room: Array<LodgeRoomTypeAndStockDto>;
+  rating: number;
+  review: string[];
+  price: string;
+
   constructor(data: ILodge) {
     this.id = data.id;
     this.name = data.name;
@@ -22,5 +26,8 @@ export default class LodgeResponseDto {
     this.description = data.description;
     this.image = data.image;
     this.room = data.room.map(room => new LodgeRoomTypeAndStockDto(room));
+    this.rating = data.rating;
+    this.review = data.review;
+    this.price = data.price;
   }
 }

@@ -20,6 +20,12 @@ interface ILodge {
   room: Array<IRoomTypeAndStock>;
   /** 카테고리 ID */
   categoryId: string;
+  /** 평점 */
+  rating: number;
+  /** 리뷰 */
+  review: string[]; // TODO: 리뷰 모델 추가
+  /** 가격 */
+  price: string;
 }
 
 interface IRoomTypeAndStock {
