@@ -17,8 +17,6 @@ export default class LodgeRoomTypeAndStockDto {
       discount: number;
       additionalPrice: number;
     };
-    rating: number;
-    review: string[];
     event: string;
     lodgeId: string;
   }>;

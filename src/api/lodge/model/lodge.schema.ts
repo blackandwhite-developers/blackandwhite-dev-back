@@ -51,7 +51,15 @@ const lodgeSchema = new mongoose.Schema<ILodge>(
     categoryId: {
       type: String,
       required: true,
-    }
+    },
+    rating: {
+      type: Number,
+      required: true,
+    },
+    review: {
+      type: [String],
+      required: true, // TODO: 리뷰 모델 추가
+    },
   },
   {
     timestamps: {

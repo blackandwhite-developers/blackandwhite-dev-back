@@ -56,14 +56,6 @@ const roomSchema = new mongoose.Schema<IRoom>({
     },
     required: true,
   },
-  rating: {
-    type: Number,
-    required: true,
-  },
-  review: {
-    type: [String],
-    required: true, // TODO: 리뷰 모델 추가
-  },
   event: {
     type: String,
     required: true,
