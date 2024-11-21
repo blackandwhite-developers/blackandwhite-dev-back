@@ -39,7 +39,7 @@ const lodgeSchema = new mongoose.Schema<ILodge>(
         roomType: [
           {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'rooms',
+            ref: 'room',
           },
         ],
         stock: {

@@ -10,7 +10,7 @@ export default class MongooseRoomRepository implements RoomRepository {
         throw new HttpException(400, 'lodgeId는 필수 입니다.'); 
     }
 
-    const lodgeExists = await MongooseLodge.findById(lodgeId);
+    const lodgeExists = await MongooseLodge.findById(lodgeId).populate("room");
     if (!lodgeExists) {
         throw new HttpException(404, 'lodgeId에 해당하는 숙소를 찾을 수 없습니다.');
     }

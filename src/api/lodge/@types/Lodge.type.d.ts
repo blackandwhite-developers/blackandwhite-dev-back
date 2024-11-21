@@ -35,6 +35,18 @@ interface ILodge {
 }
 
 interface IRoomTypeAndStock {
-  roomType: Array<IRoom>;
+  roomType:  IRoom[];
   stock: number;
+}
+
+interface IRoom {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+  capacity: IRoomCapacity;
+  time: IRoomTime;
+  price: IPrice;
+  event: string;
+  lodgeId: string;
 }
