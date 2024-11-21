@@ -22,7 +22,10 @@ const ADMIN_ROOM_ROUTES = {
 } as const;
 
 const adminRoomController = new AdminRoomController(
-  new RoomServiceImpl(new MongooseRoomRepository(), new MongooseLodgeRepository()),
+  new RoomServiceImpl(
+    new MongooseRoomRepository(), 
+    new MongooseLodgeRepository()
+  ), new MongooseLodgeRepository()
 );
 adminRoomRouter.get(extractPath(ADMIN_ROOM_ROUTES.GET_ROOM, ROUTES_INDEX.ADMIN_ROOMS_API), adminRoomController.getRoom);
 adminRoomRouter.get(
