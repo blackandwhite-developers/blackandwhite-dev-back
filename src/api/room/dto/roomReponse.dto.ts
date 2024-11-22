@@ -41,14 +41,12 @@ class RoomTimeDto {
 }
 
 class RoomPriceDto {
-  shortStayPrice: number;
-  overnightPrice: number;
+  price: number;
   discount: number;
   additionalPrice: number;
 
   constructor(data: RoomPriceDto) {
-    this.shortStayPrice = data.shortStayPrice;
-    this.overnightPrice = data.overnightPrice;
+    this.price = data.price;
     this.discount = data.discount;
     this.additionalPrice = data.additionalPrice;
   }

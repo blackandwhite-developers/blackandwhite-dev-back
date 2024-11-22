@@ -56,11 +56,6 @@ const reservationSchema = new mongoose.Schema<IReservation>({
     default: 'active',
     required: true,
   },
-  reservationType: {
-    type: String,
-    enum: ['shortStay', 'overnight'],
-    required: true,
-  },
   payment: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'payment',

@@ -12,12 +12,15 @@ export default class CategoryController {
   }
 
   async createCategory(req: Request, res: Response, next: NextFunction) {
-    const { title, thumbnail, path } = req.body;
+    const { title, thumbnail, path, division } = req.body;
     try {
+      const divisionArray = Array.isArray(division) ? division : [];
+
       const createCate = await this._categoryService.createCategory({
         title,
         path,
         thumbnail,
+        division: divisionArray,
       });
       res.send(createCate);
     } catch (err) {
@@ -47,11 +50,13 @@ export default class CategoryController {
   async updateCategory(req: Request, res: Response, next: NextFunction) {
     try {
       const { cid } = req.params;
-      const { title, thumbnail, path } = req.body;
+      const { title, thumbnail, path,  division  } = req.body;
+      const divisionArray = Array.isArray(division) ? division : [];
       await this._categoryService.updateCategory(cid, {
         title,
         path,
         thumbnail,
+        division: divisionArray, 
       });
       res.status(204).send();
     } catch (err) {
@@ -71,11 +76,13 @@ export default class CategoryController {
   async addSubCategory(req: Request, res: Response, next: NextFunction) {
     try {
       const { cid } = req.params;
-      const { title, thumbnail, path } = req.body;
+      const { title, thumbnail, path, division } = req.body;
+      const divisionArray = Array.isArray(division) ? division : [];
       await this._categoryService.addSubCategory(cid, {
         title,
         path,
         thumbnail,
+        division: divisionArray || [], 
       });
       res.status(204).send();
     } catch (err) {
