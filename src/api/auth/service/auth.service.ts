@@ -14,7 +14,7 @@ export default class AuthServiceImpl implements AuthService {
     const user = await this._userRepository.findByEmail(email);
     if (!user) throw new HttpException(404, '존재하지 않는 사용자입니다.');
     if (!CryptoService.comparePassword(password, user.password))
-      throw new HttpException(401, '비밀번호가 일치하지 않습니다.');
+      throw new HttpException(400, '비밀번호가 일치하지 않습니다.');
     const accessToken = JwtService.generateAccessToken({ userId: user.id, role: user.role, expiresIn: '1h' });
     const refreshToken = JwtService.generateRefreshToken({ userId: user.id, role: user.role, expiresIn: '14d' });
     await redisCli.setData(user.id, refreshToken, 1209600); // 14 days in seconds

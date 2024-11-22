@@ -53,13 +53,13 @@ export default class UsersController {
   async updateUser(req: Request, res: Response, next: NextFunction) {
     try {
       const { userId } = req.user;
-      const user = await this._userService.updateUser(userId, {
+      await this._userService.updateUser(userId, {
         ...req.body,
         profile: {
           ...req.body.profile,
         },
       });
-      res.send(user);
+      res.status(204).send();
     } catch (error) {
       next(error);
     }
