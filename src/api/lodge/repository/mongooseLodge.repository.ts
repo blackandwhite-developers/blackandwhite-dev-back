@@ -77,10 +77,16 @@ export default class MongooseLodgeRepository implements LodgeRepository {
     await lodge.save();
   }
   async findByRoomId(roomId: string): Promise<ILodge> {
-    const lodge = await MongooseLodge.findOne({ 'room.roomType.id': roomId });
-    if (!lodge) {
+    console.log(roomId);
+
+    const lodges = await MongooseLodge.find();
+    const lodge = lodges.filter(lodge => {
+      return lodge.room.some(room => room.roomType.id === roomId);
+    });
+    const data = lodge[0];
+    if (!data) {
       throw new HttpException(404, '숙소를 찾을 수 없습니다.');
     }
-    return lodge;
+    return data;
   }
 }
