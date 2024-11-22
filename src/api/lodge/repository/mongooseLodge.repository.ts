@@ -1,7 +1,7 @@
 import HttpException from '@/api/common/exceptions/http.exception';
 import { MongooseLodge } from '../model/lodge.schema';
 import LodgeRepository from './lodge.repository';
-
+import mongoose from 'mongoose';
 export default class MongooseLodgeRepository implements LodgeRepository {
   async findByCategory(categoryId: string): Promise<ILodge[]> {
     const lodge = await MongooseLodge.find({ categoryId });
@@ -54,7 +54,7 @@ export default class MongooseLodgeRepository implements LodgeRepository {
   }
 
   async checkIn(id: string, roomName: string): Promise<void> {
-    const lodge = await MongooseLodge.findById(id);
+    const lodge = await MongooseLodge.findById(id).populate('room.roomType');
     if (!lodge) {
       throw new HttpException(404, '숙소를 찾을 수 없습니다.');
     }
@@ -78,16 +78,24 @@ export default class MongooseLodgeRepository implements LodgeRepository {
     await lodge.save();
   }
   async findByRoomId(roomId: string): Promise<ILodge> {
-    console.log(roomId);
+    try {
+      const lodge = await MongooseLodge.findOne({
+        'room.roomType': new mongoose.Types.ObjectId(roomId),
+      })
+        .populate('room.roomType')
+        .populate('category');
 
-    const lodges = await MongooseLodge.find();
-    const lodge = lodges.filter(lodge => {
-      return lodge.room.some(room => room.roomType.id === roomId);
-    });
-    const data = lodge[0];
-    if (!data) {
-      throw new HttpException(404, '숙소를 찾을 수 없습니다.');
+      if (!lodge) {
+        throw new HttpException(404, '해당 객실이 있는 숙소를 찾을 수 없습니다.');
+      }
+
+      return lodge;
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      console.error('Error finding lodge by roomId:', error);
+      throw new HttpException(500, '서버 에러가 발생했습니다.');
     }
-    return data;
   }
 }
