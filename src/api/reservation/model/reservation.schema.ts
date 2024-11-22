@@ -10,13 +10,13 @@ const reservationSchema = new mongoose.Schema<IReservation>({
   /** 아이 인원 */
   child: { type: Number },
   /** 예약 계정 ID */
-  userId:  { type: String },
+  userId: { type: String },
   /** 예약자 성함 */
   reserver: {
-      /** 이름 */
-      reserverName:  { type: String, required: true  },
-      /** 연락처 */
-      reserverPhone: { type: String, required: true  },
+    /** 이름 */
+    reserverName: { type: String, required: true },
+    /** 연락처 */
+    reserverPhone: { type: String, required: true },
   },
   /** 객실 정보 */
   information: {
@@ -58,9 +58,14 @@ const reservationSchema = new mongoose.Schema<IReservation>({
   },
   reservationType: {
     type: String,
-    enum: ["shortStay" , "overnight"],
+    enum: ['shortStay', 'overnight'],
     required: true,
-  }
+  },
+  payment: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'payment',
+    nullable: true,
+  },
 });
 
 export const MongooseReservation = mongoose.model<IReservation>('reservations', reservationSchema);

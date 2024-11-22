@@ -8,8 +8,8 @@ export default class Payment implements IPayment {
   status: 'PENDING' | 'SUCCESS' | 'FAILURE' | 'CANCEL';
   createdAt: Date;
   completedAt: Date | null;
-  reservationId: string;
-  userId: string;
+  reservation: Array<IReservation>;
+  user: IUser;
 
   constructor(payment: IPayment) {
     this.id = payment.id;
@@ -21,7 +21,7 @@ export default class Payment implements IPayment {
     this.status = payment.status;
     this.createdAt = payment.createdAt;
     this.completedAt = payment.completedAt;
-    this.reservationId = payment.reservationId;
-    this.userId = payment.userId;
+    this.reservation = payment.reservation;
+    this.user = payment.user;
   }
 }

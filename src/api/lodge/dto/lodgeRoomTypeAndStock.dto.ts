@@ -1,5 +1,5 @@
 export default class LodgeRoomTypeAndStockDto {
-  roomType: Array<{
+  roomType: {
     id: string;
     name: string;
     description: string;
@@ -19,7 +19,7 @@ export default class LodgeRoomTypeAndStockDto {
     };
     event: string;
     lodgeId: string;
-  }>;
+  };
   stock: number;
   constructor(data: IRoomTypeAndStock) {
     this.roomType = data.roomType;

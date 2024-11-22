@@ -33,7 +33,7 @@ interface ILodge {
 }
 
 interface IRoomTypeAndStock {
-  roomType: IRoom[];
+  roomType: IRoom;
   stock: number;
 }
 

@@ -41,27 +41,46 @@ export default class MongooseLodgeRepository implements LodgeRepository {
     if (!lodge) {
       throw new HttpException(404, '숙소를 찾을 수 없습니다.');
     }
-    if (lodge.room.some(r => r.roomType[0].name === room.name)) {
+    if (lodge.room.some(r => r.roomType.name === room.name)) {
       throw new HttpException(400, '이미 등록된 객실입니다.');
     }
     const newTypeAndStock: IRoomTypeAndStock = {
-      roomType: [room],
+      roomType: room,
       stock: count,
     };
     lodge.room.push(newTypeAndStock);
     await lodge.save();
   }
 
-  async editRoomStock(id: string, roomName: string, stock: number): Promise<void> {
+  async checkIn(id: string, roomName: string): Promise<void> {
     const lodge = await MongooseLodge.findById(id);
     if (!lodge) {
       throw new HttpException(404, '숙소를 찾을 수 없습니다.');
     }
-    const roomType = lodge.room.find(r => r.roomType[0].name === roomName);
-    if (!roomType) {
+    const room = lodge.room.find(r => r.roomType.name === roomName);
+    if (!room) {
       throw new HttpException(404, '객실을 찾을 수 없습니다.');
     }
-    roomType.stock = stock;
+    room.stock -= 1;
     await lodge.save();
+  }
+  async checkOut(id: string, roomName: string): Promise<void> {
+    const lodge = await MongooseLodge.findById(id);
+    if (!lodge) {
+      throw new HttpException(404, '숙소를 찾을 수 없습니다.');
+    }
+    const room = lodge.room.find(r => r.roomType.name === roomName);
+    if (!room) {
+      throw new HttpException(404, '객실을 찾을 수 없습니다.');
+    }
+    room.stock += 1;
+    await lodge.save();
+  }
+  async findByRoomId(roomId: string): Promise<ILodge> {
+    const lodge = await MongooseLodge.findOne({ 'room.roomType.id': roomId });
+    if (!lodge) {
+      throw new HttpException(404, '숙소를 찾을 수 없습니다.');
+    }
+    return lodge;
   }
 }

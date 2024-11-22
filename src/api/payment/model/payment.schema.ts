@@ -8,8 +8,8 @@ const paymentSchema = new mongoose.Schema<IPayment>({
   status: { type: String, required: true, enum: ['PENDING', 'SUCCESS', 'FAILURE'] },
   createdAt: { type: Date, required: true },
   completedAt: { type: Date },
-  reservationId: { type: String, required: true },
-  userId: { type: String, required: true },
+  reservation: [{ type: mongoose.Schema.Types.ObjectId, ref: 'reservation' }],
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'users', required: true },
 });
 
 export const mongoosePayment = mongoose.model<IPayment>('payment', paymentSchema);
