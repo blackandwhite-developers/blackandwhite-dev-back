@@ -7,4 +7,5 @@ interface ICategory {
   parent: string | null;
   level: number;
   lodges: ILodge[] | null;
+  division: ICategory[];  
 }
