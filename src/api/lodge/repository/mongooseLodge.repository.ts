@@ -48,7 +48,8 @@ export default class MongooseLodgeRepository implements LodgeRepository {
       roomType: room,
       stock: count,
     };
-    lodge.room.push(newTypeAndStock);
+    lodge.room = [...lodge.room, newTypeAndStock];
+    console.log(lodge.room);
     await lodge.save();
   }
 

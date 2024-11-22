@@ -1,14 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 import RoomService from '../service/room.service.type';
-import LodgeRepository from '@/api/lodge/repository/lodge.repository';
 
 export default class AdminRoomController {
   private readonly _roomService: RoomService;
-  private readonly _lodgeRepository: LodgeRepository;
-  constructor(roomService: RoomService, _lodgeRepository: LodgeRepository) {
+  constructor(roomService: RoomService) {
     this._roomService = roomService;
-    this._lodgeRepository = _lodgeRepository;
-
     this.getRooms = this.getRooms.bind(this);
     this.getRoom = this.getRoom.bind(this);
     this.createRoom = this.createRoom.bind(this);
@@ -34,29 +30,7 @@ export default class AdminRoomController {
   async createRoom(req: Request, res: Response, next: NextFunction) {
     try {
       const { lodgeId, initialStock, ...roomData } = req.body;
-
-      if (!lodgeId) {
-        return res.status(400).json({ message: 'lodgeId는 필수입니다.' });
-      }
-
-      if (!initialStock) {
-        return res.status(400).json({ message: 'initialStock은 필수입니다.' });
-      }
-
       const room = await this._roomService.createRoom({ lodgeId, ...roomData }, initialStock);
-
-      const lodge = await this._lodgeRepository.findById(lodgeId);
-
-      if (lodge) {
-        const newRoomTypeAndStock: IRoomTypeAndStock = {
-          roomType: room,
-          stock: initialStock,
-        };
-
-        lodge.room.push(newRoomTypeAndStock);
-        await this._lodgeRepository.save(lodge);
-      }
-
       res.send(room);
     } catch (error) {
       next(error);

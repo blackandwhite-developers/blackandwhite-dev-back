@@ -41,7 +41,7 @@ export default class RoomServiceImpl implements RoomService {
   async getRoomTime(roomId: string): Promise<IRoomTime> {
     const room = await this._roomRepository.findById(roomId);
     if (!room) {
-        throw new HttpException(404, '해당 객실을 찾을 수 없습니다.'); 
+      throw new HttpException(404, '해당 객실을 찾을 수 없습니다.');
     }
 
     return room.time;
