@@ -82,7 +82,7 @@ export default class ReservationServiceImpl implements ReservationService {
       throw new HttpException(500, '예약 생성에 실패했습니다.');
     }
     const lodge = await this._lodgeRepository.findByRoomId(roomId);
-    console.log(lodge);
+    console.log(lodge.id, room.name);
     await this._lodgeRepository.checkIn(lodge.id, room.name);
 
     return new ReservationResponseDTO(newReservation);

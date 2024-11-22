@@ -109,7 +109,7 @@ export class UsersServiceImpl implements UserService {
       from: process.env.EMAIL,
       to: email,
       subject: '비밀번호 찾기 링크를 전달드립니다.',
-      text: `비밀번호 찾기 링크: http://localhost:3000/reset-password?name=${encryptedName}&email=${encryptedEmail}`,
+      text: `비밀번호 찾기 링크: http://localhost:3000/findaccount/newpassword?name=${encryptedName}&email=${encryptedEmail}`,
     };
 
     await transporter.sendMail(mailOptions, (err: Error | null, info: nodemailer.SentMessageInfo) => {

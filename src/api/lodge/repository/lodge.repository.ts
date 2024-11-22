@@ -17,4 +17,6 @@ export default interface LodgeRepository {
   checkOut(id: string, roomName: string): Promise<void>;
   /** roomId로 lodge 찾기 */
   findByRoomId(roomId: string): Promise<ILodge>;
+  /** 검색어로 lodge 찾기 */
+  findByKeyword(keywords: Array<string>): Promise<ILodge[]>;
 }

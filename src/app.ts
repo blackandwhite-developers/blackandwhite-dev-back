@@ -17,6 +17,7 @@ import roomRouter from './api/room/router/room.router';
 import authRouter from './api/auth/router/auth.router';
 import adminRoomRouter from './api/room/router/adminRoom.router';
 import couponRouter from './api/coupon/router/coupon.router';
+import searchRouter from './api/search/router/search.router';
 
 const app = express();
 
@@ -90,6 +91,10 @@ app.use(ROUTES_INDEX.EVENT_API, eventRouter);
 
 /** ------- Coupon ------- */
 app.use(ROUTES_INDEX.COUPON_API, couponRouter);
+
+/** ------- Search ------- */
+
+app.use(ROUTES_INDEX.SEARCH_API, searchRouter);
 
 app.use(errorHandler);
 
