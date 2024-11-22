@@ -18,9 +18,9 @@ interface IPayment {
   /** 결제 완료 일시 */
   completedAt: Date | null;
   /** 예약 ID */
-  reservationId: string;
+  reservation: Array<IReservation>;
   /** 결제자 ID */
-  userId: string;
+  user: IUser;
 }
 
 interface IKakaoPayReadyResponse {

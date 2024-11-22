@@ -1,6 +1,6 @@
 export interface ReservationRepository {
   /** 예약 생성 */
-  save(user: Omit<IReservation, 'id'>): Promise<IReservation>;
+  save(info: Omit<IReservation, 'id' | 'payment' | 'user'>, user: IUser): Promise<IReservation>;
   /** 예약 목록 조회 */
   findAll(): Promise<IReservation[]>;
   /** ID로 예약 조회 */

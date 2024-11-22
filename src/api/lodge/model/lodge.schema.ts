@@ -36,18 +36,38 @@ const lodgeSchema = new mongoose.Schema<ILodge>(
     },
     room: [
       {
-        roomType: [
-          {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'rooms',
-          },
-        ],
+        roomType: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'rooms',
+        },
         stock: {
           type: Number,
           required: true,
         },
       },
     ],
+    category: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'category',
+      required: true,
+    },
+    rating: {
+      type: Number,
+      required: true,
+    },
+    review: {
+      type: [String],
+      required: true, // TODO: 리뷰 모델 추가
+    },
+    price: {
+      type: Number,
+    },
+    distance: {
+      type: String,
+    },
+    count: {
+      type: Number,
+    },
   },
   {
     timestamps: {
@@ -56,5 +76,10 @@ const lodgeSchema = new mongoose.Schema<ILodge>(
     },
   },
 );
+
+lodgeSchema.index({ name: 1 });
+lodgeSchema.index({ address: 1 });
+lodgeSchema.index({ description: 1 });
+lodgeSchema.index({ addressDetail: 1 });
 
 export const MongooseLodge = mongoose.model<ILodge>('lodge', lodgeSchema);

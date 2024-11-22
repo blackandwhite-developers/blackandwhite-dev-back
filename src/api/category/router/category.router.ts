@@ -10,6 +10,8 @@ const categoryRouter = express.Router();
 const CATEGORY_ROUTES = {
   /** 카테고리 생성 */
   CREATE_CATEGORY: `/api/category`,
+  /** 서브 카테고리 생성 */
+  CREATE_SUB_CATEGORY: `/api/category/:cid`,
   /** 카테고리 상세조회 */
   GETS_CATEGORY: `/api/category`,
   /** 카테고리 상세조회 */
@@ -21,6 +23,10 @@ const CATEGORY_ROUTES = {
 };
 const categoryController = new CategoryController(new CategoryServiceImpl(new MongooseCategoryRepository()));
 
+categoryRouter.post(
+  extractPath(CATEGORY_ROUTES.CREATE_SUB_CATEGORY, ROUTES_INDEX.CATEGORY_API),
+  categoryController.addSubCategory,
+);
 categoryRouter.post(
   extractPath(CATEGORY_ROUTES.CREATE_CATEGORY, ROUTES_INDEX.CATEGORY_API),
   categoryController.createCategory,

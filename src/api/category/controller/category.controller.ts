@@ -8,15 +8,16 @@ export default class CategoryController {
     this.createCategory = this.createCategory.bind(this);
     this.updateCategory = this.updateCategory.bind(this);
     this.deleteCategory = this.deleteCategory.bind(this);
+    this.addSubCategory = this.addSubCategory.bind(this);
   }
 
   async createCategory(req: Request, res: Response, next: NextFunction) {
-    const { title, thumbnail, division } = req.body;
+    const { title, thumbnail, path } = req.body;
     try {
       const createCate = await this._categoryService.createCategory({
         title,
+        path,
         thumbnail,
-        division,
       });
       res.send(createCate);
     } catch (err) {
@@ -25,7 +26,10 @@ export default class CategoryController {
   }
   async getsCategory(req: Request, res: Response, next: NextFunction) {
     try {
-      const cates = await this._categoryService.getsCategory();
+      const { level, parent } = req.query;
+      const parentParam = typeof parent === 'string' ? parent : null;
+      const cates = await this._categoryService.getsCategory(Number(level ?? 0), parentParam);
+      console.log(cates);
       res.send(cates);
     } catch (err) {
       next(err);
@@ -43,11 +47,11 @@ export default class CategoryController {
   async updateCategory(req: Request, res: Response, next: NextFunction) {
     try {
       const { cid } = req.params;
-      const { title, thumbnail, division } = req.body;
+      const { title, thumbnail, path } = req.body;
       await this._categoryService.updateCategory(cid, {
         title,
+        path,
         thumbnail,
-        division,
       });
       res.status(204).send();
     } catch (err) {
@@ -58,6 +62,21 @@ export default class CategoryController {
     try {
       const { cid } = req.params;
       await this._categoryService.deleteCategory(cid);
+      res.status(204).send();
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async addSubCategory(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { cid } = req.params;
+      const { title, thumbnail, path } = req.body;
+      await this._categoryService.addSubCategory(cid, {
+        title,
+        path,
+        thumbnail,
+      });
       res.status(204).send();
     } catch (err) {
       next(err);

@@ -4,13 +4,23 @@ import KakaoPaymentReadyResponseDto from '../dto/kakaoPaymentReadyResponse.dto';
 import PaymentService from './payment.service.type';
 import KakaoPaymentCancelResponseDto from '../dto/kakaoPaymentCancelResponce.dto';
 import PaymentRepository from '../repository/payment.repository';
+import { ReservationRepository } from '@/api/reservation/repository/reservation.repository';
+import { UserRepository } from '@/api/users/respository/user/user.repository';
 
 const KAKAO_PAY_API_KEY = process.env.KAKAO_PAY_API_KEY;
 
 export default class PaymentServiceImpl implements PaymentService {
   private readonly _paymentRepository: PaymentRepository;
-  constructor(_paymentRepository: PaymentRepository) {
+  private readonly _reservationRepository: ReservationRepository;
+  private readonly _userRepository: UserRepository;
+  constructor(
+    _paymentRepository: PaymentRepository,
+    _reservationRepository: ReservationRepository,
+    _userRepository: UserRepository,
+  ) {
     this._paymentRepository = _paymentRepository;
+    this._reservationRepository = _reservationRepository;
+    this._userRepository = _userRepository;
   }
   async kakaoPayRequest(
     amount: number,
@@ -24,7 +34,7 @@ export default class PaymentServiceImpl implements PaymentService {
     userId: string,
     nominalAmount: number,
     discountAmount: number,
-    reservationId: string,
+    reservationIds: Array<string>,
   ): Promise<KakaoPaymentReadyResponseDto> {
     const response = await fetch('https://open-api.kakaopay.com/online/v1/payment/ready', {
       method: 'POST',
@@ -46,6 +56,22 @@ export default class PaymentServiceImpl implements PaymentService {
       }),
     });
 
+    const reservation = (await this._reservationRepository.findAll())
+      .map(reservation => {
+        if (reservationIds.includes(reservation.id)) {
+          return reservation;
+        }
+      })
+      .filter(reservation => reservation !== undefined);
+
+    const user = await this._userRepository.findById(userId);
+    if (!user) {
+      throw new HttpException(404, '사용자를 찾을 수 없습니다.');
+    }
+    if (reservation.length !== reservationIds.length || reservation.length === 0 || reservation === undefined) {
+      throw new HttpException(404, '예약 정보가 존재하지 않습니다.');
+    }
+
     if (!response.ok) {
       await this._paymentRepository.save({
         method: 'KAKAO_PAY',
@@ -56,23 +82,11 @@ export default class PaymentServiceImpl implements PaymentService {
         status: 'FAILURE',
         createdAt: new Date(),
         completedAt: null,
-        reservationId,
-        userId,
+        reservation,
+        user,
       });
       throw new HttpException(500, '카카오페이 결제 준비 실패');
     }
-    await this._paymentRepository.save({
-      method: 'KAKAO_PAY',
-      nominalAmount,
-      discountAmount,
-      amount,
-      itemName,
-      status: 'PENDING',
-      createdAt: new Date(),
-      completedAt: null,
-      reservationId,
-      userId,
-    });
     const data = await response.json();
     return new KakaoPaymentReadyResponseDto(data);
   }
@@ -86,7 +100,7 @@ export default class PaymentServiceImpl implements PaymentService {
     paymentId: string,
   ): Promise<KakaoPaymentApproveResponseDto> {
     const payment = await this._paymentRepository.findById(paymentId);
-    if (payment?.userId !== userId) {
+    if (payment?.user.id !== userId) {
       throw new HttpException(403, '권한이 없습니다.');
     }
     if (!payment) {
@@ -131,7 +145,7 @@ export default class PaymentServiceImpl implements PaymentService {
     userId: string,
   ): Promise<KakaoPaymentCancelResponseDto> {
     const payment = await this._paymentRepository.findById(paymentId);
-    if (payment?.userId !== userId) {
+    if (payment?.user.id !== userId) {
       throw new HttpException(403, '권한이 없습니다.');
     }
     if (!payment) {

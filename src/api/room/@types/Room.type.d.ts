@@ -12,10 +12,6 @@ interface IRoom {
   time: IRoomTime;
   /** 객실 가격 */
   price: IPrice;
-  /** 평점 */
-  rating: number;
-  /** 리뷰 */
-  review: string[]; // TODO: 리뷰 모델 추가
   /** 이벤트 */
   event: string;
   /** 숙소 ID */
@@ -25,8 +21,10 @@ interface IRoom {
 type IPartialRoom = Pick<IRoom, 'id' | 'name' | 'image' | 'capacity' | 'time' | 'price'>
 
 interface IPrice {
-  /** 가격 */
-  price: number;
+  /** 대실 가격 */
+  shortStayPrice: number;
+  /** 숙박 가격 */
+  overnightPrice: number;
   /** 할인율 */
   discount: number;
   /** 인원 당 추가 가격 */

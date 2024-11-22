@@ -76,49 +76,38 @@ export default class ReservationController {
     res: Response,
     next: NextFunction,
   ) {
-    const id = req.body.information.id as string;
-    const reservation = await this._roomRepository.findById(id);
+    const { userId } = req.user;
 
-    if (!reservation) {
-      throw new Error('해당 정보가 존재하지 않습니다.');
-    }
     try {
-      const createReservation = await this._reservationService.createReservation({
-        startDate: req.body.startDate,
-        endDate: req.body.endDate,
-        adult: req.body.adult,
-        child: req.body.child,
-        userId: req.body.userId,
-        reserver: {
-          reserverName: req.body.reserver.reserverName,
-          reserverPhone: req.body.reserver.reserverPhone,
+      const createReservation = await this._reservationService.createReservation(
+        {
+          startDate: req.body.startDate,
+          endDate: req.body.endDate,
+          adult: req.body.adult,
+          child: req.body.child,
+          userId: req.body.userId,
+          reserver: {
+            reserverName: req.body.reserver.reserverName,
+            reserverPhone: req.body.reserver.reserverPhone,
+          },
+          status: req.body.status,
+          reservationType: req.body.reservationType,
         },
-        information: {
-          id: reservation.id,
-          name: reservation.name,
-          image: reservation.image,
-          capacity: {
-            standard: reservation.capacity.standard,
-            maximum: reservation.capacity.maximum,
-          },
-          time: {
-            checkIn: reservation.time.checkIn,
-            checkOut: reservation.time.checkOut,
-          },
-          price: {
-            price: reservation.price.price,
-            discount: reservation.price.discount,
-            additionalPrice: reservation.price.additionalPrice,
-          },
-        },
-        status: req.body.status,
-        reservationType: req.body.reservationType,
-      });
+        { checkIn: req.body.information.time.checkIn, checkOut: req.body.information.time.checkOut },
+        userId,
+        req.body.roomId,
+      );
+
       res.send(createReservation);
     } catch (error) {
       console.error(error);
       next(error);
     }
+  }
+
+  convertTo24Hour(time: string): number {
+    const [hours, minutes] = time.split(':').map(Number);
+    return hours * 60 + minutes;
   }
 
   async updateReservation(

@@ -29,16 +29,14 @@ export default class AdminRoomController {
   }
   async createRoom(req: Request, res: Response, next: NextFunction) {
     try {
-      const { lodgeId, count, ...roomData } = req.body;
-      if (!lodgeId) {
-        return res.status(400).json({ message: 'lodgeId는 필수입니다.' });
-      }
-      const room = await this._roomService.createRoom({ lodgeId, ...roomData }, count);
+      const { lodgeId, initialStock, ...roomData } = req.body;
+      const room = await this._roomService.createRoom({ lodgeId, ...roomData }, initialStock);
       res.send(room);
     } catch (error) {
       next(error);
     }
   }
+
   async updateRoom(req: Request, res: Response, next: NextFunction) {
     try {
       await this._roomService.editRoom(req.params.id, req.body);

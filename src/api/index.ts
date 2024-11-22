@@ -39,14 +39,8 @@ const AUTH_ROUTES = {
   AUTH_API: '/api/auth',
 };
 
-/** 최근 검색 라우터 */
-const RECENT_SEARCH_ROUTES = {
-  RECENT_SEARCH_API: `/api/recent-search`,
-};
-
-/** 인기 검색 라우터 */
-const POPULAR_SEARCH_ROUTES = {
-  POPULAR_SEARCH_API: `/api/popular-search`,
+const SEARCH_ROUTES = {
+  SEARCH_API: `/api/search`,
 };
 /** 쿠폰 */
 const COUPON_ROUTES = {
@@ -62,7 +56,6 @@ export const ROUTES_INDEX = {
   ...EVENT_ROUTES,
   ...PAYMENT_ROUTES,
   ...AUTH_ROUTES,
-  ...RECENT_SEARCH_ROUTES,
-  ...POPULAR_SEARCH_ROUTES,
+  ...SEARCH_ROUTES,
   ...COUPON_ROUTES,
 };

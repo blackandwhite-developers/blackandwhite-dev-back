@@ -9,6 +9,9 @@ const couponSchema = new mongoose.Schema<ICoupon>({
     type: Number,
     required: true,
   },
+  exp: {
+    type: Date,
+  },
 });
 
 export const mongooseCoupon = mongoose.model<ICoupon>('coupon', couponSchema);

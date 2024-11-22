@@ -3,7 +3,12 @@ import { MongooseReservation } from '@/api/reservation/model/reservation.schema'
 import { ReservationRepository } from '@/api/reservation/repository/reservation.repository';
 
 export class MongooseReservationRepository implements ReservationRepository {
-  async save(reservation: Omit<IReservation, 'id'>): Promise<IReservation> {
+  async save(info: Omit<IReservation, 'id' | 'payment' | 'user'>, user: IUser): Promise<IReservation> {
+    const reservation = {
+      ...info,
+      payment: null,
+      user,
+    };
     const newReservation = new MongooseReservation(reservation);
 
     await newReservation.save();

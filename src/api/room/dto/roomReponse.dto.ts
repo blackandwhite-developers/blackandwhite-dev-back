@@ -1,26 +1,20 @@
 export default class RoomResponseDto {
-  id: string;
   name: string;
   description: string;
   image: string;
   capacity: RoomCapacityDto;
   time: RoomTimeDto;
   price: RoomPriceDto;
-  rating: number;
-  review: string[];
   event: string;
   lodgeId: string;
 
   constructor(data: RoomResponseDto) {
-    this.id = data.id;
     this.name = data.name;
     this.description = data.description;
     this.image = data.image;
     this.capacity = new RoomCapacityDto(data.capacity);
     this.time = new RoomTimeDto(data.time);
     this.price = new RoomPriceDto(data.price);
-    this.rating = data.rating;
-    this.review = data.review;
     this.event = data.event;
     this.lodgeId = data.lodgeId;
   }
@@ -47,12 +41,14 @@ class RoomTimeDto {
 }
 
 class RoomPriceDto {
-  price: number;
+  shortStayPrice: number;
+  overnightPrice: number;
   discount: number;
   additionalPrice: number;
 
   constructor(data: RoomPriceDto) {
-    this.price = data.price;
+    this.shortStayPrice = data.shortStayPrice;
+    this.overnightPrice = data.overnightPrice;
     this.discount = data.discount;
     this.additionalPrice = data.additionalPrice;
   }

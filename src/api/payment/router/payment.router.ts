@@ -4,6 +4,8 @@ import { extractPath } from '@/utils/path.util';
 import { ROUTES_INDEX } from '@/api';
 import PaymentServiceImpl from '../service/payment.service';
 import MongoosePaymentRepository from '../repository/mongoosePayment.repository';
+import { MongooseReservationRepository } from '@/api/reservation/repository/mongooseReservation.repository';
+import { MongooseUserRepository } from '@/api/users/respository/user/mongooseUser.reopsitory';
 
 const paymentRouter = express.Router();
 
@@ -26,7 +28,13 @@ const PAYMENT_ROUTES = {
   GET_PAYMENT_DETAIL: `/api/payment`,
 } as const;
 
-const paymentController = new PaymentController(new PaymentServiceImpl(new MongoosePaymentRepository()));
+const paymentController = new PaymentController(
+  new PaymentServiceImpl(
+    new MongoosePaymentRepository(),
+    new MongooseReservationRepository(),
+    new MongooseUserRepository(),
+  ),
+);
 
 paymentRouter.post(
   extractPath(PAYMENT_ROUTES.KAKAO_PAY_REQUEST, ROUTES_INDEX.PAYMENT_API),

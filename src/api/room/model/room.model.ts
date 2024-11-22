@@ -6,8 +6,6 @@ export default class Room implements IRoom {
   capacity: IRoomCapacity;
   time: IRoomTime;
   price: IPrice;
-  rating: number;
-  review: string[]; // TODO: 리뷰 모델 추가
   event: string;
   lodgeId: string;
 
@@ -19,8 +17,6 @@ export default class Room implements IRoom {
     this.capacity = data.capacity;
     this.time = data.time;
     this.price = data.price;
-    this.rating = data.rating;
-    this.review = data.review;
     this.event = data.event;
     this.lodgeId = data.lodgeId;
   }

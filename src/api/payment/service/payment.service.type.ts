@@ -16,7 +16,7 @@ export default interface PaymentService {
     userId: string,
     nominalAmount: number,
     discountAmount: number,
-    reservationId: string,
+    reservationIds: Array<string>,
   ): Promise<KakaoPaymentReadyResponseDto>;
   /** 결제 요청 */
   requestPayment(): Promise<void>;

@@ -1,4 +1,6 @@
 export default interface LodgeRepository {
+  /** 카테고리 ID로 조회 */
+  findByCategory(categoryId: string): Promise<ILodge[]>;
   /** 숙소 조회 */
   findById(id: string): Promise<ILodge>;
   /** 숙소 등록 */
@@ -9,6 +11,12 @@ export default interface LodgeRepository {
   delete(id: string): Promise<void>;
   /** 숙소 객실 추가 */
   addRoomType(id: string, room: IRoom, count: number): Promise<void>;
-  /** 숙소 객실 재고 수정 */
-  editRoomStock(id: string, roomName: string, stock: number): Promise<void>;
+  /** 체크인 */
+  checkIn(id: string, roomName: string): Promise<void>;
+  /** 체크아웃 */
+  checkOut(id: string, roomName: string): Promise<void>;
+  /** roomId로 lodge 찾기 */
+  findByRoomId(roomId: string): Promise<ILodge>;
+  /** 검색어로 lodge 찾기 */
+  findByKeyword(keywords: Array<string>): Promise<ILodge[]>;
 }

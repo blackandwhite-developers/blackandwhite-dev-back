@@ -6,8 +6,16 @@ const categorySchema = new mongoose.Schema<ICategory>({
     unique: true,
     required: true,
   },
+  path: {
+    type: String,
+    unique: true,
+    required: true,
+  },
   thumbnail: { type: String },
-  division: { type: String, unique: true },
+  parent: { type: mongoose.Schema.Types.ObjectId, ref: 'category' },
+  subCategories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'category' }],
+  lodges: [{ type: mongoose.Schema.Types.ObjectId, ref: 'lodge' }],
+  level: { type: Number, required: true, default: 0 },
 });
 
 export const mongooseCategory = mongoose.model<ICategory>('category', categorySchema);

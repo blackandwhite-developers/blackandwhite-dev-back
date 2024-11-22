@@ -4,6 +4,8 @@ export class GetUsersResponseDTO {
   name: string;
   email: string;
   role?: string;
+  point: number;
+  coupon: Array<ICoupon>;
   profile: {
     /** ID */
     id: string;
@@ -24,6 +26,8 @@ export class GetUsersResponseDTO {
     this.name = user.name;
     this.email = user.email;
     this.role = user.role;
+    this.point = user.point;
+    this.coupon = user.coupon;
     this.profile = {
       id: user.profile.id,
       birth: user.profile.birth.toISOString(),
