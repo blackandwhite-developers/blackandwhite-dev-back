@@ -10,7 +10,7 @@ const roomRouter = express.Router();
 
 const ROOM_ROUTES = {
   /** 방 전체 조회 */
-  GET_ROOMS: `/api/rooms`,
+  GET_ROOMS: `/api/rooms/`,
   /** 방 조회 */
   GET_ROOM: `/api/rooms/:id`,
 } as const;
