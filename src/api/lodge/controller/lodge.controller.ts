@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import LodgeService from '../service/lodge.service.type';
+import mongoose from 'mongoose';
 
 export default class LodgeController {
   private readonly _lodgeService: LodgeService;
@@ -11,17 +12,21 @@ export default class LodgeController {
 
   async getLodges(req: Request, res: Response, next: NextFunction) {
     try {
-      const { categoryId } = req.query; 
-      if (!categoryId) {
-        return res.status(400).json({ message: '카테고리 ID가 필요합니다.' });
+      const { categoryId } = req.query;
+  
+      if (!categoryId || !mongoose.Types.ObjectId.isValid(categoryId as string)) {
+        return res.status(400).json({ message: '유효한 카테고리 ID가 필요합니다.' });
       }
-
-      const lodges = await this._lodgeService.getLodgesByCategory(categoryId as string);
+      const categoryIdString = categoryId.toString(); 
+      
+      const lodges = await this._lodgeService.getLodgesByCategory(categoryIdString);
+  
       res.status(200).json(lodges);
     } catch (error) {
       next(error);
     }
   }
+  
   
   async getLodge(req: Request, res: Response, next: NextFunction) {
     try {

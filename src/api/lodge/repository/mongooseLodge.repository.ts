@@ -4,7 +4,7 @@ import LodgeRepository from './lodge.repository';
 import mongoose from 'mongoose';
 export default class MongooseLodgeRepository implements LodgeRepository {
   async findByCategory(categoryId: string): Promise<ILodge[]> {
-    const lodge = await MongooseLodge.find({ categoryId });
+    const lodge = await MongooseLodge.find({ category: categoryId  });
     return lodge;
   }
 
