@@ -22,9 +22,7 @@ type IPartialRoom = Pick<IRoom, 'id' | 'name' | 'image' | 'capacity' | 'time' | 
 
 interface IPrice {
   /** 대실 가격 */
-  shortStayPrice: number;
-  /** 숙박 가격 */
-  overnightPrice: number;
+  price: number;
   /** 할인율 */
   discount: number;
   /** 인원 당 추가 가격 */

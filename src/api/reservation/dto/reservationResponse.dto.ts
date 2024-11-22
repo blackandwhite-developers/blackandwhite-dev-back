@@ -52,8 +52,6 @@ export class ReservationResponseDTO {
   };
   /** 예약 상태 */
   status: 'active' | 'cancel';
-  /** 예약 타입 */
-  reservationType: 'shortStay' | 'overnight';
 
   constructor(params: IReservation) {
     this.id = params.id;
@@ -79,15 +77,11 @@ export class ReservationResponseDTO {
         checkOut: params.information.time.checkOut,
       },
       price: {
-        price:
-          params.reservationType === 'shortStay'
-            ? params.information.price.shortStayPrice
-            : params.information.price.overnightPrice,
+        price:params.information.price.price,
         discount: params.information.price.discount,
         additionalPrice: params.information.price.additionalPrice,
       },
     };
     this.status = params.status;
-    this.reservationType = params.reservationType;
   }
 }

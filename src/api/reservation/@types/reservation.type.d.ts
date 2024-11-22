@@ -22,8 +22,6 @@ interface IReservation {
   information: IPartialRoom;
   /** 예약 상태 */
   status: 'active' | 'cancel';
-  /** 예약 타입 */
-  reservationType: 'shortStay' | 'overnight';
   /** 예약 지불 정보 */
   payment: IPayment | null;
 }
@@ -65,8 +63,6 @@ interface IReservationResponseDTO {
   };
   /** 예약 상태 */
   status: 'active' | 'cancel';
-  /** 예약 타입 */
-  reservationType: 'shortStay' | 'overnight';
   /** 예약 지불 정보 */
   payment: PaymentResponseDTO;
 }

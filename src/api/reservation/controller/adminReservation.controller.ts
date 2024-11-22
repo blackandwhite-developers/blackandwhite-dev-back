@@ -88,7 +88,6 @@ export default class AdminReservationController {
             reserverPhone: req.body.reserver.reserverPhone,
           },
           status: req.body.status,
-          reservationType: req.body.reservationType,
         },
         { checkIn: req.body.information.time.checkIn, checkOut: req.body.information.time.checkOut },
         userId,

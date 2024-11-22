@@ -57,7 +57,6 @@ export default class ReservationServiceImpl implements ReservationService {
     userId: string,
     roomId: string,
   ): Promise<ReservationResponseDTO> {
-    const { reservationType, startDate } = params;
     const user = await this._userRepository.findById(userId);
     const room = await this._roomService.getRoom(roomId);
     if (!user) {
@@ -66,26 +65,6 @@ export default class ReservationServiceImpl implements ReservationService {
 
     let checkIn: string = time.checkIn;
     let checkOut: string = time.checkOut || '';
-
-    if (reservationType === 'shortStay') {
-      if (!time.checkIn || !time.checkOut) {
-        throw new HttpException(400, '대실의 경우 체크인, 체크아웃 시간은 필수입니다.');
-      }
-
-      const start = new Date(`${startDate}T${time.checkIn}`).getTime();
-      const end = new Date(`${startDate}T${time.checkOut}`).getTime();
-      const diffInHours = (end - start) / (1000 * 60 * 60);
-
-      if (diffInHours > 4) {
-        throw new HttpException(400, '대실의 경우 최대이용시간은 4시간입니다.');
-      }
-    } else if (reservationType === 'overnight') {
-      const roomTime = await this._roomService.getRoomTime(roomId);
-      checkIn = roomTime.checkIn;
-      checkOut = roomTime.checkOut;
-    } else {
-      throw new HttpException(400, '숙박 또는 대실을 선택해야합니다.');
-    }
 
     const newReservation = await this._reservationRepository.save(
       {
