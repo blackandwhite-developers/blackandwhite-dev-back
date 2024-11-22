@@ -13,8 +13,7 @@ export default class LodgeRoomTypeAndStockDto {
       checkOut: string;
     };
     price: {
-      shortStayPrice: number;
-      overnightPrice: number;
+      price: number;
       discount: number;
       additionalPrice: number;
     };

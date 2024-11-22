@@ -41,11 +41,7 @@ const roomSchema = new mongoose.Schema<IRoom>({
   },
   price: {
     type: {
-      shortStayPrice: {
-        type: Number,
-        required: true,
-      },
-      overnightPrice: {
+      price: {
         type: Number,
         required: true,
       },

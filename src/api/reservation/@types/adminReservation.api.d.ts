@@ -124,8 +124,6 @@ declare type adminCreateReservationRequestBody = {
   };
   /** 예약 상태 */
   status: 'active' | 'cancel';
-  /** 예약 타입 */
-  reservationType: 'shortStay' | 'overnight';
   /** 예약 객실 ID */
   roomId: string;
 };
