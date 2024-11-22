@@ -11,8 +11,15 @@ export default class RoomController {
 
   async getRooms(req: Request, res: Response, next: NextFunction) {
     try {
+      const lodgeId = req.query.lodgeId as string;
+
       const rooms = await this._roomService.getRooms();
-      res.send(rooms);
+
+      const filteredRooms = lodgeId
+      ? rooms.filter((room) => room.lodgeId === lodgeId)
+      : rooms;
+
+      res.send(filteredRooms);
     } catch (error) {
       next(error);
     }
