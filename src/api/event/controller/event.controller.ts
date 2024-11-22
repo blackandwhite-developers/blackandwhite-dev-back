@@ -9,9 +9,6 @@ export default class eventController {
         Connection: 'keep-alive',
         'content-encoding': 'none',
       });
-
-      const eventTypes = ['message', 'newEvent', 'alarm'];
-
       const eventHandler = (...args: unknown[]) => {
         const [data] = args;
         res.write(
@@ -20,11 +17,7 @@ export default class eventController {
           })}\n\n`,
         );
       };
-
-      eventTypes.forEach(eventType => {
-        return EventTrigger.onEvent(eventType, eventHandler);
-      });
-
+      EventTrigger.onEvent('newEvent', eventHandler);
       req.on('close', () => {
         EventTrigger.offEvent('newEvent', eventHandler);
         res.end();
@@ -35,9 +28,9 @@ export default class eventController {
   }
 
   async postEvent(req: Request, res: Response, next: NextFunction) {
-    const { eventType, data } = req.body;
+    const { data } = req.body;
     try {
-      EventTrigger.emitEvent(eventType, data);
+      EventTrigger.emitEvent('newEvent', data);
       res.send('ok');
     } catch (error) {
       next(error);

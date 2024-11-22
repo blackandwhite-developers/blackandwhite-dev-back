@@ -1,3 +1,4 @@
+import { MongooseLodge } from '@/api/lodge/model/lodge.schema';
 import mongoose from 'mongoose';
 
 // mongodb+srv://[]:BUFfDus9RCF9S3ff@mongo-study.jdr95.mongodb.net/
@@ -14,6 +15,8 @@ export const db = mongoose.createConnection(mongodbUri).asPromise();
         dbName: 'blackAndWhite',
       },
     );
+    await MongooseLodge.collection.dropIndexes();
+    await MongooseLodge.syncIndexes();
     console.log('Connected to MongoDB ^-^');
   } catch (error) {
     console.error(error);

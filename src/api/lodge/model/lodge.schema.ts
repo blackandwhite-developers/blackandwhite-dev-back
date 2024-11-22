@@ -77,4 +77,9 @@ const lodgeSchema = new mongoose.Schema<ILodge>(
   },
 );
 
+lodgeSchema.index({ name: 1 });
+lodgeSchema.index({ address: 1 });
+lodgeSchema.index({ description: 1 });
+lodgeSchema.index({ addressDetail: 1 });
+
 export const MongooseLodge = mongoose.model<ILodge>('lodge', lodgeSchema);
