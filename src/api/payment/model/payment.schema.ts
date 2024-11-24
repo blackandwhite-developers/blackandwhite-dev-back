@@ -12,4 +12,4 @@ const paymentSchema = new mongoose.Schema<IPayment>({
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'users', required: true },
 });
 
-export const mongoosePayment = mongoose.model<IPayment>('payment', paymentSchema);
+export const mongoosePayment = mongoose.model<IPayment>('payments', paymentSchema);

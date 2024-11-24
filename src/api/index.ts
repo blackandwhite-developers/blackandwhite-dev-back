@@ -47,6 +47,10 @@ const COUPON_ROUTES = {
   COUPON_API: '/api/coupon',
 };
 
+const ORDER_ROUTES = {
+  ORDER_API: '/api/orders',
+};
+
 export const ROUTES_INDEX = {
   ...USER_ROUTES,
   ...LODGE_ROUTES,
@@ -58,4 +62,5 @@ export const ROUTES_INDEX = {
   ...AUTH_ROUTES,
   ...SEARCH_ROUTES,
   ...COUPON_ROUTES,
+  ...ORDER_ROUTES,
 };
