@@ -58,7 +58,7 @@ const reservationSchema = new mongoose.Schema<IReservation>({
   },
   payment: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'payment',
+    ref: 'payments',
     nullable: true,
   },
 });
