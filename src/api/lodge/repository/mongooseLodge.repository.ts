@@ -9,7 +9,12 @@ export default class MongooseLodgeRepository implements LodgeRepository {
   }
 
   async findById(id: string): Promise<ILodge> {
-    const lodge = await MongooseLodge.findById(id).populate('category').populate('rooms');
+    const lodge = await MongooseLodge.findById(id)
+      .populate('category')
+      .populate({
+        path: 'room.roomType',
+      })
+      .populate('room.stock');
     if (!lodge) {
       throw new Error('숙소를 찾을 수 없습니다.');
     }
