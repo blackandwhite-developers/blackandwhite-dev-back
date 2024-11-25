@@ -126,10 +126,13 @@ export class UsersServiceImpl implements UserService {
     if (!decryptedName) throw new HttpException(400, '이름 복호화에 실패했습니다.');
     const decryptedEmail = CryptoService.decryptString(email);
     if (!decryptedEmail) throw new HttpException(400, '이메일 복호화에 실패했습니다.');
+    console.log(decryptedName, decryptedEmail);
     const user = await this._mongooseUserRepository.findByEmail(decryptedEmail);
     if (!user) throw new HttpException(404, '존재하지 않는 회원입니다.');
     if (!CryptoService.compareString(name, decryptedName))
       throw new HttpException(400, '이름 혹은 이메일이 일치하지 않습니다.');
+
+    console.log(user);
     const saltedPassword = CryptoService.encryptPassword(newPassword);
     if (saltedPassword === null) throw new HttpException(500, '비밀번호 암호화에 실패했습니다.');
     await this._mongooseUserRepository.update(user.id, { password: saltedPassword.hashedPassword });
