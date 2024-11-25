@@ -9,6 +9,8 @@ const reservationSchema = new mongoose.Schema<IReservation>({
   adult: { type: Number },
   /** 아이 인원 */
   child: { type: Number },
+  /** 예약 계정 ID */
+  userId: { type: mongoose.Schema.Types.String, ref: 'users', required: true },
   /** 예약자 성함 */
   reserver: {
     /** 이름 */
@@ -18,7 +20,6 @@ const reservationSchema = new mongoose.Schema<IReservation>({
   },
   /** 객실 정보 */
   information: {
-    /** 객실 시설 */
     time: {
       /** 입실 시간 */
       checkIn: { type: String },
@@ -37,8 +38,7 @@ const reservationSchema = new mongoose.Schema<IReservation>({
     ref: 'payments',
     nullable: true,
   },
-  /** 예약 객실 ID */
-  roomId: { type: String, required: true },
+  roomId: { type: mongoose.Schema.Types.String, ref: 'rooms', required: true },
 });
 
 export const MongooseReservation = mongoose.model<IReservation>('reservations', reservationSchema);

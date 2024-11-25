@@ -24,6 +24,8 @@ export class Reservation implements IReservation {
   payment: IPayment | null;
   /** 예약 객실 ID */
   roomId: string;
+  /** 예약 계정 ID */
+  userId: string;
 
   constructor(params: IReservation) {
     this.id = params.id;
@@ -36,5 +38,6 @@ export class Reservation implements IReservation {
     this.status = params.status;
     this.payment = params.payment;
     this.roomId = params.roomId;
+    this.userId = params.userId;
   }
 }

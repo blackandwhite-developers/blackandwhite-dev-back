@@ -37,7 +37,7 @@ export default class ReservationController {
   ) {
     try {
       const { userId } = req.user;
-      console.log("userId", userId);
+      console.log('userId', userId);
       const reservations = await this._reservationService.getReservationByUserId(userId);
 
       res.send(reservations);
@@ -90,7 +90,7 @@ export default class ReservationController {
             reserverPhone: req.body.reserver.reserverPhone,
           },
           status: req.body.status,
-          
+          userId,
         },
         { checkIn: req.body.information.time.checkIn, checkOut: req.body.information.time.checkOut },
         userId,

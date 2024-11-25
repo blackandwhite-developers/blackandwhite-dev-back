@@ -24,6 +24,8 @@ interface IReservation {
   payment: IPayment | null;
   /* 객실 ID */
   roomId: string;
+  /** 예약 계정 ID */
+  userId: string;
 }
 
 interface IReservationResponseDTO {
