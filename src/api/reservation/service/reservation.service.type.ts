@@ -9,11 +9,7 @@ export interface ReservationService {
   getReservationDetail(id: string): Promise<ReservationResponseDTO | null>;
   /** 예약 생성 */
   createReservation(
-    params: Omit<IReservation, 'id' | 'payment' | 'user' | 'information' | 'roomId'>,
-    time: {
-      checkIn: string;
-      checkOut: string;
-    },
+    params: Omit<IReservation, 'id' | 'payment' | 'user' | 'roomId'>,
     userId: string,
     roomId: string,
   ): Promise<ReservationResponseDTO>;

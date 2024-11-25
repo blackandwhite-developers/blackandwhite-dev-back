@@ -49,11 +49,7 @@ export default class ReservationServiceImpl implements ReservationService {
   }
 
   async createReservation(
-    params: Omit<IReservation, 'id' | 'payment' | 'user' | 'information' | 'roomId'>,
-    time: {
-      checkIn: string;
-      checkOut: string | null;
-    },
+    params: Omit<IReservation, 'id' | 'payment' | 'user' | 'roomId'>,
     userId: string,
     roomId: string,
   ): Promise<ReservationResponseDTO> {
@@ -63,16 +59,9 @@ export default class ReservationServiceImpl implements ReservationService {
       throw new HttpException(404, '사용자를 찾을 수 없습니다.');
     }
 
-    const checkIn: string = time.checkIn;
-    const checkOut: string = time.checkOut || '';
-
     const newReservation = await this._reservationRepository.save(
       {
         ...params,
-        information: {
-          ...room,
-          time: { checkIn, checkOut },
-        },
         roomId,
       },
       user,

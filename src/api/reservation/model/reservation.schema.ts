@@ -18,15 +18,6 @@ const reservationSchema = new mongoose.Schema<IReservation>({
     /** 연락처 */
     reserverPhone: { type: String, required: true },
   },
-  /** 객실 정보 */
-  information: {
-    time: {
-      /** 입실 시간 */
-      checkIn: { type: String },
-      /** 퇴실 시간 */
-      checkOut: { type: String },
-    },
-  },
   status: {
     type: String,
     enum: ['active', 'cancel'],

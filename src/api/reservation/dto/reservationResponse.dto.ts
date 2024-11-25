@@ -16,15 +16,6 @@ export class ReservationResponseDTO {
     /** 연락처 */
     reserverPhone: string;
   };
-  /** 예약 정보 */
-  information: {
-    time: {
-      /** 입실 시간 */
-      checkIn: string;
-      /** 퇴실 시간 */
-      checkOut: string;
-    };
-  };
   /** 예약 상태 */
   status: 'active' | 'cancel';
   /** 예약 객실 ID */
@@ -39,12 +30,6 @@ export class ReservationResponseDTO {
     this.reserver = {
       reserverName: params.reserver.reserverName,
       reserverPhone: params.reserver.reserverPhone,
-    };
-    this.information = {
-      time: {
-        checkIn: params.information.time.checkIn,
-        checkOut: params.information.time.checkOut,
-      },
     };
     this.status = params.status;
     this.roomId = params.roomId;

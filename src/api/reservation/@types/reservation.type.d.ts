@@ -16,8 +16,6 @@ interface IReservation {
     /** 이용자 휴대폰 번호 */
     reserverPhone: string;
   };
-  /** 객실 정보 */
-  information: IPartialRoom;
   /** 예약 상태 */
   status: 'active' | 'cancel';
   /** 예약 지불 정보 */
@@ -48,38 +46,10 @@ interface IReservationResponseDTO {
     /** 연락처 */
     reserverPhone: string;
   };
-  /** 객실 정보 */
-  information: {
-    /** 객실 시설 */
-    time: IRoomTime;
-  };
   /** 예약 상태 */
   status: 'active' | 'cancel';
   /** 예약 지불 정보 */
   payment: PaymentResponseDTO;
   /* 객실 ID */
   roomId: string;
-}
-
-interface IPriceResponseDTO {
-  /** 객실 가격 */
-  price: number;
-  /** 할인율 */
-  discount: number;
-  /** 인원 당 추가 가격 */
-  additionalPrice: number;
-}
-
-interface IRoomTimeResponseDTO {
-  /** 입실 시간 */
-  checkIn: string;
-  /** 퇴실 시간 */
-  checkOut: string;
-}
-
-interface IRoomCapacityResponseDTO {
-  /** 기준 인원 */
-  standard: number;
-  /** 최대 인원 */
-  maximum: number;
 }
