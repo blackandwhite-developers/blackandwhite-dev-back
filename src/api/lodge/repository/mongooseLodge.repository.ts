@@ -4,12 +4,12 @@ import LodgeRepository from './lodge.repository';
 import mongoose from 'mongoose';
 export default class MongooseLodgeRepository implements LodgeRepository {
   async findByCategory(categoryId: string): Promise<ILodge[]> {
-    const lodge = await MongooseLodge.find({ category: categoryId  });
+    const lodge = await MongooseLodge.find({ category: categoryId }).populate('rooms');
     return lodge;
   }
 
   async findById(id: string): Promise<ILodge> {
-    const lodge = await MongooseLodge.findById(id).populate('category');
+    const lodge = await MongooseLodge.findById(id).populate('category').populate('rooms');
     if (!lodge) {
       throw new Error('숙소를 찾을 수 없습니다.');
     }
