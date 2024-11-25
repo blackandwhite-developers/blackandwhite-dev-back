@@ -9,8 +9,6 @@ interface IReservation {
   adult: number;
   /** 아이 인원 */
   child: number;
-  /** 예약 계정 ID */
-  userId: string;
   /** 이용자(로그인한 유저와 다름) */
   reserver: {
     /** 이용자 이름 */
@@ -24,6 +22,8 @@ interface IReservation {
   status: 'active' | 'cancel';
   /** 예약 지불 정보 */
   payment: IPayment | null;
+  /* 객실 ID */
+  roomId: string;
 }
 
 interface IReservationResponseDTO {
@@ -48,23 +48,15 @@ interface IReservationResponseDTO {
   };
   /** 객실 정보 */
   information: {
-    /* 객실 ID */
-    id: string;
-    /** 객실 이름 */
-    name: string;
-    /** 객실 이미지 */
-    image: string;
-    /** 객실 인원 */
-    capacity: IRoomCapacity;
     /** 객실 시설 */
     time: IRoomTime;
-    /** 객실 가격 */
-    price: IPrice;
   };
   /** 예약 상태 */
   status: 'active' | 'cancel';
   /** 예약 지불 정보 */
   payment: PaymentResponseDTO;
+  /* 객실 ID */
+  roomId: string;
 }
 
 interface IPriceResponseDTO {

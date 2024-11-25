@@ -82,16 +82,17 @@ export default class AdminReservationController {
           endDate: req.body.endDate,
           adult: req.body.adult,
           child: req.body.child,
-          userId: req.body.userId,
           reserver: {
             reserverName: req.body.reserver.reserverName,
             reserverPhone: req.body.reserver.reserverPhone,
           },
           status: req.body.status,
+          
         },
         { checkIn: req.body.information.time.checkIn, checkOut: req.body.information.time.checkOut },
         userId,
-        req.body.roomId,
+        req.body.roomId
+        
       );
 
       res.send(createReservation);
