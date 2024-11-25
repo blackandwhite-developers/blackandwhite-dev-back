@@ -18,6 +18,7 @@ import authRouter from './api/auth/router/auth.router';
 import adminRoomRouter from './api/room/router/adminRoom.router';
 import couponRouter from './api/coupon/router/coupon.router';
 import searchRouter from './api/search/router/search.router';
+import orderRouter from './api/order/router/order.router';
 
 const app = express();
 
@@ -95,6 +96,9 @@ app.use(ROUTES_INDEX.COUPON_API, couponRouter);
 /** ------- Search ------- */
 
 app.use(ROUTES_INDEX.SEARCH_API, searchRouter);
+
+/** ------- Order ------- */
+app.use(ROUTES_INDEX.ORDER_API, orderRouter);
 
 app.use(errorHandler);
 

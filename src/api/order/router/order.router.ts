@@ -9,7 +9,7 @@ import { MongooseReservationRepository } from '@/api/reservation/repository/mong
 import { MongooseUserRepository } from '@/api/users/respository/user/mongooseUser.reopsitory';
 import MongooseOrderRepository from '../repository/mongooseOrder.repository';
 
-const router = express.Router();
+const orderRouter = express.Router();
 
 const ORDER_ROUTES = {
   GET_ORDERS: '/api/orders',
@@ -29,30 +29,40 @@ const orderController = new OrderController(
   ),
 );
 
-router.get(
+orderRouter.get(
   extractPath(ORDER_ROUTES.GET_ORDERS_BY_USER_ID, ROUTES_INDEX.ORDER_API),
   authUserMiddleware,
   orderController.getOrdersByUserId,
 );
 
-router.get(extractPath(ORDER_ROUTES.GET_ORDER, ROUTES_INDEX.ORDER_API), authUserMiddleware, orderController.getOrder);
+orderRouter.get(
+  extractPath(ORDER_ROUTES.GET_ORDER, ROUTES_INDEX.ORDER_API),
+  authUserMiddleware,
+  orderController.getOrder,
+);
 
-router.get(extractPath(ORDER_ROUTES.GET_ORDERS, ROUTES_INDEX.ORDER_API), authUserMiddleware, orderController.getOrders);
+orderRouter.get(
+  extractPath(ORDER_ROUTES.GET_ORDERS, ROUTES_INDEX.ORDER_API),
+  authUserMiddleware,
+  orderController.getOrders,
+);
 
-router.post(
+orderRouter.post(
   extractPath(ORDER_ROUTES.CREATE_ORDER, ROUTES_INDEX.ORDER_API),
   authUserMiddleware,
   orderController.createOrder,
 );
 
-router.put(
+orderRouter.put(
   extractPath(ORDER_ROUTES.UPDATE_ORDER, ROUTES_INDEX.ORDER_API),
   authUserMiddleware,
   orderController.updateOrder,
 );
 
-router.delete(
+orderRouter.delete(
   extractPath(ORDER_ROUTES.DELETE_ORDER, ROUTES_INDEX.ORDER_API),
   authUserMiddleware,
   orderController.deleteOrder,
 );
+
+export default orderRouter;
