@@ -85,7 +85,7 @@ export default class ReservationController {
           endDate: req.body.endDate,
           adult: req.body.adult,
           child: req.body.child,
-          userId: req.body.userId,
+          userId: userId,
           reserver: {
             reserverName: req.body.reserver.reserverName,
             reserverPhone: req.body.reserver.reserverPhone,

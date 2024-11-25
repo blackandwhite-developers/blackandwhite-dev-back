@@ -11,7 +11,7 @@ const profileSchema = new mongoose.Schema<IProfile>(
     /** 관심사 */
     interest: {
       type: String,
-      enum: ['호캉스', '풀빌라', '게스트하우스', '전원주택', '비지니스호텔', '레저', '해외숙소'],
+      enum: ['호텔', '풀빌라', '게스트하우스', '전원주택', '비지니스호텔', '레저', '해외숙소'],
       required: true,
     },
     /** 닉네임 */
