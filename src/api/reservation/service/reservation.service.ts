@@ -49,7 +49,7 @@ export default class ReservationServiceImpl implements ReservationService {
   }
 
   async createReservation(
-    params: Omit<IReservation, 'id' | 'payment' | 'user' | 'information'>,
+    params: Omit<IReservation, 'id' | 'payment' | 'user' | 'information' | 'roomId'>,
     time: {
       checkIn: string;
       checkOut: string | null;
@@ -71,9 +71,9 @@ export default class ReservationServiceImpl implements ReservationService {
         ...params,
         information: {
           ...room,
-          id: room.id,
           time: { checkIn, checkOut },
         },
+        roomId,
       },
       user,
     );
