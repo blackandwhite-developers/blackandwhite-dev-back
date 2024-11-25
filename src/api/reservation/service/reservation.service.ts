@@ -63,8 +63,8 @@ export default class ReservationServiceImpl implements ReservationService {
       throw new HttpException(404, '사용자를 찾을 수 없습니다.');
     }
 
-    let checkIn: string = time.checkIn;
-    let checkOut: string = time.checkOut || '';
+    const checkIn: string = time.checkIn;
+    const checkOut: string = time.checkOut || '';
 
     const newReservation = await this._reservationRepository.save(
       {

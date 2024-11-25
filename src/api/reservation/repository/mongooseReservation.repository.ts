@@ -28,21 +28,18 @@ export class MongooseReservationRepository implements ReservationRepository {
   }
 
   async findById(id: string): Promise<IReservation | null> {
-    const values = await MongooseReservation.findById(id)
-
-      .populate('userId')
-      .populate({
-        path: 'information',
-        select: 'id name image adult child maximum price discount additionalPrice checkin checkout',
-      });
+    const values = await MongooseReservation.findById(id).populate({
+      path: 'information',
+      select: 'id name image adult child maximum price discount additionalPrice checkin checkout',
+    });
 
     return values;
   }
 
   async findByUserId(userId: string): Promise<IReservation[]> {
-    const values = await MongooseReservation.find({ userId })
-
-      .populate('userId');
+    const values = await MongooseReservation.find({
+      userId,
+    });
 
     return values || [];
   }
