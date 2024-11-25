@@ -9,8 +9,6 @@ export class Reservation implements IReservation {
   adult: number;
   /** 아이 인원 */
   child: number;
-  /** 예약 계정 ID */
-  userId: string;
   /** 예약자 성함 */
   reserver: {
     /** 이름 */
@@ -24,6 +22,8 @@ export class Reservation implements IReservation {
   status: 'active' | 'cancel';
   /** 예약 지불 정보 */
   payment: IPayment | null;
+  /** 예약 객실 ID */
+  roomId: string;
 
   constructor(params: IReservation) {
     this.id = params.id;
@@ -31,10 +31,10 @@ export class Reservation implements IReservation {
     this.endDate = params.endDate;
     this.adult = params.adult;
     this.child = params.child;
-    this.userId = params.userId;
     this.reserver = params.reserver;
     this.information = params.information;
     this.status = params.status;
     this.payment = params.payment;
+    this.roomId = params.roomId;
   }
 }
