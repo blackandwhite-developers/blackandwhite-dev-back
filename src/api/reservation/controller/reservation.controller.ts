@@ -92,7 +92,6 @@ export default class ReservationController {
           status: req.body.status,
           userId,
         },
-        { checkIn: req.body.information.time.checkIn, checkOut: req.body.information.time.checkOut },
         userId,
         req.body.roomId,
       );

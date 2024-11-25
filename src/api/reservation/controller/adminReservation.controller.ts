@@ -89,7 +89,6 @@ export default class AdminReservationController {
           status: req.body.status,
           userId,
         },
-        { checkIn: req.body.information.time.checkIn, checkOut: req.body.information.time.checkOut },
         userId,
         req.body.roomId,
       );

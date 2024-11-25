@@ -16,8 +16,6 @@ export class Reservation implements IReservation {
     /** 연락처 */
     reserverPhone: string;
   };
-  /** 객실 정보 */
-  information: IPartialRoom;
   /** 예약 상태 */
   status: 'active' | 'cancel';
   /** 예약 지불 정보 */
@@ -34,7 +32,6 @@ export class Reservation implements IReservation {
     this.adult = params.adult;
     this.child = params.child;
     this.reserver = params.reserver;
-    this.information = params.information;
     this.status = params.status;
     this.payment = params.payment;
     this.roomId = params.roomId;
