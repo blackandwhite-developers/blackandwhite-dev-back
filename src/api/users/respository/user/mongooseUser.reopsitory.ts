@@ -50,14 +50,23 @@ export class MongooseUserRepository implements UserRepository {
     return;
   }
   /** 이름과 전화번호로 유저 조회 */
-  async getEmailByNameAndPhone(name: string, phone: string): Promise<string> {
+  async getEmailByNameAndPhone(
+    name: string,
+    phone: string,
+  ): Promise<{
+    email: string;
+    createdAt: Date;
+  }> {
     const user = await MongooseUser.findOne({ name }).populate({
       path: 'profile',
-      match: {phone},
+      match: { phone },
       select: 'phone',
     });
     if (!user) throw new HttpException(404, '존재 하지 않는 회원입니다.');
     console.log(user);
-    return user.email;
+    return {
+      email: user.email,
+      createdAt: user.createdAt,
+    };
   }
 }

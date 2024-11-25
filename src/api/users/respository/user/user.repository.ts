@@ -1,6 +1,12 @@
 export interface UserRepository {
   /** 이름과 전화번호로 유저 조회 */
-  getEmailByNameAndPhone(name: string, phone: string): Promise<string>;
+  getEmailByNameAndPhone(
+    name: string,
+    phone: string,
+  ): Promise<{
+    email: string;
+    createdAt: Date;
+  }>;
   /** 유저 생성 */
   save(user: Omit<IUser, 'id'>): Promise<IUser>;
   /** 유저 목록 조회 */

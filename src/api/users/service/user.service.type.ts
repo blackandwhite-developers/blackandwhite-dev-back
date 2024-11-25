@@ -8,7 +8,13 @@ export interface UserService {
   /** 비밀번호 변경 */
   resetPassword(name: string, email: string, newPassword: string): Promise<void>;
   /** 이름과 전화번호로 유저 조회 */
-  getEmailByNameAndPhone(name: string, phone: string): Promise<string | null>;
+  getEmailByNameAndPhone(
+    name: string,
+    phone: string,
+  ): Promise<{
+    email: string;
+    createdAt: Date;
+  }>;
   /** 유저 목록 조회 */
   getUsers(): Promise<{
     results: GetUsersResponseDTO[];

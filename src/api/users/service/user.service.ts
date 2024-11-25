@@ -24,7 +24,13 @@ export class UsersServiceImpl implements UserService {
     await this._mongooseUserRepository.update(id, { role });
   }
 
-  async getEmailByNameAndPhone(name: string, phone: string): Promise<string | null> {
+  async getEmailByNameAndPhone(
+    name: string,
+    phone: string,
+  ): Promise<{
+    email: string;
+    createdAt: Date;
+  }> {
     const id = await this._mongooseUserRepository.getEmailByNameAndPhone(name, phone);
     return id;
   }

@@ -14,11 +14,10 @@ export default class AdminLodgeController {
 
   async getLodges(req: Request, res: Response, next: NextFunction) {
     try {
-      const { categoryId } = req.query; 
+      const { categoryId } = req.query;
       if (!categoryId) {
         return res.status(400).json({ message: '카테고리 ID가 필요합니다.' });
       }
-
       const lodges = await this._lodgeService.getLodgesByCategory(categoryId as string);
       res.status(200).json(lodges);
     } catch (error) {

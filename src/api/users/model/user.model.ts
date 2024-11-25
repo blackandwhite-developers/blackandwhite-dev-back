@@ -9,6 +9,8 @@ export class User implements IUser {
   point: number;
   coupon: Array<ICoupon>;
   accountType: 'local' | 'kakao' | 'naver' | 'apple';
+  createdAt: Date;
+  updatedAt: Date;
   constructor(params: IUser) {
     this.id = params.id;
     this.email = params.email;
@@ -20,5 +22,7 @@ export class User implements IUser {
     this.accountType = params.accountType;
     this.point = params.point;
     this.coupon = params.coupon;
+    this.createdAt = params.createdAt;
+    this.updatedAt = params.updatedAt;
   }
 }

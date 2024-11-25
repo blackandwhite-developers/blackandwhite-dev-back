@@ -42,6 +42,8 @@ interface IUser {
   accountType: 'local' | 'kakao' | 'naver' | 'apple';
   point: number;
   coupon: Array<ICoupon>;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 interface ITerms {
