@@ -5,6 +5,7 @@ export default class OrderController {
   private readonly _orderService: OrderService;
   constructor(_orderService: OrderService) {
     this._orderService = _orderService;
+    this.getOrders = this.getOrders.bind(this);
     this.getOrdersByUserId = this.getOrdersByUserId.bind(this);
     this.getOrder = this.getOrder.bind(this);
     this.createOrder = this.createOrder.bind(this);
