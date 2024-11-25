@@ -27,7 +27,16 @@ export class CryptoService {
     return decrypted.toString();
   };
   public static compareString = (str: string, hashedStr: string): boolean => {
-    return this.encryptString(str) === hashedStr;
+    try {
+      // 암호화된 데이터를 복호화
+      const decrypted = this.decryptString(str);
+      // 원본과 복호화된 데이터를 비교
+      return decrypted === hashedStr;
+    } catch (error) {
+      // 복호화 과정에서 에러가 발생하면 false 반환
+      console.error('Decryption failed:', error);
+      return false;
+    }
   };
   public static comparePassword(password: string, hashedPassword: string): boolean {
     return this._encryptPassword(password, this.SALT_KEY) === hashedPassword;

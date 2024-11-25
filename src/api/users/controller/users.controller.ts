@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { UserService } from '../service/user.service.type';
+import HttpException from '@/api/common/exceptions/http.exception';
 
 export default class UsersController {
   constructor(private _userService: UserService) {
@@ -97,7 +98,10 @@ export default class UsersController {
   async resetPassword(req: Request, res: Response, next: NextFunction) {
     try {
       const { newPassword } = req.body;
-      const { name, email } = req.params;
+      const { name, email } = req.query;
+      if (typeof name !== 'string' || typeof email !== 'string') {
+        throw new HttpException(400, '이름과 이메일을 입력해주세요.');
+      }
       await this._userService.resetPassword(name, email, newPassword);
       res.status(204).send();
     } catch (error) {
